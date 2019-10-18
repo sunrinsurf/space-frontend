@@ -7,6 +7,11 @@ const pages = [
     path: "/",
     exact: true,
     component: loadable(() => import("./IndexPage"))
+  },
+  {
+    path: "/learn-more",
+    exact: true,
+    component: loadable(() => import("./LearnMorePage"))
   }
 ];
 

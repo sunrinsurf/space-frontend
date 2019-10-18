@@ -31,3 +31,10 @@ p {
   flex-direction: column;
   min-height: 100vh;
 }
+.Layout__contents {
+  margin: 1em;
+}
+
+a {
+  text-decoration: none;
+}
