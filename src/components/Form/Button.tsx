@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-type ButtonProps = { fullWidth: Boolean };
+type ButtonProps = { fullWidth?: Boolean };
 const Button = styled.button<ButtonProps>`
   display: block;
   font-size: 1rem;

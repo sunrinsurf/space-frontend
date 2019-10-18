@@ -1,8 +1,8 @@
 import React from "react";
 import loadable from "@loadable/component";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, RouteProps } from "react-router-dom";
 
-const pages = [
+const pages: RouteProps[] = [
   {
     path: "/",
     exact: true,
