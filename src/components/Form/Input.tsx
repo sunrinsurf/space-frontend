@@ -4,15 +4,13 @@ const Input = styled.input`
   display: block;
   width: 100%;
   box-sizing: border-box;
-  font-size: 1rem;
-  padding: 0.25em 0.5em;
-  border: 0;
-  box-shadow: 0 2px #6b32a8;
-  transition: box-shadow 1s;
-  margin: 0 0.5em;
+  font-size: 1.2rem;
+  padding: 1em 1.5em;
+  border: 1px solid #b3b3b3;
+  border-radius: .5em;
+  margin: .7em 0;
   &:focus {
     outline: 0;
-    box-shadow: 0 2px #3f1e63;
   }
 `;
 

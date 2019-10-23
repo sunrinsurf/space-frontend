@@ -12,6 +12,11 @@ const pages: RouteProps[] = [
     path: "/learn-more",
     exact: true,
     component: loadable(() => import("./LearnMorePage"))
+  },
+  {
+    path: '/signin',
+    exact: true,
+    component: loadable(() => import('./SignInPage'))
   }
 ];
 

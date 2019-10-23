@@ -1,0 +1,25 @@
+.SignInForm__remember {
+    text-align: right;
+}
+.SignInForm__wrap {
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1em;
+}
+.SignInForm__social {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.SignInForm__social > * {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.SignInForm__forget {
+    margin-top: 40px;
+    text-align: center;
+}
+.SignInForm__forget > a {
+    color: gray;
+}

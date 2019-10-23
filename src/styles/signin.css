@@ -1,0 +1,10 @@
+.SignIn__wrap {
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.SignIn__header {
+    padding: 2em;
+}
+.SignIn__main {
+    margin-top: 5vh;
+}
