@@ -19,7 +19,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: center;
 `;
-const StepCircle = styled.div<{ current?: boolean }>`
+const StepCircle = styled.div<{ current?: boolean, prev?: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -29,6 +29,12 @@ const StepCircle = styled.div<{ current?: boolean }>`
     if (props.current) {
       return css`
         background: #6b32a8;
+      `;
+    }
+    if (props.prev) {
+      return css`
+       background: #caabeb;
+       cursor: pointer;
       `;
     }
     return css`
@@ -46,11 +52,17 @@ const steps: ((props: SignUpStepProps) => any)[] = [
 function SignUpStep() {
   const page = useSelector((state: RootState) => state.SignUp.page);
   const dispatch = useDispatch();
-  const toNext = useCallback(() =>{
+  const toNext = useCallback(() => {
     if (page + 1 >= steps.length) {
       return;
     }
     dispatch(setPage(page + 1));
+  }, [dispatch, page]);
+  const toPage = useCallback((i: number) => {
+    return () => {
+      if (page <= i) return;
+      dispatch(setPage(i));
+    }
   }, [dispatch, page]);
   const Step = steps[page];
   return (
@@ -61,7 +73,7 @@ function SignUpStep() {
       <Footer>
         {steps.map((_, idx) => {
           if (idx === page) return <StepCircle current key={idx} />;
-          return <StepCircle key={idx} />;
+          return <StepCircle key={idx} onClick={toPage(idx)} prev={idx < page} />;
         })}
       </Footer>
     </Box>
