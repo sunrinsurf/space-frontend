@@ -1,6 +1,6 @@
 const INPUT_CHANGE = "SignUp/INPUT_CHANGE" as const;
 const INPUT_CLEAR = `SignUp/INPUT_CLEAR` as const;
-const SET_PAGE = 'SignUp/SET_PAGE' as const;
+const SET_PAGE = "SignUp/SET_PAGE" as const;
 const CATEGORY_TOGGLE = "SignUp/CATEGORY_TOGGLE" as const;
 const INPUT_ERROR = "SignUp/INPUT_ERROR" as const;
 const INPUT_ERROR_CLEAR = "SignUp/INPUT_ERROR_CLEAR" as const;
@@ -61,7 +61,7 @@ export function setPage(i: number) {
   return {
     type: SET_PAGE,
     payload: i
-  }
+  };
 }
 export function categoryToggle(i: number) {
   return {
@@ -73,7 +73,7 @@ export function inputError(payload: { [key: string]: string }) {
   return {
     type: INPUT_ERROR,
     payload
-  }
+  };
 }
 export function inputErrorClear(payload: string[]) {
   return {
@@ -128,8 +128,8 @@ function SignUp(state = initialState, action: SignUpAction) {
         error: action.payload
       };
     case INPUT_ERROR_CLEAR:
-      const error = { ...state.error };
-      action.payload.forEach((key) => {
+      const error: { [key: string]: string | undefined } = { ...state.error };
+      action.payload.forEach(key => {
         error[key] = "";
       });
       return {
