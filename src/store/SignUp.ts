@@ -1,5 +1,6 @@
 const INPUT_CHANGE = "SignUp/INPUT_CHANGE" as const;
 const INPUT_CLEAR = `SignUp/INPUT_CLEAR` as const;
+const SET_PAGE = 'SignUp/SET_PAGE' as const;
 const CATEGORY_TOGGLE = "SignUp/CATEGORY_TOGGLE" as const;
 interface dataTypes {
   id?: string;
@@ -45,6 +46,12 @@ export function inputClear() {
     type: INPUT_CLEAR
   };
 }
+export function setPage(i: number) {
+  return {
+    type: SET_PAGE,
+    payload: i
+  }
+}
 export function categoryToggle(i: number) {
   return {
     type: CATEGORY_TOGGLE,
@@ -54,10 +61,12 @@ export function categoryToggle(i: number) {
 type SignUpAction =
   | ReturnType<typeof categoryToggle>
   | ReturnType<typeof inputChange>
-  | ReturnType<typeof inputClear>;
+  | ReturnType<typeof inputClear>
+  | ReturnType<typeof setPage>;
 const initialState = {
   form: initialDataState,
-  categorys
+  categorys,
+  page: 0
 };
 function SignUp(state = initialState, action: SignUpAction) {
   switch (action.type) {
@@ -81,6 +90,11 @@ function SignUp(state = initialState, action: SignUpAction) {
       return {
         ...state,
         categorys
+      };
+      case SET_PAGE:
+      return {
+        ...state,
+        page: action.payload
       };
     default:
       return state;

@@ -1,11 +1,16 @@
 import React, { useCallback } from "react";
+import styled from 'styled-components';
 import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
 import Input from "../../Form/Input";
 import Button from "../../Form/Button";
 import { RootState } from "../../../store/reducer";
 import { inputChange } from "../../../store/SignUp";
+import SignUpInfoCert from "./SignUpInfoCert";
 
+const Flex = styled.div`
+  display: flex;
+`;
 function SignUpInfo({ toNext }: SignUpStepProps) {
   const {
     id,
@@ -58,19 +63,22 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
           defaultValue={name}
           name="name"
         />
-        <Input
-          type="text"
-          placeholder="전화번호"
-          defaultValue={phone}
-          name="phone"
-        />
+        <Flex>
+          <Input
+            type="text"
+            placeholder="전화번호"
+            defaultValue={phone}
+            name="phone"
+            style={{ flex: 1 }}
+          />
+          <Button style={{ margin: '1em 0 1em 1em', height: 'fit-content' }} onClick={SignUpInfoCert}>본인인증</Button>
+        </Flex>
         <Input
           type="text"
           placeholder="주소"
           defaultValue={address}
           name="address"
         />
-        <Button>본인인증</Button>
       </form>
       <Button fullWidth onClick={toNext}>
         다음으로

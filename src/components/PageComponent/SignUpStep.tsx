@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import styled, { css } from "styled-components";
 import PolicyStep from "./SignUpSteps/Policy";
 import SignUpStepProps from "./SignUpSteps/SignUpStepProps";
 import SignUpInfo from "./SignUpSteps/SignUpInfo";
 import SelectCategory from "./SignUpSteps/SelectCategory";
+import { RootState } from "../../store/reducer";
+import { setPage } from "../../store/SignUp";
 
 const Box = styled.div`
   max-width: 640px;
@@ -41,15 +44,15 @@ const steps: ((props: SignUpStepProps) => any)[] = [
   SelectCategory
 ];
 function SignUpStep() {
-  const [i, setI] = useState(0);
-
-  function toNext() {
-    if (i + 1 >= steps.length) {
+  const page = useSelector((state: RootState) => state.SignUp.page);
+  const dispatch = useDispatch();
+  const toNext = useCallback(() =>{
+    if (page + 1 >= steps.length) {
       return;
     }
-    setI(i + 1);
-  }
-  const Step = steps[i];
+    dispatch(setPage(page + 1));
+  }, [dispatch, page]);
+  const Step = steps[page];
   return (
     <Box>
       <div>
@@ -57,7 +60,7 @@ function SignUpStep() {
       </div>
       <Footer>
         {steps.map((_, idx) => {
-          if (idx === i) return <StepCircle current key={idx} />;
+          if (idx === page) return <StepCircle current key={idx} />;
           return <StepCircle key={idx} />;
         })}
       </Footer>
