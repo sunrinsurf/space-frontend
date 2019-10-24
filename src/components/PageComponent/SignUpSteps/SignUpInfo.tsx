@@ -19,7 +19,7 @@ const Flex = styled.div`
 
 function phoneNumberWrap(str: string): string | boolean {
   if (str === "") return "";
-  if (!str.match(/[0-9-]+/)) {
+  if (!str.match(/^[0-9-]+$/)) {
     return false;
   }
   let data = str.replace(/-/g, "");

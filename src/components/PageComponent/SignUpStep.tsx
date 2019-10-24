@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import PolicyStep from "./SignUpSteps/Policy";
 import SignUpStepProps from "./SignUpSteps/SignUpStepProps";
@@ -19,11 +19,12 @@ const Footer = styled.div`
   display: flex;
   justify-content: center;
 `;
-const StepCircle = styled.div<{ current?: boolean, prev?: boolean }>`
+const StepCircle = styled.div<{ current?: boolean; prev?: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 10px;
   margin: 0 0.5em;
+  transition: background 0.5s;
 
   ${props => {
     if (props.current) {
@@ -33,8 +34,8 @@ const StepCircle = styled.div<{ current?: boolean, prev?: boolean }>`
     }
     if (props.prev) {
       return css`
-       background: #caabeb;
-       cursor: pointer;
+        background: #caabeb;
+        cursor: pointer;
       `;
     }
     return css`
@@ -58,12 +59,15 @@ function SignUpStep() {
     }
     dispatch(setPage(page + 1));
   }, [dispatch, page]);
-  const toPage = useCallback((i: number) => {
-    return () => {
-      if (page <= i) return;
-      dispatch(setPage(i));
-    }
-  }, [dispatch, page]);
+  const toPage = useCallback(
+    (i: number) => {
+      return () => {
+        if (page <= i) return;
+        dispatch(setPage(i));
+      };
+    },
+    [dispatch, page]
+  );
   const Step = steps[page];
   return (
     <Box>
@@ -73,7 +77,9 @@ function SignUpStep() {
       <Footer>
         {steps.map((_, idx) => {
           if (idx === page) return <StepCircle current key={idx} />;
-          return <StepCircle key={idx} onClick={toPage(idx)} prev={idx < page} />;
+          return (
+            <StepCircle key={idx} onClick={toPage(idx)} prev={idx < page} />
+          );
         })}
       </Footer>
     </Box>
