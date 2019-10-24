@@ -1,0 +1,8 @@
+.SignLayout__wrap {
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.SignLayout__header {
+    padding: 2em;
+}

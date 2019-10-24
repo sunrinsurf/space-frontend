@@ -12,6 +12,9 @@ const Input = styled.input`
   &:focus {
     outline: 0;
   }
+  &::placeholder {
+    color: #b3b3b3;
+  }
 `;
 
 export default Input;

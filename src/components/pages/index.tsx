@@ -14,17 +14,22 @@ const pages: RouteProps[] = [
     component: loadable(() => import("./LearnMorePage"))
   },
   {
-    path: '/signin',
+    path: "/signin",
     exact: true,
-    component: loadable(() => import('./SignInPage'))
+    component: loadable(() => import("./SignInPage"))
+  },
+  {
+    path: "/signup",
+    exact: true,
+    component: loadable(() => import("./SignUpPage"))
   }
 ];
 
 function Pages() {
   return (
     <Switch>
-      {pages.map(data => (
-        <Route {...data} />
+      {pages.map((data, i) => (
+        <Route key={i} {...data} />
       ))}
     </Switch>
   );

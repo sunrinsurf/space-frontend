@@ -1,21 +1,19 @@
-import React from 'react';
-import Page from '../Page';
-import '../../styles/signin.css';
-import SignInForm from '../PageComponent/SignInForm';
+import React from "react";
+import Page from "../Page";
+import "../../styles/signin.css";
+import SignInForm from "../PageComponent/SignInForm";
+import SignLayout from "../Layout/SignLayout";
 
 function SignInPage() {
-    return (
-        <Page title="로그인" noLayout>
-            <div className="SignIn__wrap">
-                <header className="SignIn__header">
-                    <h1><span role="img" aria-label="rocket">🚀</span> Space</h1>
-                </header>
-                <main className="SignIn__main">
-                    <SignInForm />
-                </main>
-            </div>
-        </Page>
-    )
+  return (
+    <Page title="로그인" noLayout>
+      <SignLayout>
+        <div className="SignIn__main">
+          <SignInForm />
+        </div>
+      </SignLayout>
+    </Page>
+  );
 }
 
 export default SignInPage;
