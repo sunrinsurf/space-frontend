@@ -7,6 +7,7 @@ import Button from "../../Form/Button";
 import { RootState } from "../../../store/reducer";
 import { inputChange } from "../../../store/SignUp";
 import SignUpInfoCert from "./SignUpInfoCert";
+import SignUpInfoMatch from "./SignUpInfoMatch";
 
 const Flex = styled.div`
   display: flex;
@@ -25,6 +26,12 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
 
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLFormElement>) => {
+      const [isValid, message] = SignUpInfoMatch(e.target.name, e.target.value);
+
+      if (!isValid) {
+        console.log(message);
+        return;
+      }
       dispatch(
         inputChange({
           [e.target.name]: e.target.value

@@ -2,6 +2,8 @@ const INPUT_CHANGE = "SignUp/INPUT_CHANGE" as const;
 const INPUT_CLEAR = `SignUp/INPUT_CLEAR` as const;
 const SET_PAGE = 'SignUp/SET_PAGE' as const;
 const CATEGORY_TOGGLE = "SignUp/CATEGORY_TOGGLE" as const;
+const INPUT_ERROR = "SignUp/INPUT_ERROR" as const;
+const INPUT_ERROR_CLEAR = "SignUp/INPUT_ERROR_CLEAR" as const;
 interface dataTypes {
   id?: string;
   password?: string;
@@ -17,6 +19,15 @@ interface category {
 }
 
 const initialDataState: dataTypes = {
+  id: "",
+  password: "",
+  password_accept: "",
+  username: "",
+  name: "",
+  phone: "",
+  address: ""
+};
+const initialDataErrorState: dataTypes = {
   id: "",
   password: "",
   password_accept: "",
@@ -58,13 +69,28 @@ export function categoryToggle(i: number) {
     payload: i
   };
 }
+export function inputError(payload: { [key: string]: string }) {
+  return {
+    type: INPUT_ERROR,
+    payload
+  }
+}
+export function inputErrorClear(payload: string[]) {
+  return {
+    type: INPUT_ERROR_CLEAR,
+    payload
+  };
+}
 type SignUpAction =
   | ReturnType<typeof categoryToggle>
   | ReturnType<typeof inputChange>
   | ReturnType<typeof inputClear>
+  | ReturnType<typeof inputError>
+  | ReturnType<typeof inputErrorClear>
   | ReturnType<typeof setPage>;
 const initialState = {
   form: initialDataState,
+  error: initialDataErrorState,
   categorys,
   page: 0
 };
@@ -91,10 +117,24 @@ function SignUp(state = initialState, action: SignUpAction) {
         ...state,
         categorys
       };
-      case SET_PAGE:
+    case SET_PAGE:
       return {
         ...state,
         page: action.payload
+      };
+    case INPUT_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case INPUT_ERROR_CLEAR:
+      const error = { ...state.error };
+      action.payload.forEach((key) => {
+        error[key] = "";
+      });
+      return {
+        ...state,
+        error
       };
     default:
       return state;
