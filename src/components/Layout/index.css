@@ -28,11 +28,32 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
 }
 .Layout__contents {
   margin: 1em;
 }
-
+.Layout__header {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: white;
+  border-bottom: 1px solid #EAEAEA;
+}
+.Layout__navContents {
+  flex: 1;
+  text-align: right;
+}
+.Layout__navContents a {
+  color: #7b7b7b;
+}
 a {
   text-decoration: none;
+}
+.Layout__footer{
+  border-top: 1px solid #EAEAEA;
+  padding: 2.5em;
 }
