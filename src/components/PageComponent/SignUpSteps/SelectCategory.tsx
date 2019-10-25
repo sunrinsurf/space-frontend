@@ -1,9 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import SignUpStepProps from "./SignUpStepProps";
 import { RootState } from "../../../store/reducer";
-import { categoryToggle } from "../../../store/SignUp";
+import { categoryToggle, signUpComplete } from "../../../store/SignUp";
+import Button from "../../Form/Button";
+import ErrorComponent from "../../ErrorComponent";
 
 const Category = styled.div<{ select?: boolean }>`
   padding: 1em;
@@ -30,7 +32,7 @@ const CategoryList = styled.div`
 `;
 
 function SelectCategory({ toNext }: SignUpStepProps) {
-  const { categorys } = useSelector((state: RootState) => state.SignUp);
+  const { categorys, success, sign_error } = useSelector((state: RootState) => state.SignUp);
   const dispatch = useDispatch();
 
   const onCategoryToggle = useCallback(
@@ -41,8 +43,16 @@ function SelectCategory({ toNext }: SignUpStepProps) {
     },
     [dispatch]
   );
+  const completeSignUp = useCallback(() => {
+    console.log('complete');
+    dispatch(signUpComplete());
+  }, [dispatch]);
+  useEffect(() => {
+    if (success) toNext();
+  }, [success, toNext])
   return (
     <div>
+      {sign_error && <ErrorComponent>{sign_error}</ErrorComponent>}
       <h1>흥미가 있는 카테고리를 선택해 주세요.</h1>
       <CategoryList>
         {categorys.map((data, i) => (
@@ -56,6 +66,9 @@ function SelectCategory({ toNext }: SignUpStepProps) {
           </Category>
         ))}
       </CategoryList>
+      <Button fullWidth onClick={completeSignUp}>
+        회원가입 완료하기
+      </Button>
     </div>
   );
 }

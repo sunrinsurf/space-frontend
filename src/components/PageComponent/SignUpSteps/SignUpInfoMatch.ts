@@ -42,6 +42,12 @@ const matchers: matchersInterface = {
     if (!value.match(/^[가-힣]{2,}$/))
       return [false, "이름은 2글자 이상의 한글이어야 합니다."];
     return [true];
+  },
+  email(value) {
+    if (!value.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i)) {
+      return [false, "이메일 형식에 맞춰 입력해 주세요."];
+    }
+    return [true];
   }
 };
 function SignUpInfoMatch(key: string, value: string) {

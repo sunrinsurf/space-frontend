@@ -1,9 +1,19 @@
 import { combineReducers } from "redux";
-import SignUp from "./SignUp";
+import { all } from "redux-saga/effects";
+import SignUp, { SignUpType, SignUpSaga } from "./SignUp";
+import PhoneCert, { PhoneCertType, PhoneCertSaga } from './PhoneCert';
+
+export type RootState = {
+  SignUp: SignUpType,
+  PhoneCert: PhoneCertType
+};
 
 const reducer = combineReducers({
-  SignUp
+  PhoneCert,
+  SignUp,
 });
 
+export function* rootSaga() {
+  yield all([PhoneCertSaga(), SignUpSaga()]);
+}
 export default reducer;
-export type RootState = ReturnType<typeof reducer>;

@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
 import Input from "../../Form/Input";
@@ -10,35 +9,27 @@ import {
   inputError,
   inputErrorClear
 } from "../../../store/SignUp";
-import SignUpInfoCert from "./SignUpInfoCert";
 import SignUpInfoMatch from "./SignUpInfoMatch";
-
-const Flex = styled.div`
-  display: flex;
-`;
-
-function phoneNumberWrap(str: string): string | boolean {
-  if (str === "") return "";
-  if (!str.match(/^[0-9-]+$/)) {
-    return false;
-  }
-  let data = str.replace(/-/g, "");
-  const [num1, num2, num3] = [
-    data.slice(0, 3),
-    data.slice(3, 7),
-    data.slice(7, 11)
-  ];
-  let n = num1;
-  if (num2) {
-    n += "-" + num2;
-  }
-  if (num3) {
-    n += "-" + num3;
-  }
-  return n;
-}
+import SignUpInfoPhone from "./SignUpInfoPhone";
 
 function SignUpInfo({ toNext }: SignUpStepProps) {
+  const { form, token } = useSelector((state: RootState) => ({ form: state.SignUp.form, token: state.SignUp.certToken }));
+
+  const next = useCallback(() => {
+    if (!form.address || !form.id || !form.name || !form.password || !form.password_accept || !form.phone || !form.username || !form.email) {
+      alert("빈 칸을 모두 채워주세요.");
+      return;
+    }
+    if (form.password_accept !== form.password) {
+      alert("비밀번호를 다시 확인해주세요.");
+      return;
+    }
+    if (!token) {
+      alert('휴대폰 번호를 인증해주세요.');
+      return;
+    }
+    toNext();
+  }, [form, token, toNext]);
   return (
     <div>
       <form>
@@ -84,37 +75,22 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
             />
           )}
         </Column>
+        <Column column="email">
+          {(onchange, email) => (
+            <Input type="email" placeholder="이메일" value={email} onChange={onchange} />
+          )}
+        </Column>
         <Column column="name">
           {(onchange, name) => (
             <Input
               type="text"
               placeholder="이름 (본명)"
               value={name}
-              name="name"
               onChange={onchange}
             />
           )}
         </Column>
-        <Column column="phone" valueWrapper={phoneNumberWrap}>
-          {(onchange, phone) => (
-            <Flex>
-              <Input
-                type="text"
-                placeholder="전화번호"
-                value={phone}
-                style={{ flex: 1 }}
-                onChange={onchange}
-              />
-              <Button
-                style={{ margin: "1em 0 1em 1em", height: "fit-content" }}
-                onClick={SignUpInfoCert}
-              >
-                본인인증
-              </Button>
-            </Flex>
-          )}
-        </Column>
-
+        <SignUpInfoPhone />
         <Column column="address">
           {(onchange, address) => (
             <Input
@@ -126,7 +102,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
           )}
         </Column>
       </form>
-      <Button fullWidth onClick={toNext}>
+      <Button fullWidth onClick={next}>
         다음으로
       </Button>
     </div>
@@ -134,14 +110,18 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
 }
 
 interface SignUpInfoColumnProps {
-  column: any;
+  column: string;
   valueWrapper?: (value: string) => string | boolean;
   children: (
     handler: (e: React.ChangeEvent<HTMLInputElement>) => any,
     defaultData: any
   ) => any;
 }
-function Column({ column, children, valueWrapper }: SignUpInfoColumnProps) {
+export function Column({
+  column,
+  children,
+  valueWrapper
+}: SignUpInfoColumnProps) {
   const value = useSelector((state: RootState) => {
     const form: { [key: string]: any } = state.SignUp.form;
     return form[column];
@@ -160,7 +140,7 @@ function Column({ column, children, valueWrapper }: SignUpInfoColumnProps) {
       if (value !== false) {
         dispatch(
           inputChange({
-            [column]: value
+            [column]: value.toString()
           })
         );
       }

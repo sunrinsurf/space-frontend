@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import PolicyStep from "./SignUpSteps/Policy";
@@ -7,6 +7,8 @@ import SignUpInfo from "./SignUpSteps/SignUpInfo";
 import SelectCategory from "./SignUpSteps/SelectCategory";
 import { RootState } from "../../store/reducer";
 import { setPage } from "../../store/SignUp";
+import SignUpComplete from "./SignUpSteps/SignUpComplete";
+import { Redirect } from 'react-router-dom'
 
 const Box = styled.div`
   max-width: 640px;
@@ -48,13 +50,16 @@ const StepCircle = styled.div<{ current?: boolean; prev?: boolean }>`
 const steps: ((props: SignUpStepProps) => any)[] = [
   PolicyStep,
   SignUpInfo,
-  SelectCategory
+  SelectCategory,
+  SignUpComplete
 ];
 function SignUpStep() {
+  const [redirect, setRedirect] = useState(false);
   const page = useSelector((state: RootState) => state.SignUp.page);
   const dispatch = useDispatch();
   const toNext = useCallback(() => {
     if (page + 1 >= steps.length) {
+      setRedirect(true);
       return;
     }
     dispatch(setPage(page + 1));
@@ -71,6 +76,7 @@ function SignUpStep() {
   const Step = steps[page];
   return (
     <Box>
+      {redirect && <Redirect to="/" />}
       <div>
         <Step toNext={toNext} />
       </div>
