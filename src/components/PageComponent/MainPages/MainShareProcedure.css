@@ -1,4 +1,9 @@
-.MainShareProcedure__wrap {}
+.MainShareProcedure__wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
 .MainShareProcedure__Image {
     height: 200px;
@@ -18,7 +23,6 @@
 }
 
 .MainShareProcedure__Info {
-    margin: 300px auto;
     width: 80vw;
 }
 
@@ -33,5 +37,9 @@
 }
 
 .MainShareProcedure__arrow {
-    margin: 0px 80px;
+    margin: 0px 3vw;
+}
+.MainShareProcedure__Images_Element {
+    display: flex;
+    align-items: center;
 }

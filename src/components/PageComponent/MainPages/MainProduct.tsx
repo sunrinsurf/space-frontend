@@ -8,10 +8,10 @@ function MainProduct() {
             <div className="MainProduct__Info">
                 <div className="MainProduct__Title">최근 공유된 상품</div>
                 <div className="MainProduct__List">
-                    <MainShopCard></MainShopCard>
-                    <MainShopCard></MainShopCard>
-                    <MainShopCard></MainShopCard>
-                    <MainShopCard></MainShopCard>
+                    <MainShopCard />
+                    <MainShopCard />
+                    <MainShopCard />
+                    <MainShopCard />
                 </div>
             </div>
         </div >

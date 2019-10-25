@@ -1,7 +1,11 @@
-.MainProduct__wrap {}
+.MainProduct__wrap {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .MainProduct__Info {
-    margin: 500px auto;
     width: 80vw;
 }
 
