@@ -126,7 +126,7 @@ function* signUpCompleteSaga() {
       address: form.address || '',
       nickname: form.username || '',
       phone: form.phone,
-      email: '',
+      email: form.email || '',
       ptoken: certToken || '',
       interest: categorys.map((data: any) => data.name)
     });
