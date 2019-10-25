@@ -1,0 +1,37 @@
+.MainShareProcedure__wrap {}
+
+.MainShareProcedure__Image {
+    height: 200px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.MainShareProcedure__Images {
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.MainShareProcedure__Info {
+    margin: 300px auto;
+    width: 80vw;
+}
+
+.MainShareProcedure__Title {
+    font-size: 30px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.radius {
+    border-radius: 10px;
+}
+
+.MainShareProcedure__arrow {
+    margin: 0px 80px;
+}
