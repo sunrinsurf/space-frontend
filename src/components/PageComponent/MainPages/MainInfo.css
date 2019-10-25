@@ -1,13 +1,14 @@
 .MainInfo__wrap {
-    max-width: 600px;
-    margin: 15% auto;
-}
-
-.MainInfo__Info {
+    height: 90vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: center;  
+}
+
+.MainInfo__Info {
+    max-width: 600px;
+    text-align: center;
 }
 
 .MainInfo__Catchphrase {
@@ -23,4 +24,7 @@
 .MainInfo__Button {
     min-width: 90%;
     margin-top: 40px;
+}
+.MainInfo__icon {
+    font-size: 4em;
 }
