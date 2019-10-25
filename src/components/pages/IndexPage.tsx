@@ -1,10 +1,15 @@
 import React from "react";
 import Page from "../Page";
+import MainInfo from "../PageComponent/MainPages/MainInfo";
+import MainProduct from "../PageComponent/MainPages/MainProduct";
+import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure"
 
 function IndexPage() {
   return (
     <Page>
-      여길 수정해 주시면 됨.
+      <MainInfo></MainInfo>
+      <MainProduct></MainProduct>
+      <MainShareProcedure></MainShareProcedure>
     </Page>
   );
 }

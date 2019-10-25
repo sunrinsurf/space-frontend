@@ -1,0 +1,24 @@
+.MainShopCard__wrap {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.MainShopCard__Image {
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    margin-bottom: 30px;
+}
+
+.MainShopCard__Content {
+    width: 200px;
+    text-align: start;
+    margin-bottom: 30px;
+}
+
+.radius {
+    border-radius: 10px;
+}

@@ -1,0 +1,19 @@
+.MainProduct__wrap {}
+
+.MainProduct__Info {
+    margin: 500px auto;
+    width: 80vw;
+}
+
+.MainProduct__Title {
+    font-size: 30px;
+    margin-bottom: 60px;
+}
+
+.MainProduct__List {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
