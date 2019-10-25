@@ -133,6 +133,7 @@ export function Column({
   const dispatch = useDispatch();
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      const [isValid, message] = SignUpInfoMatch(column, e.target.value);
       const value = valueWrapper
         ? valueWrapper(e.target.value)
         : e.target.value;
@@ -143,15 +144,12 @@ export function Column({
           })
         );
       }
-      Promise.resolve(SignUpInfoMatch(column, e.target.value)).then(([isValid, message]) => {
-
-        if (!isValid) {
-          const msg: string = message.toString();
-          dispatch(inputError({ [column]: msg }));
-        } else if (error) {
-          dispatch(inputErrorClear([column]));
-        }
-      });
+      if (!isValid) {
+        const msg: string = message.toString();
+        dispatch(inputError({ [column]: msg }));
+      } else if (error) {
+        dispatch(inputErrorClear([column]));
+      }
     },
     [dispatch, column, error, valueWrapper]
   );
