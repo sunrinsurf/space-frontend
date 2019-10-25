@@ -128,7 +128,7 @@ function* signUpCompleteSaga() {
       phone: form.phone,
       email: form.email || '',
       ptoken: certToken || '',
-      interest: categorys.map((data: any) => data.name)
+      interest: categorys.filter((data: any) => data.checked).map((data: any) => data.name)
     });
     yield put({ type: SIGNUP_COMPLETE_SUCCESS });
   } catch (e) {
