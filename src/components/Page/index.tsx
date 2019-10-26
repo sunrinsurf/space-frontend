@@ -5,10 +5,11 @@ import Layout from "../Layout";
 type PageProps = {
   title?: string;
   noLayout?: boolean;
+  central?: boolean;
   children: React.ReactNode;
 };
 
-function Page({ title, children, noLayout }: PageProps) {
+function Page({ title, children, central, noLayout }: PageProps) {
   const LayoutOrFragment = noLayout ? React.Fragment : Layout;
   return (
     <LayoutOrFragment>
@@ -16,7 +17,19 @@ function Page({ title, children, noLayout }: PageProps) {
         <meta charSet="utf-8" />
         <title>{title ? title + " - Space" : "Space"}</title>
       </Helmet>
-      {children}
+      {central
+        ? (
+          <div style={{ display: 'flex', minHeight: '70vh', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              {children}
+            </div>
+          </div>
+        )
+        : (
+          <div style={{ minHeight: '70vh' }}>
+            {children}
+          </div>
+        )}
     </LayoutOrFragment>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import loadable from "@loadable/component";
 import { Route, Switch, RouteProps } from "react-router-dom";
+import NotFoundPage from "./SpecialPages/NotFoundPage";
 
 const pages: RouteProps[] = [
   {
@@ -41,6 +42,7 @@ function Pages() {
       {pages.map((data, i) => (
         <Route key={i} {...data} />
       ))}
+      <Route path="*" component={NotFoundPage} />
     </Switch>
   );
 }
