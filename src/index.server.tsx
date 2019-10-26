@@ -10,6 +10,7 @@ import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import * as Prefetch from './lib/usePrefetch';
 import store from './store';
 import { Provider } from 'react-redux';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
 const PORT = process.env.PORT || 8080;
 const statsFile = path.resolve('./build/loadable-stats.json');
@@ -42,15 +43,18 @@ function createPage(root: any, { style, link, script }: { style: string, link: s
 async function serverRender(ctx: Koa.ParameterizedContext) {
     Prefetch.clearPromises();
     const extractor = new ChunkExtractor({ statsFile });
+    const sheet = new ServerStyleSheet()
 
     const context = {};
     const jsx = (
         <ChunkExtractorManager extractor={extractor}>
-            <Provider store={store}>
-                <StaticRouter location={ctx.url} context={context}>
-                    <App />
-                </StaticRouter>
-            </Provider>
+            <StyleSheetManager sheet={sheet.instance}>
+                <Provider store={store}>
+                    <StaticRouter location={ctx.url} context={context}>
+                        <App />
+                    </StaticRouter>
+                </Provider>
+            </StyleSheetManager>
         </ChunkExtractorManager>
     );
 
@@ -66,7 +70,7 @@ async function serverRender(ctx: Koa.ParameterizedContext) {
     ctx.body = createPage(root, {
         script: `<script>window.__PRELOAD_SERVER__=${JSON.stringify(preloads)}</script>` + extractor.getScriptTags(),
         link: extractor.getLinkTags(),
-        style: extractor.getStyleTags()
+        style: sheet.getStyleTags()+extractor.getStyleTags()
     });
 }
 
