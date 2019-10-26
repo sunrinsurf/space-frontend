@@ -4,11 +4,18 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.6.0",
+    "@loadable/babel-plugin": "^5.10.3",
     "@loadable/component": "^5.10.3",
+    "@loadable/server": "^5.10.3",
+    "@loadable/webpack-plugin": "^5.7.1",
     "@svgr/webpack": "4.3.2",
     "@types/axios": "^0.14.0",
     "@types/jest": "24.0.19",
+    "@types/koa": "^2.0.51",
+    "@types/koa-router": "^7.0.42",
+    "@types/koa-static": "^4.0.1",
     "@types/loadable__component": "^5.10.0",
+    "@types/loadable__server": "^5.9.1",
     "@types/node": "12.11.1",
     "@types/react": "16.9.9",
     "@types/react-dom": "16.9.2",
@@ -49,6 +56,9 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
+    "koa": "^2.10.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "mini-css-extract-plugin": "0.8.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.5.0",
@@ -82,11 +92,14 @@
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
+    "webpack-node-externals": "^1.7.2",
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
     "start": "REACT_APP_LOCAL=true node scripts/start.js",
     "build": "node scripts/build.js",
+    "build:server": "node scripts/build.server.js",
+    "start:server": "node server",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -157,7 +170,8 @@
       "react-app"
     ],
     "plugins": [
-      "react-hot-loader/babel"
+      "react-hot-loader/babel",
+      "@loadable/babel-plugin"
     ]
   }
 }

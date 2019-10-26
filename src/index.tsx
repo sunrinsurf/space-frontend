@@ -5,15 +5,24 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
+import { loadableReady } from '@loadable/component';
 
-ReactDOM.render(
+const jsx = (
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
+const root = document.getElementById("root");
+
+if (process.env.NODE_ENV === 'production' && !process.env.REACT_APP_CLIENT_SIDE) {
+  loadableReady(() => {
+    ReactDOM.hydrate(jsx, root);
+  })
+} else {
+  ReactDOM.render(jsx, root);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
