@@ -41,36 +41,40 @@ function createPage(root: any, { style, link, script }: { style: string, link: s
     `.trim();
 }
 async function serverRender(ctx: Koa.ParameterizedContext) {
-    Prefetch.clearPromises();
     const extractor = new ChunkExtractor({ statsFile });
     const sheet = new ServerStyleSheet()
 
     const context = {};
+    const prefetchContext: Prefetch.PrefetchContextInterface = {
+        promises: {},
+        preloads: {}
+    };
     const jsx = (
         <ChunkExtractorManager extractor={extractor}>
             <StyleSheetManager sheet={sheet.instance}>
-                <Provider store={store}>
-                    <StaticRouter location={ctx.url} context={context}>
-                        <App />
-                    </StaticRouter>
-                </Provider>
+                <Prefetch.PrefetchContext.Provider value={prefetchContext}>
+                    <Provider store={store}>
+                        <StaticRouter location={ctx.url} context={context}>
+                            <App />
+                        </StaticRouter>
+                    </Provider>
+                </Prefetch.PrefetchContext.Provider>
             </StyleSheetManager>
         </ChunkExtractorManager>
     );
 
     ReactDOMServer.renderToStaticMarkup(jsx);
-    const preloads: { [key: string]: Object } = {};
-    await Promise.all(Object.entries(Prefetch.promises).map(([key, value]) => {
+    await Promise.all(Object.entries(prefetchContext.promises).map(([key, value]) => {
         return (async () => {
-            preloads[key] = await Promise.resolve(value());
+            prefetchContext.preloads[key] = await Promise.resolve(value());
         })();
     }));
-    (global as any).ssrPreloads = preloads;
+
     const root = ReactDOMServer.renderToString(jsx);
     ctx.body = createPage(root, {
-        script: `<script>window.__PRELOAD_SERVER__=${JSON.stringify(preloads)}</script>` + extractor.getScriptTags(),
+        script: `<script>window.__PRELOAD_SERVER__=${JSON.stringify(prefetchContext.preloads)}</script>` + extractor.getScriptTags(),
         link: extractor.getLinkTags(),
-        style: sheet.getStyleTags()+extractor.getStyleTags()
+        style: sheet.getStyleTags() + extractor.getStyleTags()
     });
 }
 

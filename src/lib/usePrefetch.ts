@@ -1,15 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext, useContext } from 'react'
 
 const serverRendered = (window as any).__PRELOAD_SERVER__;
-export let promises: { [key: string]: () => any } = {};
-function usePrefetch<T>(name: string, func: (() => T) | (() => Promise<T>)) {
 
+export interface PrefetchContextInterface {
+    promises: {
+        [key: string]: () => any
+    },
+    preloads: {
+        [key: string]: any
+    }
+}
+export const PrefetchContext = createContext<PrefetchContextInterface | null>(null);
+function usePrefetch<T>(name: string, func: (() => T) | (() => Promise<T>)) {
     const [data, setData] = useState<T | null>((serverRendered && serverRendered[name]) || null);
     const [error, setError] = useState<any | null>(null);
+    const context = useContext(PrefetchContext);
 
-    if (global && (global as any).isSSR) {
-        promises[name] = func;
-    }
     useEffect(() => {
         if (data) return;
         Promise.resolve(func())
@@ -21,13 +27,15 @@ function usePrefetch<T>(name: string, func: (() => T) | (() => Promise<T>)) {
                 setError(e);
             })
     }, [data, func]);
-    if (global && (global as any).ssrPreloads && (global as any).ssrPreloads[name]) {
-        return [(global as any).ssrPreloads[name], null];
+
+    if (context) {
+        context.promises[name] = func;
+    }
+    if (context && context.preloads) {
+        return [context.preloads[name], null];
     }
 
     return [data, error];
 }
-export function clearPromises() {
-    promises = {};
-}
+
 export default usePrefetch;
