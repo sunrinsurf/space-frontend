@@ -57,3 +57,7 @@ a {
   border-top: 1px solid #EAEAEA;
   padding: 2.5em;
 }
+.Layout__brand {
+  margin: 0;
+  cursor: pointer;
+}

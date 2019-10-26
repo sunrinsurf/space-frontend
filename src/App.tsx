@@ -4,7 +4,9 @@ import { hot } from 'react-hot-loader';
 
 const App: React.FC = () => {
   return (
-    <Pages />
+    <>
+      <Pages />
+    </>
   );
 };
 

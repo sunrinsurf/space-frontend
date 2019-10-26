@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import "./index.css";
 import { Link } from "react-router-dom";
 type LayoutProps = {
@@ -6,10 +7,15 @@ type LayoutProps = {
 };
 
 function Layout({ children }: LayoutProps) {
+  const history = useHistory();
+
+  function goToMain() {
+    history.push('/');
+  }
   return (
     <div className="Layout__wrap">
       <header className="Layout__header">
-        <h1 style={{ margin: 0 }}>
+        <h1 className="Layout__brand" role="button" onClick={goToMain}>
           <span role="img" aria-label="rocket">🚀</span>&nbsp;Space
         </h1>
         <div className="Layout__navContents">
