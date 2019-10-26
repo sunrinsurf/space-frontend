@@ -8,6 +8,8 @@ function MainInfo() {
   function getStart() {
     history.push('/signup');
   }
+
+
   return (
     <div className="MainInfo__wrap">
       <div className="MainInfo__Info">

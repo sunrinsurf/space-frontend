@@ -39,6 +39,7 @@ p {
   align-items: center;
   position: -webkit-sticky;
   position: sticky;
+  z-index: 10001;
   top: 0;
   background: white;
   border-bottom: 1px solid #EAEAEA;
