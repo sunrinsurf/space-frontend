@@ -15,7 +15,10 @@ function Page({ title, children, central, noLayout }: PageProps) {
     <LayoutOrFragment>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{title ? title + " - Space" : "Space"}</title>
+        <link rel="icon" href="/favicon2x.png" />
+        <meta name="description" content="소유의 경계를 허물다, 스페이스" />
+        <link rel="apple-touch-icon" href="/favicon2x.png" />
+        <title>{title ? title + " - 스페이스" : "스페이스"}</title>
       </Helmet>
       {central
         ? (
