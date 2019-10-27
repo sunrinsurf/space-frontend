@@ -33,12 +33,12 @@ function Layout({ children, noPadding, navFixed }: LayoutProps) {
           <div className="Layout__navContents">
             {!logined ? (
               <>
-                <Link to="signin">로그인</Link>
+                <Link to="signin">Sign In</Link>
                 <span> | </span>
-                <Link to="signup">회원가입</Link>
+                <Link to="signup">Sign Up</Link>
               </>
             ) : (
-              <Link to="/info">내 정보</Link>
+              <Link to="/info">My Page</Link>
             )}
           </div>
         </nav>
