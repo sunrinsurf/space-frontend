@@ -10,6 +10,7 @@ async function handleError(handler: () => Promise<any> | any) {
     throw e;
   }
 }
+
 export function* handleSagaError(e: any, errorType: string) {
   yield put({ type: errorType, payload: e });
 }

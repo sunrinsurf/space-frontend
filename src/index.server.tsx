@@ -8,9 +8,10 @@ import App from './App';
 import serve from 'koa-static';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import * as Prefetch from './lib/usePrefetch';
-import store from './store';
+import createStore from './store/createStore';
 import { Provider } from 'react-redux';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import { END } from 'redux-saga';
 
 const PORT = process.env.PORT || 8080;
 const statsFile = path.resolve('./build/loadable-stats.json');
@@ -43,6 +44,12 @@ function createPage(root: any, { style, link, script }: { style: string, link: s
 async function serverRender(ctx: Koa.ParameterizedContext) {
     const extractor = new ChunkExtractor({ statsFile });
     const sheet = new ServerStyleSheet()
+    const store = createStore({
+        Auth: {
+            token: ctx.cookies.get('auth_token'),
+            autorized: !!ctx.cookies.get('auth_token')
+        }
+    });
 
     const context = {};
     const prefetchContext: Prefetch.PrefetchContextInterface = {
@@ -70,9 +77,14 @@ async function serverRender(ctx: Koa.ParameterizedContext) {
         })();
     }));
 
+    store.dispatch(END);
     const root = ReactDOMServer.renderToString(jsx);
+    const preloadScript = `<script>window.__PRELOAD_SERVER__=${JSON.stringify(prefetchContext.preloads).replace(/</g, '\\u003c')}</script>`;
+    const preloadStateScript = `<script>window.__PRELOAD_STATE__=${
+        JSON.stringify(store.getState()).replace(/</g, '\\u003c')
+        }</script>`;
     ctx.body = createPage(root, {
-        script: `<script>window.__PRELOAD_SERVER__=${JSON.stringify(prefetchContext.preloads)}</script>` + extractor.getScriptTags(),
+        script: preloadScript + preloadStateScript + extractor.getScriptTags(),
         link: extractor.getLinkTags(),
         style: sheet.getStyleTags() + extractor.getStyleTags()
     });

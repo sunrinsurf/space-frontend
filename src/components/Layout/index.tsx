@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom';
 import "./index.css";
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.svg'
+import useLogin from "../../lib/useLogin";
 type LayoutProps = {
   children?: React.ReactNode;
 };
 
 function Layout({ children }: LayoutProps) {
   const history = useHistory();
+  const logined = useLogin();
 
   function goToMain() {
     history.push('/');
@@ -20,7 +22,11 @@ function Layout({ children }: LayoutProps) {
           <img src={logo} alt="logo" height="30" />
         </div>
         <div className="Layout__navContents">
-          <Link to="signin">로그인</Link><span> | </span><Link to="signup">회원가입</Link>
+          {!logined ? (
+            <><Link to="signin">로그인</Link><span> | </span><Link to="signup">회원가입</Link></>
+          )
+            : <Link to="/info">내 정보</Link>
+          }
         </div>
       </header>
       <main className="Layout__contents">{children}</main>

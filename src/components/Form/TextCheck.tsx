@@ -8,7 +8,7 @@ interface TextCheckProps {
 interface TextCheckLabelProps {
     checked?: boolean
 }
-const TextCheckLabel = styled.div<TextCheckLabelProps>`
+export const TextCheckLabel = styled.div<TextCheckLabelProps>`
     cursor: pointer;
     display: inline;
     padding: .1em .5em;
