@@ -50,7 +50,10 @@ function Layout({ children, noPadding, navFixed }: LayoutProps) {
       >
         {children}
       </main>
-      <footer className="Layout__footer">Team Surf @ 2019</footer>
+      <footer className="Layout__footer">
+        Team Surf @ 2019 | <Link to="/policy">이용약관</Link> |{" "}
+        <Link to="/privacy">개인정보취급방침</Link>
+      </footer>
     </div>
   );
 }

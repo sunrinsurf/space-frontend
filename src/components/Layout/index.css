@@ -45,13 +45,12 @@ p {
   top: 0;
   left: 0;
   right: 0;
-  background: black;
+  background: rgb(17, 131, 250);
   position: sticky;
   position: -webkit-sticky;
 }
 .Layout__header.navFixed {
   position: fixed;
-  background: transparent;
 }
 .Layout__navContents {
   flex: 1;
