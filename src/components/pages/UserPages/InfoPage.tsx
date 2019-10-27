@@ -12,7 +12,7 @@ function InfoPage() {
     async () => {
       if (!user) return;
       const id = user.data.userId;
-      return await getUserData(id);
+      return await getUserData(id, user.token);
     }
   );
   useEffect(() => {

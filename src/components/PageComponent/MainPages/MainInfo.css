@@ -59,6 +59,9 @@
   .MainInfo__Info {
     font-size: 0.5rem;
   }
+  .MainInfo__Phone img {
+    margin: 0;
+  }
 }
 @media (max-width: 600px) {
   .MainInfo__Background {

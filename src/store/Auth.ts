@@ -8,9 +8,13 @@ const UNREGISTER_TOKEN_SUCCESS = "Auth/UNREGISTER_TOKEN_SUCCESS" as const;
 const CHECK_TOKEN = "Auth/CHECK_TOKEN" as const;
 const CHECK_TOKEN_SUCCESS = "Auth/CHECK_TOKEN_SUCCESS" as const;
 
-function decodePayload(token: string): any {
+export function decodePayload(token: string): any {
   const payload = token.split(".")[1];
-  return JSON.parse(atob(payload));
+  const payload_d =
+    (window.atob && window.atob(payload)) ||
+    (Buffer && Buffer.from(payload, "base64").toString());
+
+  return JSON.parse(payload_d);
 }
 export function registerToken({ token }: { token: string }) {
   return { type: REGISTER_TOKEN, token };
