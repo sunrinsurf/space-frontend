@@ -1,60 +1,107 @@
 .MainInfo__wrap {
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;  
+  height: 100vh;
 }
 
 .MainInfo__Info {
-    max-width: 600px;
+  height: 80vh;
+  text-align: center;
+}
+.MainInfo__BrandWrap {
+  text-align: left;
+  color: white;
+  margin-bottom: 10vh;
+  flex: 1;
+}
+.MainInfo__Phone {
+  flex: 1;
+  text-align: right;
+}
+.MainInfo__Phone > img {
+  margin-top: 20vh;
+  width: 90%;
+  height: auto;
+}
+.MainInfo__BrandWrap > h1 {
+  font-size: 3em;
+  margin-bottom: 0.3em;
+  font-weight: lighter;
+}
+.MainInfo__BrandWrap > h3 {
+  font-size: 1.5em;
+  font-weight: lighter;
+}
+.MainInfo__BrandLogo {
+  margin: 0 4px;
+  max-width: 400px;
+  width: 100%;
+}
+.MainInfo__GetStart {
+  position: absolute;
+  top: 68%;
+  left: 0;
+  right: 0;
+}
+.MainInfo__Guide {
+  position: absolute;
+  bottom: 20px;
+  display: block;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .MainInfo__Info {
+    font-size: 0.7rem;
+  }
+}
+@media (max-width: 705px) {
+  .MainInfo__Info {
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .MainInfo__Background {
+    display: none;
+  }
+  .MainInfo__FlexBox {
+    flex-direction: column-reverse;
+    padding: 0 40px;
+  }
+  .MainInfo__Info {
+    background: #1183fa;
+    height: auto;
+    min-height: 80vh;
+  }
+  .MainInfo__BrandWrap {
     text-align: center;
-}
-.MainInfo__Favicon {
-    max-width: 200px;
-    display: block;
-    margin: 0 auto;
-
-    animation: MainInfo__Rocket_Animation 1s both;
-}
-.MainInfo__Catchphrase {
-    font-size: 40px;
-    margin-top: 50px;
-    animation: MainInfo__Animation 1s both;
-    animation-delay: .5s;
-}
-
-.MainInfo__Subject {
-    font-size: 25px;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  .MainInfo__Phone img {
+    width: 70%;
+    max-height: 30vh;
+    margin: 0;
+    object-fit: contain;
+  }
+  .MainInfo__Phone {
+    text-align: center;
+    padding-top: 15vh;
+  }
+  .MainInfo__BrandLogo {
+    width: 60%;
+    margin: 0;
+    margin-bottom: 1.5em;
+  }
+  .MainInfo__BrandWrap > h3 {
+    font-size: 1rem;
+  }
+  .MainInfo__GetStart {
+    position: static;
+    margin-top: 10vh;
+  }
+  .MainInfo__Guide {
+    position: static;
     margin-top: 10px;
-    animation: MainInfo__Animation 1s both;
-    animation-delay: 1s;
-}
-
-.MainInfo__Button {
-    min-width: 90%;
-    margin-top: 40px;
-    animation: MainInfo__Animation 1s both;
-    animation-delay: 1.5s;
-}
-
-@keyframes MainInfo__Rocket_Animation {
-    from {
-        transform: translate3d(-80px, 80px, -100px);
-        opacity: 0;
-    }
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1;
-    }
-}
-@keyframes MainInfo__Animation {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  }
 }

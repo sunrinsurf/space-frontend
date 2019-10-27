@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-type ButtonProps = { fullWidth?: Boolean, background?: string | false };
+type ButtonProps = { fullWidth?: Boolean; background?: string | false };
 const Button = styled.button<ButtonProps>`
   display: block;
   font-size: 1rem;
-  
-  padding: 1em;
+
+  padding: 0.7em 1em;
   border: 0;
   color: white;
   border-radius: 5px;
@@ -19,21 +19,27 @@ const Button = styled.button<ButtonProps>`
     if (props.background === false) {
       return css`
         background: transparent;
-        color: black
+        color: black;
       `;
     }
     if (!props.background) {
-      return css`background: #6b32a8;`;
+      return css`
+        background: #fd437c;
+      `;
     }
-    return css`background: ${props.background};`;
+    return css`
+      background: ${props.background};
+    `;
   }}
   &:focus {
     ${props => {
-    if (props.background === false) {
-      return css``;
-    }
-    return css`background: #3f1e63;`;
-  }}
+      if (props.background === false) {
+        return css``;
+      }
+      return css`
+        background: #3f1e63;
+      `;
+    }}
     outline: 0;
   }
 `;

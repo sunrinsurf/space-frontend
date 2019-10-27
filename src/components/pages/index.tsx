@@ -27,12 +27,12 @@ const pages: RouteProps[] = [
   {
     path: "/policy",
     exact: true,
-    component: loadable(() => import('./PolicyPage'))
+    component: loadable(() => import("./PolicyPage"))
   },
   {
-    path: '/privacy',
+    path: "/privacy",
     exact: true,
-    component: loadable(() => import('./PrivacyPage'))
+    component: loadable(() => import("./PrivacyPage"))
   }
 ];
 

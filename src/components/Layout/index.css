@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,500&display=swap");
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -28,37 +33,49 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
 }
 .Layout__contents {
   margin: 1em;
 }
+.Layout__contents.noPadding {
+  margin: 0;
+}
 .Layout__header {
-  padding: 1em;
-  display: flex;
-  align-items: center;
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   z-index: 10001;
   top: 0;
-  background: white;
-  border-bottom: 1px solid #EAEAEA;
+  left: 0;
+  right: 0;
 }
 .Layout__navContents {
   flex: 1;
   text-align: right;
 }
 .Layout__navContents a {
-  color: #7b7b7b;
+  color: #ffffff;
+}
+.Layout__nav {
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1em;
+  color: white;
 }
 a {
   text-decoration: none;
 }
-.Layout__footer{
-  border-top: 1px solid #EAEAEA;
+.Layout__footer {
+  border-top: 1px solid #eaeaea;
   padding: 2.5em;
 }
 .Layout__brand {
   margin: 0;
   cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.Layout__brand > svg {
+  margin-right: 10px;
 }

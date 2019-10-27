@@ -1,14 +1,34 @@
-import React from 'react'
+import React from "react";
 
-function Favicon() {
-    return (
-        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-            <g>
-                <linearGradient id="Favicon__1" gradientUnits="userSpaceOnUse" x1="9.7391" y1="-201.9191" x2="150.8387" y2="-265.7958" gradientTransform="matrix(1 0 0 -1 0 -159.2)">
-                    <stop offset="0" style={{stopColor:"#FD437C"}}/>
-                    <stop offset="1" style={{stopColor: "#22C6C2"}}/>
-                </linearGradient>
-                <path style={{fill: 'url(#Favicon__1)'}} d="M127.7,20.5c-5.1,0.1-11.8,1.7-19.9,4.6c-4.6,1.7-9.7,3.8-14.9,6.3c-1.2,0.6-2.5,1.2-3.8,1.8l-1.3,0.6
+interface FaviconProps {
+  white?: boolean;
+}
+function Favicon({
+  white,
+  ...props
+}: FaviconProps & React.SVGProps<SVGAElement>) {
+  return (
+    <svg
+      viewBox="0 0 140 140"
+      xmlns="http://www.w3.org/2000/svg"
+      {...(props as any)}
+    >
+      <g>
+        <linearGradient
+          id="Favicon__1"
+          gradientUnits="userSpaceOnUse"
+          x1="9.7391"
+          y1="-201.9191"
+          x2="150.8387"
+          y2="-265.7958"
+          gradientTransform="matrix(1 0 0 -1 0 -159.2)"
+        >
+          <stop offset="0" style={{ stopColor: "#FD437C" }} />
+          <stop offset="1" style={{ stopColor: "#22C6C2" }} />
+        </linearGradient>
+        <path
+          style={{ fill: white ? "white" : "url(#Favicon__1)" }}
+          d="M127.7,20.5c-5.1,0.1-11.8,1.7-19.9,4.6c-4.6,1.7-9.7,3.8-14.9,6.3c-1.2,0.6-2.5,1.2-3.8,1.8l-1.3,0.6
 			l1.2,0.7c9.5,5.6,16.1,14.9,18.3,25.7c-9.3,7.9-19.1,15.2-29.3,21.9C67.9,88.9,57.3,95,46.3,100.5l0,0l-0.4,0.2c-1,0.5-2,1-3,1.4
 			c-1,0.4-2.2,1-3.3,1.5c-3.5,1.6-6.9,3-10,4.1c-8.5,3.1-13.8,4-16.6,4.1c-3.5,0.2-4.9-0.5-5.2-0.9c-0.3-0.4-0.3-1.3,0.4-3.2
 			c1-2.7,3.8-7.7,11.2-15.5c1.8-2,3.9-4,6.1-6.1c1.2,2.8,2.6,5.5,4.2,8c1.4,2.2,3,4.2,4.8,6.2l0.4,0.4l0.5-0.2c1.9-0.8,4-1.8,6-2.7
@@ -20,17 +40,29 @@ function Favicon() {
 			C136.6,21.9,132.9,20.4,127.7,20.5z M102.4,35.5c2.8-1.2,5.4-2.3,8-3.2c8.5-3.1,13.8-4,16.6-4.1c3.5-0.2,4.9,0.5,5.2,0.9
 			c0.3,0.4,0.4,2-1.2,5.1c-1.3,2.6-4.1,7.1-10.4,13.7c-2.1,2.2-4.3,4.4-6.8,6.8c-0.5-1.8-1.2-3.5-1.9-5.2c-1.1-2.4-2.3-4.7-3.7-6.9
 			C106.4,40,104.5,37.7,102.4,35.5z M90.5,101.1c-10.6,7-24,8.4-35.9,3.8c9.5-5,18.7-10.4,27.6-16.3c8.9-5.8,17.6-12.2,25.9-18.9
-			C107.7,82.4,101.1,94.1,90.5,101.1L90.5,101.1z"/>
-		
-			<linearGradient id="Favicon__2" gradientUnits="userSpaceOnUse" x1="16.9105" y1="-186.0902" x2="158.0001" y2="-249.9669" gradientTransform="matrix(1 0 0 -1 0 -159.2)">
-                <stop  offset="0" style={{stopColor: "#FD437C"}} />
-                <stop  offset="1" style={{stopColor: "#22C6C2"}} />
-            </linearGradient>
-            <path style={{opacity: 0.33, fill: `url(#Favicon__2)`}} d="M107.4,76.2c2.9-1.7,5.7-3.5,8.4-5.4c0.1-2.5,0.1-5-0.2-7.5c-2.7,2.5-4.4,3.9-7.4,6.3
-                C108.1,71.8,107.8,74,107.4,76.2z"/>
-            </g>
-        </svg>
-    );
+			C107.7,82.4,101.1,94.1,90.5,101.1L90.5,101.1z"
+        />
+
+        <linearGradient
+          id="Favicon__2"
+          gradientUnits="userSpaceOnUse"
+          x1="16.9105"
+          y1="-186.0902"
+          x2="158.0001"
+          y2="-249.9669"
+          gradientTransform="matrix(1 0 0 -1 0 -159.2)"
+        >
+          <stop offset="0" style={{ stopColor: "#FD437C" }} />
+          <stop offset="1" style={{ stopColor: "#22C6C2" }} />
+        </linearGradient>
+        <path
+          style={{ opacity: 0.33, fill: white ? "white" : `url(#Favicon__2)` }}
+          d="M107.4,76.2c2.9-1.7,5.7-3.5,8.4-5.4c0.1-2.5,0.1-5-0.2-7.5c-2.7,2.5-4.4,3.9-7.4,6.3
+                C108.1,71.8,107.8,74,107.4,76.2z"
+        />
+      </g>
+    </svg>
+  );
 }
 
 export default Favicon;

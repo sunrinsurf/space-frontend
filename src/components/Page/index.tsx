@@ -6,13 +6,19 @@ type PageProps = {
   title?: string;
   noLayout?: boolean;
   central?: boolean;
+  noPadding?: boolean;
   children: React.ReactNode;
 };
 
-function Page({ title, children, central, noLayout }: PageProps) {
+function Page({ title, children, central, noLayout, noPadding }: PageProps) {
   const LayoutOrFragment = noLayout ? React.Fragment : Layout;
+  const props = noLayout
+    ? {}
+    : {
+        noPadding
+      };
   return (
-    <LayoutOrFragment>
+    <LayoutOrFragment {...props}>
       <Helmet>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon2x.png" />
@@ -20,19 +26,19 @@ function Page({ title, children, central, noLayout }: PageProps) {
         <link rel="apple-touch-icon" href="/favicon2x.png" />
         <title>{title ? title + " - 스페이스" : "스페이스"}</title>
       </Helmet>
-      {central
-        ? (
-          <div style={{ display: 'flex', minHeight: '70vh', justifyContent: 'center' }}>
-            <div style={{ textAlign: 'center' }}>
-              {children}
-            </div>
-          </div>
-        )
-        : (
-          <div style={{ minHeight: '70vh' }}>
-            {children}
-          </div>
-        )}
+      {central ? (
+        <div
+          style={{
+            display: "flex",
+            minHeight: "100vh",
+            justifyContent: "center"
+          }}
+        >
+          <div style={{ textAlign: "center" }}>{children}</div>
+        </div>
+      ) : (
+        <div style={{ minHeight: "70vh" }}>{children}</div>
+      )}
     </LayoutOrFragment>
   );
 }

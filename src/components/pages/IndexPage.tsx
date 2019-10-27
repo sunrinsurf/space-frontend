@@ -6,7 +6,7 @@ import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure"
 
 function IndexPage() {
   return (
-    <Page>
+    <Page noPadding>
       <MainInfo></MainInfo>
       <MainProduct></MainProduct>
       <MainShareProcedure></MainShareProcedure>
