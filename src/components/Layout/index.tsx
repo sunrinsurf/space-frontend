@@ -8,9 +8,10 @@ import Favicon from "./Favicon";
 type LayoutProps = {
   children?: React.ReactNode;
   noPadding?: boolean;
+  navFixed?: boolean;
 };
 
-function Layout({ children, noPadding }: LayoutProps) {
+function Layout({ children, noPadding, navFixed }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
 
@@ -19,7 +20,11 @@ function Layout({ children, noPadding }: LayoutProps) {
   }
   return (
     <div className="Layout__wrap">
-      <header className="Layout__header">
+      <header
+        className={["Layout__header", navFixed && "navFixed"]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <nav className="Layout__nav">
           <div className="Layout__brand" role="button" onClick={goToMain}>
             <Favicon white height="40" />

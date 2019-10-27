@@ -33,6 +33,11 @@ const pages: RouteProps[] = [
     path: "/privacy",
     exact: true,
     component: loadable(() => import("./PrivacyPage"))
+  },
+  {
+    path: "/info",
+    exact: true,
+    component: loadable(() => import("./UserPages/InfoPage"))
   }
 ];
 

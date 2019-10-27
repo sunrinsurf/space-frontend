@@ -7,15 +7,24 @@ type PageProps = {
   noLayout?: boolean;
   central?: boolean;
   noPadding?: boolean;
+  navFixed?: boolean;
   children: React.ReactNode;
 };
 
-function Page({ title, children, central, noLayout, noPadding }: PageProps) {
+function Page({
+  title,
+  children,
+  central,
+  noLayout,
+  noPadding,
+  navFixed
+}: PageProps) {
   const LayoutOrFragment = noLayout ? React.Fragment : Layout;
   const props = noLayout
     ? {}
     : {
-        noPadding
+        noPadding,
+        navFixed
       };
   return (
     <LayoutOrFragment {...props}>

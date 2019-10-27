@@ -41,11 +41,17 @@ p {
   margin: 0;
 }
 .Layout__header {
-  position: fixed;
   z-index: 10001;
   top: 0;
   left: 0;
   right: 0;
+  background: black;
+  position: sticky;
+  position: -webkit-sticky;
+}
+.Layout__header.navFixed {
+  position: fixed;
+  background: transparent;
 }
 .Layout__navContents {
   flex: 1;
