@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "./index.css";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo_white.svg";
 import useLogin from "../../lib/useLogin";
 import Favicon from "./Favicon";
 type LayoutProps = {
