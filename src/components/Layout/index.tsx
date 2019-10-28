@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./index.css";
 import { Link } from "react-router-dom";
@@ -14,14 +14,32 @@ type LayoutProps = {
 function Layout({ children, noPadding, navFixed }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
+  const [transparent, setTransparent] = useState(navFixed || false);
 
   function goToMain() {
     history.push("/");
   }
+  useEffect(() => {
+    const handler = () => {
+      const y = window.scrollY;
+      console.log(y)
+      if (y <= 0 && navFixed) {
+        setTransparent(true);
+      } else {
+        setTransparent(false);
+      }
+    };
+    window && window.addEventListener('scroll', handler);
+
+    return () => {
+      console.log('cleanup')
+      window && window.removeEventListener('scroll', handler);
+    }
+  }, [navFixed]);
   return (
     <div className="Layout__wrap">
       <header
-        className={["Layout__header", navFixed && "navFixed"]
+        className={["Layout__header", navFixed && "navFixed", transparent && "transparent"]
           .filter(Boolean)
           .join(" ")}
       >
@@ -38,8 +56,8 @@ function Layout({ children, noPadding, navFixed }: LayoutProps) {
                 <Link to="signup">Sign Up</Link>
               </>
             ) : (
-              <Link to="/info">My Page</Link>
-            )}
+                <Link to="/info">My Page</Link>
+              )}
           </div>
         </nav>
       </header>
