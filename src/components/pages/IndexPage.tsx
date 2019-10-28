@@ -3,13 +3,26 @@ import Page from "../Page";
 import MainInfo from "../PageComponent/MainPages/MainInfo";
 import MainProduct from "../PageComponent/MainPages/MainProduct";
 import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure";
+import useLogin from "../../lib/useLogin";
+import LoginedMainPage from "../PageComponent/LoginedMainPage";
 
 function IndexPage() {
+  const user = useLogin();
+  const beforeLogin = (
+    <>
+      <MainInfo />
+      <MainProduct />
+      <MainShareProcedure />
+    </>
+  );
+  const afterLogin = (
+    <LoginedMainPage />
+  )
+  const props: any = {};
+  if (!user) props.navFixed = true;
   return (
-    <Page noPadding navFixed>
-      <MainInfo></MainInfo>
-      <MainProduct></MainProduct>
-      <MainShareProcedure></MainShareProcedure>
+    <Page noPadding {...props}>
+      {!user ? beforeLogin : afterLogin}
     </Page>
   );
 }

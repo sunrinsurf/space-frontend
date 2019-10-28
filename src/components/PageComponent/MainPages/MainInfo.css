@@ -19,7 +19,12 @@
 .MainInfo__Phone > img {
   margin-top: 20vh;
   width: 90%;
-  height: auto;
+  height: 90vh;
+  object-fit: contain;
+}
+
+.MainInfo__BrandWrap > * {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 .MainInfo__BrandWrap > h1 {
   font-size: 3em;
@@ -34,6 +39,8 @@
   margin: 0 4px;
   max-width: 400px;
   width: 100%;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
+  -webkit-filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
 }
 .MainInfo__GetStart {
   position: absolute;

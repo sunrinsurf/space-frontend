@@ -21,7 +21,7 @@ function InfoPage() {
 
   if (!user) return <Redirect to="/signin" />;
 
-  return <Page title="">{!data ? null : <InfoPageMain {...data} />}</Page>;
+  return <Page title={data ? `${data.nickname}님의 정보` : ""}>{!data ? null : <InfoPageMain {...data} />}</Page>;
 }
 
 export default InfoPage;
