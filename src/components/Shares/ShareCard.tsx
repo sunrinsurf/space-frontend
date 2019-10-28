@@ -6,7 +6,8 @@ import './ShareCard.css';
 
 interface ShareCardProps {
     title: string,
-    person: number
+    person: number,
+    image?: string
 }
 interface ThumbProps {
     image?: string
@@ -29,12 +30,12 @@ const Thumb = styled.div<ThumbProps>`
 `;
 const getName = getClassHandler("ShareCard");
 
-function ShareCard({ title, person }: ShareCardProps) {
+function ShareCard({ title, person, image }: ShareCardProps) {
     return (
         <div className={getName("wrap")}>
             <div className={getName("thumbWrap")}>
                 <div className={getName("person")}>{person}</div>
-                <Thumb />
+                <Thumb image={image} />
             </div>
             <div className={getName("title")}>
                 <h3>{title}</h3>
