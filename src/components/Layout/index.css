@@ -36,6 +36,7 @@ p {
 }
 .Layout__contents {
   margin: 1em;
+  flex: 1;
 }
 .Layout__contents.noPadding {
   margin: 0;
@@ -53,6 +54,9 @@ p {
 .Layout__header.navFixed {
   position: fixed;
 }
+.Layout__header.whiteBackground {
+  background: white;
+}
 .Layout__header.transparent {
   background: transparent;
 }
@@ -63,6 +67,7 @@ p {
 .Layout__navContents a {
   color: #ffffff;
 }
+
 .Layout__nav {
   display: flex;
   align-items: center;

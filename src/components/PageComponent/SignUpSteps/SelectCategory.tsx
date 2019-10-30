@@ -1,38 +1,21 @@
 import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import SignUpStepProps from "./SignUpStepProps";
 import { RootState } from "../../../store/reducer";
 import { categoryToggle, signUpComplete } from "../../../store/SignUp";
 import Button from "../../Form/Button";
 import ErrorComponent from "../../ErrorComponent";
+import Category from "../../Form/Category";
 
-const Category = styled.div<{ select?: boolean }>`
-  padding: 1em;
-  border-radius: 10px;
-  width: fit-content;
-  margin: 10px;
-  transition: background 0.5s, color 0.5s;
-  cursor: pointer;
-  ${props => {
-    if (props.select) {
-      return css`
-        color: white;
-        background: #6b32a8;
-      `;
-    }
-    return css`
-      background: #b4b4b4;
-    `;
-  }}
-`;
+
 const CategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
 function SelectCategory({ toNext }: SignUpStepProps) {
-  const { categorys, success, sign_error } = useSelector((state: RootState) => state.SignUp);
+  const { categorys, success, sign_error, categorysOn } = useSelector((state: RootState) => ({ ...state.SignUp, categorys: state.Categorys.categorys }));
   const dispatch = useDispatch();
 
   const onCategoryToggle = useCallback(
@@ -58,11 +41,11 @@ function SelectCategory({ toNext }: SignUpStepProps) {
         {categorys.map((data, i) => (
           <Category
             role="button"
-            select={data.checked}
+            select={categorysOn && categorysOn[i]}
             key={i}
             onClick={onCategoryToggle(i)}
           >
-            {data.name}
+            {data}
           </Category>
         ))}
       </CategoryList>

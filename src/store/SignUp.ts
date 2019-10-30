@@ -8,6 +8,7 @@ const INPUT_CHANGE = "SignUp/INPUT_CHANGE" as const;
 const INPUT_CLEAR = `SignUp/INPUT_CLEAR` as const;
 const SET_PAGE = "SignUp/SET_PAGE" as const;
 const CATEGORY_TOGGLE = "SignUp/CATEGORY_TOGGLE" as const;
+const CATEGORY_TOGGLE_DONE = "SignUp/CATEGORY_TOGGLE_DONE" as const;
 const INPUT_ERROR = "SignUp/INPUT_ERROR" as const;
 const INPUT_ERROR_CLEAR = "SignUp/INPUT_ERROR_CLEAR" as const;
 const CERT_TOKEN_COMPLETE = 'SignUp/CERT_TOKEN_COMPLETE' as const;
@@ -48,15 +49,6 @@ const initialDataErrorState: dataTypes = {
   address: "",
   email: ""
 };
-const categorys: category[] = [
-  { name: "자전거" },
-  { name: "교통수단" },
-  { name: "장소/공간" },
-  { name: "구독 서비스" },
-  { name: "가전제품" },
-  { name: "모바일/컴퓨터" },
-  { name: "기타" }
-];
 
 export function inputChange(payload: any) {
   return {
@@ -80,6 +72,12 @@ export function categoryToggle(i: number) {
     type: CATEGORY_TOGGLE,
     payload: i
   };
+}
+function categoryToggleDone(categorys: boolean[]) {
+  return {
+    type: CATEGORY_TOGGLE_DONE,
+    payload: categorys
+  }
 }
 export function inputError(payload: { [key: string]: string }) {
   return {
@@ -109,6 +107,7 @@ export function signUpComplete() {
 
 type SignUpAction =
   | ReturnType<typeof categoryToggle>
+  | ReturnType<typeof categoryToggleDone>
   | ReturnType<typeof inputChange>
   | ReturnType<typeof inputClear>
   | ReturnType<typeof inputError>
@@ -119,7 +118,16 @@ type SignUpAction =
 
 function* signUpCompleteSaga() {
   try {
-    const { form, categorys, certToken } = yield select((state: RootState) => ({ form: state.SignUp.form, categorys: state.SignUp.categorys, certToken: state.SignUp.certToken }));
+    const { form, categorys, categorysOn, certToken } = yield select((state: RootState) => ({
+      form: state.SignUp.form,
+      categorysOn: state.SignUp.categorysOn,
+      categorys: state.Categorys.categorys,
+      certToken: state.SignUp.certToken
+    }));
+    const interest = (categorys as string[]).filter((_, i) => {
+      if (!categorysOn) return false;
+      return categorysOn[i];
+    });
     yield call(signUpCompleteAPI, {
       uid: form.id || '',
       password: form.password || '',
@@ -128,22 +136,39 @@ function* signUpCompleteSaga() {
       phone: form.phone,
       email: form.email || '',
       ptoken: certToken || '',
-      interest: categorys.filter((data: any) => data.checked).map((data: any) => data.name)
+      interest
     });
     yield put({ type: SIGNUP_COMPLETE_SUCCESS });
   } catch (e) {
     yield handleSagaError(e, SIGNUP_COMPLETE_FAIL);
   }
 }
+function* categoryToggleSaga({ payload }: { payload: number }) {
+  const { categorys, categorysOn } = yield select((state: RootState) => ({
+    categorys: state.Categorys.categorys,
+    categorysOn: state.SignUp.categorysOn
+  }));
+  if (categorysOn) {
+    categorysOn[payload] = !categorysOn[payload];
+    yield put(categoryToggleDone(categorysOn));
+  } else {
+    const bools = [];
+    categorys.forEach(() => { bools.push(false) });
+    bools[payload] = true;
+    yield put(categoryToggleDone(bools));
+  }
+
+}
 export function* SignUpSaga() {
   yield takeEvery(SIGNUP_COMPLETE, signUpCompleteSaga);
+  yield takeEvery((CATEGORY_TOGGLE as any), categoryToggleSaga);
 }
 const initialState = {
   success: false,
   sign_error: null,
   form: initialDataState,
   error: initialDataErrorState,
-  categorys,
+  categorysOn: [],
   page: 0,
   certToken: ''
 };
@@ -163,13 +188,10 @@ function SignUp(state = initialState, action: SignUpAction) {
         ...state,
         form: initialDataState
       };
-    case CATEGORY_TOGGLE:
-      const categorys = [...state.categorys];
-      categorys[action.payload].checked = !categorys[action.payload].checked;
-
+    case CATEGORY_TOGGLE_DONE:
       return {
         ...state,
-        categorys
+        categorysOn: action.payload
       };
     case SET_PAGE:
       return {

@@ -38,6 +38,11 @@ const pages: RouteProps[] = [
     path: "/info",
     exact: true,
     component: loadable(() => import("./UserPages/InfoPage"))
+  },
+  {
+    path: '/write',
+    exact: true,
+    component: loadable(() => import('./WritePage'))
   }
 ];
 

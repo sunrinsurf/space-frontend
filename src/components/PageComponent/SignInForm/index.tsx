@@ -1,14 +1,15 @@
 import React, { useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { TextCheckLabel } from "../Form/TextCheck";
+import { TextCheckLabel } from "../../Form/TextCheck";
 import "./SignInForm.css";
-import Input from "../Form/Input";
-import Button from "../Form/Button";
+import Input from "../../Form/Input";
+import Button from "../../Form/Button";
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { RootState } from "../../store/reducer";
-import * as SignIn from '../../store/SignIn';
-import useLogin from "../../lib/useLogin";
+import { RootState } from "../../../store/reducer";
+import * as SignIn from '../../../store/SignIn';
+import useLogin from "../../../lib/useLogin";
+import Favicon from "../../Layout/Favicon";
 
 function SignInForm() {
   const { remember, uid, password, success } = useSelector((state: RootState) => ({ success: state.SignIn.success, ...state.SignIn.form }));
@@ -34,18 +35,28 @@ function SignInForm() {
 
   return (
     <div className="SignInForm__wrap">
+      <div className="SignInForm__brand">
+        <Favicon width="200" />
+        <h1>LOGIN</h1>
+      </div>
       <div className="SignInForm__remember">
         <TextCheckLabel onClick={toggleRemember} checked={remember}>Remember Me</TextCheckLabel>
       </div>
-      <form onSubmit={onSubmit}>
-        <Input type="text" placeholder="아이디" onChange={handleChange("uid")} value={uid} />
-        <Input type="password" placeholder="비밀번호" onChange={handleChange("password")} value={password} />
-        <Button fullWidth>로그인</Button>
+      <form onSubmit={onSubmit} className="SignInForm__form">
+        <Input type="text" placeholder="ID" onChange={handleChange("uid")} value={uid} />
+        <Input type="password" placeholder="PW" onChange={handleChange("password")} value={password} />
+        <Button fullWidth>LOGIN</Button>
       </form>
+
       <div className="SignInForm__social">
-        <Button background={false}>F</Button>
-        <Button background={false}>N</Button>
-        <Button background={false}>K</Button>
+        <div className="typo">
+          <hr />
+          <span>SNS로 시작하기</span>
+          <hr />
+        </div>
+        <div className="logins">
+
+        </div>
       </div>
       <div className="SignInForm__forget">
         <Link to="/find">Forget password?</Link> /{" "}

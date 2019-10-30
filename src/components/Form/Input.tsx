@@ -1,20 +1,26 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Input = styled.input`
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-  padding: 1em 1.5em;
-  border: 1px solid #b3b3b3;
-  border-radius: .5em;
-  margin: .7em 0;
-  &:focus {
-    outline: 0;
-  }
-  &::placeholder {
-    color: #b3b3b3;
-  }
-`;
+const styles = css`
+display: block;
+width: 100%;
+box-sizing: border-box;
+font-size: 1rem;
+padding: .75em 1em;
+border-radius: .5em;
+margin: .7em 0;
+background: #efefef;
+box-shadow: 5px 3px 10px -1px rgba(34, 34, 34, 0.2);
+border: 0;
+&:focus {
+  outline: 0;
+}
+&::placeholder {
+  color: #b3b3b3;
+}
+`
+const Input = styled.input`${styles}`;
+export const TextArea = styled.textarea`
+  ${styles}
+`
 
 export default Input;

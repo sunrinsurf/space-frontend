@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import Layout from "../Layout";
+import Layout, { LayoutProps } from "../Layout";
 
 type PageProps = {
   title?: string;
@@ -8,6 +8,7 @@ type PageProps = {
   central?: boolean;
   noPadding?: boolean;
   navFixed?: boolean;
+  colorfulLogo?: boolean;
   children: React.ReactNode;
 };
 
@@ -16,16 +17,12 @@ function Page({
   children,
   central,
   noLayout,
-  noPadding,
-  navFixed
-}: PageProps) {
+  ...layoutProps
+}: LayoutProps & PageProps) {
   const LayoutOrFragment = noLayout ? React.Fragment : Layout;
   const props = noLayout
     ? {}
-    : {
-        noPadding,
-        navFixed
-      };
+    : layoutProps;
   return (
     <LayoutOrFragment {...props}>
       <Helmet>
@@ -46,8 +43,8 @@ function Page({
           <div style={{ textAlign: "center" }}>{children}</div>
         </div>
       ) : (
-        <div style={{ minHeight: "70vh" }}>{children}</div>
-      )}
+          <div>{children}</div>
+        )}
     </LayoutOrFragment>
   );
 }

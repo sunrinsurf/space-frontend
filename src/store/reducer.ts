@@ -4,22 +4,28 @@ import SignUp, { SignUpType, SignUpSaga } from "./SignUp";
 import PhoneCert, { PhoneCertType, PhoneCertSaga } from './PhoneCert';
 import SignIn, { SignInType, SignInSaga } from "./SignIn";
 import Auth, { AuthType, AuthSaga } from './Auth';
+import Categorys, { CategorysType } from "./Categorys";
+import Forms, { FormsType, FormsSaga } from './forms';
 
 export type RootState = {
   SignUp: SignUpType,
   PhoneCert: PhoneCertType,
   SignIn: SignInType,
-  Auth: AuthType
+  Auth: AuthType,
+  Categorys: CategorysType,
+  Forms: FormsType
 };
 
 const reducer = combineReducers({
   PhoneCert,
   SignUp,
   SignIn,
-  Auth
+  Auth,
+  Categorys,
+  Forms
 });
 
 export function* rootSaga() {
-  yield all([PhoneCertSaga(), SignUpSaga(), SignInSaga(), AuthSaga()]);
+  yield all([PhoneCertSaga(), SignUpSaga(), SignInSaga(), AuthSaga(), FormsSaga()]);
 }
 export default reducer;

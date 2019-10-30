@@ -16,11 +16,11 @@ export const TextCheckLabel = styled.div<TextCheckLabelProps>`
     ${props => {
         if (props.checked) {
             return css`
-                color: #9834eb;
+                color: #fd437c;
             `;
         }
         return css`
-            color: #b3b3b3;
+            color: #494949;
         `;
     }}
 `;
