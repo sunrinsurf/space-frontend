@@ -12,6 +12,7 @@ const Button = styled.button<ButtonProps>`
   box-shadow: 2px 2px 3px rgba(41, 18, 66, 0.3);
   transition: background 1s;
   width: fit-content;
+  word-break: keep-all;
   ${props => css`
     width: ${props.fullWidth && "100%"};
   `}
