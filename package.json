@@ -100,7 +100,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "REACT_APP_LOCAL=true node scripts/start.js",
+    "start": "cross-env REACT_APP_LOCAL=true node scripts/start.js",
     "build": "node scripts/build.js",
     "build:server": "node scripts/build.server.js",
     "start:server": "node server",
@@ -177,5 +177,8 @@
       "react-hot-loader/babel",
       "@loadable/babel-plugin"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3"
   }
 }
