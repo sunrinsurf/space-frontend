@@ -1,0 +1,43 @@
+.AticlePage__warp {
+    margin-top: 20px;
+}
+
+.ArticlePage__User {
+    display: flex;
+}
+
+.ArticlePage__Image {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 90%;
+    margin-top: 50px;
+}
+
+.ArticlePage__Images {
+    min-width: 200px;
+    min-height: 200px;
+    background-color: gray;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.ArticlePage__Category {
+    font-size: 28px;
+}
+
+.ArticlePage__title {
+    font-size: 35px;
+}
+
+.ArticlePage__Nickname {
+    font-size: 23px;
+}
+
+.ArticlePage__Text {
+    width: 90%;
+    font-size: 23px;
+    margin-top: 50px;
+}
