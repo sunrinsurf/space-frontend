@@ -10,11 +10,9 @@ import {
 } from "../../lib/getFormSelector";
 import loadImageBase64 from "../../lib/store/Share/loadImageBase64";
 import { PostProduct } from "../../lib/api/PostProduct";
-import { handleSagaError } from "../../lib/api/handleError";
 
 const CHANGE_ACTION = "Share/CHANGE_ACTION" as const;
 const CATEGORY_HANDLE = "Share/CATEGORY_HANDLE" as const;
-const CATEGORY_HANDLE_DONE = "Share/CATEGORY_HANDLE_DONE" as const;
 const ROYALTY_SELECT = "Share/ROYALTY_SELECT" as const;
 const TIME_SELECT = "Share/TIME_SELECT" as const;
 const CLEAR_FORM = "Share/CLEAR_FORM" as const;
@@ -49,12 +47,6 @@ export function shareClearForm() {
   };
 }
 
-function shareCategoryHandleDone(payload: boolean[]) {
-  return {
-    type: CATEGORY_HANDLE_DONE,
-    payload
-  };
-}
 export function shareAddImage(images: File[]) {
   return {
     type: ADD_IMAGE,
@@ -98,7 +90,6 @@ function shareSubmitFail(e: any) {
 }
 type ActionType =
   | ReturnType<typeof shareChange>
-  | ReturnType<typeof shareCategoryHandleDone>
   | ReturnType<typeof shareCategoryHandle>
   | ReturnType<typeof shareAddImage>
   | ReturnType<typeof shareAddImageDone>
@@ -107,20 +98,6 @@ type ActionType =
   | ReturnType<typeof shareSubmitSuccess>
   | ReturnType<typeof shareSubmitFail>;
 
-function* CategoryHandleSaga({ payload }: { payload: number }) {
-  const { formCategorys, category } = yield select((state: RootState) => ({
-    formCategorys: state.Forms.Share.categorys,
-    category: state.Categorys.categorys
-  }));
-  if (formCategorys && formCategorys.length > 0) {
-    const _category = [...formCategorys];
-    _category[payload] = !_category[payload];
-    yield put(shareCategoryHandleDone(_category));
-  } else {
-    const _category = category.map((_: any, i: number) => i === payload);
-    yield put(shareCategoryHandleDone(_category));
-  }
-}
 function* AddImageSaga({ payload }: { payload: File[] }) {
   let previews = [];
   for (const file of payload) {
@@ -129,35 +106,38 @@ function* AddImageSaga({ payload }: { payload: File[] }) {
   yield put(shareAddImageDone({ previews, images: payload }));
 }
 function* SubmitSaga() {
-  const {
-    share,
-    categoryString,
-    token
-  }: {
-    share: ShareType;
-    categoryString: string[];
-    token: string | null;
-  } = yield select((state: RootState) => ({
-    share: state.Forms.Share,
-    categoryString: state.Categorys.categorys,
-    token: state.Auth.token
-  }));
-
-  if (!token) {
-    throw new Error("로그인 된 상태가 아닙니다.");
-  }
-  const {
-    title,
-    contents,
-    previews,
-    person,
-    timeToUse,
-    timeToUseDate,
-    royaltyPrice,
-    royalty,
-    categorys
-  } = share;
   try {
+    const {
+      share,
+      categoryString,
+      token
+    }: {
+      share: ShareType;
+      categoryString: string[];
+      token: string | null;
+    } = yield select((state: RootState) => ({
+      share: state.Forms.Share,
+      categoryString: state.Categorys.categorys,
+      token: state.Auth.token
+    }));
+
+    if (!token) {
+      throw new Error("로그인 된 상태가 아닙니다.");
+    }
+    const {
+      title,
+      contents,
+      previews,
+      person,
+      timeToUse,
+      timeToUseDate,
+      royaltyPrice,
+      royalty,
+      category
+    } = share;
+    if (!category) {
+      throw new Error("카테고리를 선택해야 합니다.");
+    }
     const req = yield call(
       PostProduct as any,
       {
@@ -171,7 +151,7 @@ function* SubmitSaga() {
         royalty: royalty.selected,
         royaltyPrice:
           royalty.selected !== "afterContact" ? royaltyPrice : undefined,
-        categorys: categoryString.filter((_, i) => categorys[i])
+        category: categoryString[category]
       },
       token
     );
@@ -182,7 +162,6 @@ function* SubmitSaga() {
   }
 }
 export function* ShareSaga() {
-  yield takeEvery(CATEGORY_HANDLE as any, CategoryHandleSaga);
   yield takeEvery(ADD_IMAGE as any, AddImageSaga);
   yield takeEvery(SUBMIT as any, SubmitSaga);
 }
@@ -192,7 +171,7 @@ const initialState = {
   success: false,
   productId: null as number | null,
   error: null as string | null,
-  categorys: [] as boolean[],
+  category: null as number | null,
   title: "",
   contents: "",
   royalty: getFormSelector({
@@ -220,10 +199,10 @@ export default function Share(
   switch (action.type) {
     case CHANGE_ACTION:
       return getFormActionHandler(state, action);
-    case CATEGORY_HANDLE_DONE:
+    case CATEGORY_HANDLE:
       return {
         ...state,
-        categorys: (action as any).payload as boolean[]
+        category: (action as any).payload
       };
     case ROYALTY_SELECT:
       return handleFromSelector(state, action, "royalty");

@@ -7,7 +7,7 @@ interface PostProductImage {
 }
 interface PostProductInterface {
   title: string;
-  categorys: string[];
+  category: string;
   contents: string;
   images: PostProductImage[];
   royalty: String;
