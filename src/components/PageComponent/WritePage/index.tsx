@@ -3,19 +3,21 @@ import styled from "styled-components";
 import Input, { TextArea } from "../../Form/Input";
 import WritePageCategorySelect from "./CategorySelect";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { RootState } from "../../../store/reducer";
 import {
   shareChange,
   shareRoyaltySelect,
   shareTimeSelect,
   shareClearForm,
-  sharePeriodSelect
+  shareSubmit
 } from "../../../store/forms/Share";
 import WritePageFormSelect from "./Select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../Form/Button";
 import WritePageImageUpload from "./ImageUpload";
+import ErrorComponent from "../../ErrorComponent";
 
 const Section = styled.section`
   padding: 1em;
@@ -31,23 +33,40 @@ const Flex = styled.div`
 `;
 function DateButton({ value, onClick }: any) {
   return (
-    <Button onClick={(e) => {
-      e.preventDefault();
-      onClick(e);
-    }} fullWidth style={{ marginTop: "1em" }}>
+    <Button
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      fullWidth
+      style={{ marginTop: "1em" }}
+    >
       {value}
     </Button>
   );
 }
 function WritePageForm() {
-  const { title, contents, timeToUseDate, person, periodDate } = useSelector(
-    (state: RootState) => state.Forms.Share
-  );
+  const {
+    title,
+    contents,
+    timeToUseDate,
+    person,
+    error,
+    success,
+    progress,
+    productId
+  } = useSelector((state: RootState) => state.Forms.Share);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(shareClearForm());
   }, [dispatch]);
+  useEffect(() => {
+    if (success) {
+      history.push(`/product/${productId}`);
+    }
+  }, [success, productId, history]);
   const onchange = useCallback(
     name => {
       return (e: React.ChangeEvent) => {
@@ -92,17 +111,17 @@ function WritePageForm() {
       customInput={<DateButton />}
     />
   );
-  const periodDataPicker = (
-    <DatePicker
-      selected={periodDate}
-      onChange={onDateChange("periodDate")}
-      minDate={new Date()}
-      customInput={<DateButton />}
-    />
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      dispatch(shareSubmit());
+    },
+    [dispatch]
   );
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
+      {error && <ErrorComponent>{error}</ErrorComponent>}
       <Flex>
         <div>
           <Section>
@@ -150,23 +169,13 @@ function WritePageForm() {
               value={person}
             />
           </Section>
-          <Section>
-            <h1>공유 기간</h1>
-            <WritePageFormSelect
-              dispatcher={sharePeriodSelect}
-              objKey="period"
-              showConditions={{
-                selectPeriod: periodDataPicker
-              }}
-            />
-          </Section>
         </div>
       </Flex>
       <Section>
         <h1>이미지 업로드</h1>
         <WritePageImageUpload />
       </Section>
-      <Button>올리기</Button>
+      <Button disabled={progress}>{progress ? "처리 중..." : "올리기"}</Button>
     </form>
   );
 }

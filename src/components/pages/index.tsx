@@ -40,14 +40,14 @@ const pages: RouteProps[] = [
     component: loadable(() => import("./UserPages/InfoPage"))
   },
   {
-    path: '/write',
+    path: "/write",
     exact: true,
-    component: loadable(() => import('./WritePage'))
+    component: loadable(() => import("./WritePage"))
   },
   {
-    path: '/product/:id',
+    path: "/product/:id",
     exact: true,
-    component: loadable(() => import('./ProductPage'))
+    component: loadable(() => import("./ProductPage"))
   }
 ];
 

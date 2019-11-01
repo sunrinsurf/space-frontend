@@ -9,13 +9,14 @@ import {
   handleFromSelector
 } from "../../lib/getFormSelector";
 import loadImageBase64 from "../../lib/store/Share/loadImageBase64";
+import { PostProduct } from "../../lib/api/PostProduct";
+import { handleSagaError } from "../../lib/api/handleError";
 
 const CHANGE_ACTION = "Share/CHANGE_ACTION" as const;
 const CATEGORY_HANDLE = "Share/CATEGORY_HANDLE" as const;
 const CATEGORY_HANDLE_DONE = "Share/CATEGORY_HANDLE_DONE" as const;
 const ROYALTY_SELECT = "Share/ROYALTY_SELECT" as const;
 const TIME_SELECT = "Share/TIME_SELECT" as const;
-const PERIOD_SELECT = "Share/PERIOD_SELECT" as const;
 const CLEAR_FORM = "Share/CLEAR_FORM" as const;
 const ADD_IMAGE = "Share/ADD_IMAGE" as const;
 const ADD_IMAGE_DONE = "Share/ADD_IMAGE_DONE" as const;
@@ -35,7 +36,6 @@ export const shareChange = getFormActionDispatcher<ShareChangeInterface>(
 );
 export const shareRoyaltySelect = getFormSelectorDispatcher(ROYALTY_SELECT);
 export const shareTimeSelect = getFormSelectorDispatcher(TIME_SELECT);
-export const sharePeriodSelect = getFormSelectorDispatcher(PERIOD_SELECT);
 
 export function shareCategoryHandle(payload: number) {
   return {
@@ -82,17 +82,19 @@ export function shareRemoveImage(idx: number) {
 export function shareSubmit() {
   return {
     type: SUBMIT
-  }
+  };
 }
-function shareSubmitSuccess() {
+function shareSubmitSuccess(productId: number) {
   return {
-    type: SUBMIT_SUCCESS
-  }
+    type: SUBMIT_SUCCESS,
+    payload: productId
+  };
 }
-function shareSubmitFail() {
+function shareSubmitFail(e: any) {
   return {
-    type: SUBMIT_FAIL
-  }
+    type: SUBMIT_FAIL,
+    payload: e
+  };
 }
 type ActionType =
   | ReturnType<typeof shareChange>
@@ -100,7 +102,10 @@ type ActionType =
   | ReturnType<typeof shareCategoryHandle>
   | ReturnType<typeof shareAddImage>
   | ReturnType<typeof shareAddImageDone>
-  | ReturnType<typeof shareRemoveImage>;
+  | ReturnType<typeof shareRemoveImage>
+  | ReturnType<typeof shareSubmit>
+  | ReturnType<typeof shareSubmitSuccess>
+  | ReturnType<typeof shareSubmitFail>;
 
 function* CategoryHandleSaga({ payload }: { payload: number }) {
   const { formCategorys, category } = yield select((state: RootState) => ({
@@ -124,16 +129,69 @@ function* AddImageSaga({ payload }: { payload: File[] }) {
   yield put(shareAddImageDone({ previews, images: payload }));
 }
 function* SubmitSaga() {
-  const {title, contents, condition } = yield select((state: RootState) => state.Forms.Share);
+  const {
+    share,
+    categoryString,
+    token
+  }: {
+    share: ShareType;
+    categoryString: string[];
+    token: string | null;
+  } = yield select((state: RootState) => ({
+    share: state.Forms.Share,
+    categoryString: state.Categorys.categorys,
+    token: state.Auth.token
+  }));
 
+  if (!token) {
+    throw new Error("로그인 된 상태가 아닙니다.");
+  }
+  const {
+    title,
+    contents,
+    previews,
+    person,
+    timeToUse,
+    timeToUseDate,
+    royaltyPrice,
+    royalty,
+    categorys
+  } = share;
+  try {
+    const req = yield call(
+      PostProduct as any,
+      {
+        title,
+        contents,
+        images: previews.map(data => ({ data, type: "image/png" })),
+        person,
+        timeToUse: timeToUse.selected,
+        timeToUseDate:
+          timeToUse.selected === "selectTime" ? timeToUseDate : undefined,
+        royalty: royalty.selected,
+        royaltyPrice:
+          royalty.selected !== "afterContact" ? royaltyPrice : undefined,
+        categorys: categoryString.filter((_, i) => categorys[i])
+      },
+      token
+    );
+
+    yield put(shareSubmitSuccess(req.data.productId));
+  } catch (e) {
+    yield put(shareSubmitFail(e));
+  }
 }
 export function* ShareSaga() {
   yield takeEvery(CATEGORY_HANDLE as any, CategoryHandleSaga);
   yield takeEvery(ADD_IMAGE as any, AddImageSaga);
+  yield takeEvery(SUBMIT as any, SubmitSaga);
 }
 
 const initialState = {
   progress: false,
+  success: false,
+  productId: null as number | null,
+  error: null as string | null,
   categorys: [] as boolean[],
   title: "",
   contents: "",
@@ -150,11 +208,6 @@ const initialState = {
     selectTime: "날짜/시간 설정",
     noLimit: "제한 없음"
   }),
-  period: getFormSelector({
-    selectPeriod: "기간 선택하기",
-    noLimit: "제한 없음"
-  }),
-  periodDate: new Date(),
   images: [] as File[],
   previews: [] as string[]
 };
@@ -170,26 +223,27 @@ export default function Share(
     case CATEGORY_HANDLE_DONE:
       return {
         ...state,
-        categorys: action.payload as boolean[]
+        categorys: (action as any).payload as boolean[]
       };
     case ROYALTY_SELECT:
       return handleFromSelector(state, action, "royalty");
     case TIME_SELECT:
       return handleFromSelector(state, action, "timeToUse");
-    case PERIOD_SELECT:
-      return handleFromSelector(state, action, "period");
     case CLEAR_FORM:
       return initialState;
     case ADD_IMAGE_DONE:
       return {
         ...state,
-        previews: [...state.previews, ...(action.payload as any).previews],
-        images: [...state.images, ...(action.payload as any).images]
+        previews: [
+          ...state.previews,
+          ...((action as any).payload as any).previews
+        ],
+        images: [...state.images, ...(action as any).payload.images]
       };
     case REMOVE_IMAGE:
       const { previews, images } = state;
-      previews.splice(action.payload as number, 1);
-      images.splice(action.payload as number, 1);
+      previews.splice((action as any).payload as number, 1);
+      images.splice((action as any).payload as number, 1);
 
       return {
         ...state,
@@ -200,7 +254,19 @@ export default function Share(
       return {
         ...state,
         progress: true
-      }
+      };
+    case SUBMIT_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        productId: (action as any).payload
+      };
+    case SUBMIT_FAIL:
+      return {
+        ...state,
+        progress: false,
+        error: (action as any).payload.message
+      };
     default:
       return state;
   }
