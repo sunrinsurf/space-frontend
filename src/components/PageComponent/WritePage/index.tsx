@@ -31,7 +31,10 @@ const Flex = styled.div`
 `;
 function DateButton({ value, onClick }: any) {
   return (
-    <Button onClick={onClick} fullWidth style={{ marginTop: "1em" }}>
+    <Button onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }} fullWidth style={{ marginTop: "1em" }}>
       {value}
     </Button>
   );
@@ -99,7 +102,7 @@ function WritePageForm() {
   );
 
   return (
-    <div>
+    <form>
       <Flex>
         <div>
           <Section>
@@ -163,7 +166,8 @@ function WritePageForm() {
         <h1>이미지 업로드</h1>
         <WritePageImageUpload />
       </Section>
-    </div>
+      <Button>올리기</Button>
+    </form>
   );
 }
 

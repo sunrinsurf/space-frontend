@@ -3,7 +3,6 @@ import React from 'react'
 function Policy() {
     return (
         <>
-            <h1>이용약관</h1>
             <p>
                 Voluptate pariatur ullamco exercitation aute aute ipsum quis veniam
                 adipisicing Lorem voluptate consectetur laborum incididunt. Aliquip do

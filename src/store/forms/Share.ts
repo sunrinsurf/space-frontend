@@ -20,6 +20,9 @@ const CLEAR_FORM = "Share/CLEAR_FORM" as const;
 const ADD_IMAGE = "Share/ADD_IMAGE" as const;
 const ADD_IMAGE_DONE = "Share/ADD_IMAGE_DONE" as const;
 const REMOVE_IMAGE = "Share/REMOVE_IMAGE" as const;
+const SUBMIT = "Share/SUBMIT" as const;
+const SUBMIT_SUCCESS = "Share/SUBMIT_SUCCESS" as const;
+const SUBMIT_FAIL = "Share/SUBMIT_FAIL" as const;
 
 interface ShareChangeInterface {
   title?: string;
@@ -76,6 +79,21 @@ export function shareRemoveImage(idx: number) {
     payload: idx
   };
 }
+export function shareSubmit() {
+  return {
+    type: SUBMIT
+  }
+}
+function shareSubmitSuccess() {
+  return {
+    type: SUBMIT_SUCCESS
+  }
+}
+function shareSubmitFail() {
+  return {
+    type: SUBMIT_FAIL
+  }
+}
 type ActionType =
   | ReturnType<typeof shareChange>
   | ReturnType<typeof shareCategoryHandleDone>
@@ -105,12 +123,17 @@ function* AddImageSaga({ payload }: { payload: File[] }) {
   }
   yield put(shareAddImageDone({ previews, images: payload }));
 }
+function* SubmitSaga() {
+  const {title, contents, condition } = yield select((state: RootState) => state.Forms.Share);
+
+}
 export function* ShareSaga() {
   yield takeEvery(CATEGORY_HANDLE as any, CategoryHandleSaga);
   yield takeEvery(ADD_IMAGE as any, AddImageSaga);
 }
 
 const initialState = {
+  progress: false,
   categorys: [] as boolean[],
   title: "",
   contents: "",
@@ -173,6 +196,11 @@ export default function Share(
         previews,
         images
       };
+    case SUBMIT:
+      return {
+        ...state,
+        progress: true
+      }
     default:
       return state;
   }

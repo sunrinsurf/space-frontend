@@ -19,7 +19,8 @@ function WritePageImageUpload() {
   const dispatch = useDispatch();
 
   const fileRef = useRef<HTMLInputElement>(null);
-  const onAdd = useCallback(() => {
+  const onAdd = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (!fileRef.current) return;
     const file = fileRef.current;
     if (!file.files) return;

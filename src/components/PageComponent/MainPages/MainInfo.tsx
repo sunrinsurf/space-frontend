@@ -5,6 +5,7 @@ import "./MainInfo.css";
 import styled from "styled-components";
 import logo from "../../../assets/logo.svg";
 import phone from "../../../assets/space-phone.png";
+import Arrow from "../../Design/Arrow";
 
 const Flex = styled.div`
   display: flex;
@@ -66,12 +67,7 @@ function Guide() {
   }
   return (
     <div className="MainInfo__Guide">
-      <svg viewBox="0 0 300 300" height="30" role="button" onClick={goTo} style={{ cursor: 'pointer' }}>
-        <path
-          style={{ fill: "black" }}
-          d="M149.9,220L11.8,81.8l1.8-1.8L150,216.4L286.4,80l1.8,1.8L150.1,220"
-        />
-      </svg>
+      <Arrow role="button" onClick={goTo} style={{ cursor: 'pointer' }}/>
     </div>
   );
 }
