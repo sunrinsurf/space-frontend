@@ -1,0 +1,23 @@
+.ProductLayout__wrap {
+    margin: 0px 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ProductLayout__Before {
+    display: flex;
+    margin-left: -20px;
+}
+
+.ProductLayout__Left {
+    max-width: 70%;
+}
+
+.ProductLayout__Right {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
