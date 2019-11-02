@@ -135,7 +135,7 @@ function* SubmitSaga() {
       royalty,
       category
     } = share;
-    if (!category) {
+    if (category === null) {
       throw new Error("카테고리를 선택해야 합니다.");
     }
     const req = yield call(

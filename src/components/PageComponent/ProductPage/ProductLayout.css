@@ -1,23 +1,27 @@
 .ProductLayout__wrap {
-    margin: 0px 70px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+  margin: 0px 1em;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ProductLayout__Before {
-    display: flex;
-    margin-left: -20px;
+  display: flex;
+  margin-left: -1em;
+  cursor: pointer;
 }
 
 .ProductLayout__Left {
-    max-width: 70%;
+  flex: 1;
+  margin-right: 1em;
 }
 
 .ProductLayout__Right {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
 }

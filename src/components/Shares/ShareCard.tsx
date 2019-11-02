@@ -1,47 +1,56 @@
-import React from 'react'
-import getClassHandler from '../../lib/getClassHandler'
-import styled, { css } from 'styled-components';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import getClassHandler from "../../lib/getClassHandler";
+import styled, { css } from "styled-components";
 /*image="https://avatars3.githubusercontent.com/u/23256775?s=460&v=4"*/
-import './ShareCard.css';
+import "./ShareCard.css";
 
 interface ShareCardProps {
-    title: string,
-    person: number,
-    image?: string
+  title: string;
+  person: number;
+  image?: string;
+  id: string;
 }
 interface ThumbProps {
-    image?: string
+  image?: string;
 }
 
 const Thumb = styled.div<ThumbProps>`
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    ${(props) => {
-        if (props.image) {
-            return css`
-                background: url(${props.image});
-                background-size: cover;
-                background-position: center;
-            `;
-        }
-        return css`background: gray;`;
-    }}
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  ${props => {
+    if (props.image) {
+      return css`
+        background: url(${props.image});
+        background-size: cover;
+        background-position: center;
+      `;
+    }
+    return css`
+      background: gray;
+    `;
+  }}
 `;
 const getName = getClassHandler("ShareCard");
 
-function ShareCard({ title, person, image }: ShareCardProps) {
-    return (
-        <div className={getName("wrap")}>
-            <div className={getName("thumbWrap")}>
-                <div className={getName("person")}>{person}</div>
-                <Thumb image={image} />
-            </div>
-            <div className={getName("title")}>
-                <h3>{title}</h3>
-            </div>
-        </div>
-    )
+function ShareCard({ title, person, image, id }: ShareCardProps) {
+  const history = useHistory();
+
+  const onClick = React.useCallback(() => {
+    history.push(`/product/${id}`);
+  }, [history, id]);
+  return (
+    <div className={getName("wrap")} role="button" onClick={onClick}>
+      <div className={getName("thumbWrap")}>
+        <div className={getName("person")}>{person}</div>
+        <Thumb image={image} />
+      </div>
+      <div className={getName("title")}>
+        <h3>{title}</h3>
+      </div>
+    </div>
+  );
 }
 
 export default ShareCard;
