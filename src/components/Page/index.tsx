@@ -20,9 +20,7 @@ function Page({
   ...layoutProps
 }: LayoutProps & PageProps) {
   const LayoutOrFragment = noLayout ? React.Fragment : Layout;
-  const props = noLayout
-    ? {}
-    : layoutProps;
+  const props = noLayout ? {} : layoutProps;
   return (
     <LayoutOrFragment {...props}>
       <Helmet>
@@ -43,8 +41,8 @@ function Page({
           <div style={{ textAlign: "center" }}>{children}</div>
         </div>
       ) : (
-          <div>{children}</div>
-        )}
+        <div>{children}</div>
+      )}
     </LayoutOrFragment>
   );
 }

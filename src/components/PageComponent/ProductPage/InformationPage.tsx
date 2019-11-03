@@ -1,6 +1,10 @@
 import React, { useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./InformationPage.css";
 import Button from "../../Form/Button";
+import { RootState } from "../../../store/reducer";
+import { InviteChat } from "../../../store/Chat";
 
 interface InformationPageProps {
   timeToUse: "selectTime" | "noLimit" | "afterContact";
@@ -9,6 +13,8 @@ interface InformationPageProps {
   royaltyPrice: string | null;
   person: number;
   participant: any[];
+  owner: any;
+  productId: string;
 }
 function InformationPage({
   royalty,
@@ -16,8 +22,14 @@ function InformationPage({
   timeToUse,
   timeToUseDate,
   person,
-  participant
+  participant,
+  owner,
+  productId
 }: InformationPageProps) {
+  const { _id } = useSelector((state: RootState) => state.Auth.data);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const royaltyText = useMemo(() => {
     if (royalty === "afterContact") {
       return "로열티 협의";
@@ -36,7 +48,22 @@ function InformationPage({
       return `${(timeToUseDate as Date).toString()}까지`;
     }
   }, [timeToUse, timeToUseDate]);
+  const [isJoined, JoinText] = useMemo(() => {
+    if (_id === owner._id) return [true, "계속하기"];
+    for (const p of participant) {
+      if (p === _id) return [true, "계속하기"];
+    }
+    return [false, "참여하기"];
+  }, [_id, participant, owner]);
   const participantText = useMemo(() => participant.length, [participant]);
+
+  const onClick = React.useCallback(() => {
+    if (!isJoined) {
+      dispatch(InviteChat(productId));
+    } else {
+      history.push(`/chat/${productId}`);
+    }
+  }, [dispatch, isJoined, productId, history]);
   return (
     <div className="Information__wrap">
       <div className="Information__Title">공유정보</div>
@@ -49,7 +76,9 @@ function InformationPage({
         <div className="Information__Personnel">
           {participantText}/{person}명 참여중
         </div>
-        <Button fullWidth>참여하기</Button>
+        <Button fullWidth onClick={onClick}>
+          {JoinText}
+        </Button>
       </div>
     </div>
   );

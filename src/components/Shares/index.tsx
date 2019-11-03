@@ -2,6 +2,7 @@ import React from "react";
 import ShareCard from "./ShareCard";
 import usePrefetch from "../../lib/usePrefetch";
 import { getShares } from "../../lib/api/getShares";
+import ErrorComponent from "../ErrorComponent";
 
 //interface SharesProps { }
 function Shares() {
@@ -9,6 +10,7 @@ function Shares() {
     const req = await getShares();
     return req.data.product;
   });
+  if (error) return <ErrorComponent>{error}</ErrorComponent>;
   if (!product) return <div>로드 중...</div>;
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>

@@ -1,0 +1,80 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/reducer";
+import { JoinChat } from "../../../store/Chat";
+import ErrorComponent from "../../ErrorComponent";
+import styled, { css } from "styled-components";
+import ChatUserList from "./UserList";
+import useClickToggler from "../../../lib/useClickToggler";
+import ChatForm from "./ChatForm";
+import { SocketConnect, SocketDisconnect } from "../../../store/Socket";
+
+const Header = styled.header`
+  padding: 0.5em;
+  text-align: center;
+  background: rgb(17, 131, 250);
+  color: white;
+`;
+const Toggler = styled.div<{ opened?: boolean }>`
+  cursor: pointer;
+  padding: 0.5em 1em;
+  background: #eaeaea;
+  &::before {
+    ${props => {
+      if (props.opened) {
+        return css`
+          content: "▲";
+        `;
+      }
+      return css`
+        content: "▼";
+      `;
+    }}
+    color: gray;
+  }
+`;
+interface ChatPageComponentProps {
+  id: string;
+}
+function ChatPageComponent({ id }: ChatPageComponentProps) {
+  const dispatch = useDispatch();
+  const { chatData, error } = useSelector((state: RootState) => state.Chat);
+  const [openUser, setOpenUser] = useState(false);
+
+  const toggleUser = useClickToggler(setOpenUser, openUser);
+  React.useEffect(() => {
+    dispatch(JoinChat(id));
+    dispatch(SocketConnect(id));
+
+    return () => {
+      dispatch(SocketDisconnect());
+    };
+  }, [dispatch, id]);
+
+  if (error) return <ErrorComponent>{error}</ErrorComponent>;
+  if (!chatData) return null;
+
+  return (
+    <div style={{ height: "100%" }}>
+      <Header>
+        <h1>{chatData.product.title}</h1>
+      </Header>
+      <div>
+        <Toggler opened={openUser} onClick={toggleUser}>
+          참여자 목록
+        </Toggler>
+        {openUser && <ChatUserList />}
+      </div>
+      <div
+        style={{
+          height: "60vh",
+          position: "relative"
+        }}
+      >
+        <ChatForm id={id} />
+      </div>
+    </div>
+  );
+}
+
+export default ChatPageComponent;

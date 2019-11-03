@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./index.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-white.svg";
-import logoColorful from '../../assets/logo.svg';
+import logoColorful from "../../assets/logo.svg";
 import useLogin from "../../lib/useLogin";
 import Favicon from "./Favicon";
 export type LayoutProps = {
@@ -15,7 +15,14 @@ export type LayoutProps = {
   hideMenu?: boolean;
 };
 
-function Layout({ children, noPadding, navFixed, colorfulLogo, noFooter, hideMenu }: LayoutProps) {
+function Layout({
+  children,
+  noPadding,
+  navFixed,
+  colorfulLogo,
+  noFooter,
+  hideMenu
+}: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
   const [transparent, setTransparent] = useState(navFixed || false);
@@ -32,35 +39,46 @@ function Layout({ children, noPadding, navFixed, colorfulLogo, noFooter, hideMen
         setTransparent(false);
       }
     };
-    window && window.addEventListener('scroll', handler);
+    window && window.addEventListener("scroll", handler);
 
     return () => {
-      window && window.removeEventListener('scroll', handler);
-    }
+      window && window.removeEventListener("scroll", handler);
+    };
   }, [navFixed]);
   return (
     <div className="Layout__wrap">
       <header
-        className={["Layout__header", navFixed && "navFixed", transparent && "transparent", colorfulLogo && "colorful"]
+        className={[
+          "Layout__header",
+          navFixed && "navFixed",
+          transparent && "transparent",
+          colorfulLogo && "colorful"
+        ]
           .filter(Boolean)
           .join(" ")}
       >
         <nav className="Layout__nav">
           <div className="Layout__brand" role="button" onClick={goToMain}>
             <Favicon white={!colorfulLogo} height="40" />
-            <img src={colorfulLogo ? logoColorful : logo} alt="logo" height="30" />
+            <img
+              src={colorfulLogo ? logoColorful : logo}
+              alt="logo"
+              height="30"
+            />
           </div>
-          {!hideMenu && <div className="Layout__navContents">
-            {!logined ? (
-              <>
-                <Link to="signin">Sign In</Link>
-                <span> | </span>
-                <Link to="signup">Sign Up</Link>
-              </>
-            ) : (
+          {!hideMenu && (
+            <div className="Layout__navContents">
+              {!logined ? (
+                <>
+                  <Link to="/signin">Sign In</Link>
+                  <span> | </span>
+                  <Link to="/signup">Sign Up</Link>
+                </>
+              ) : (
                 <Link to="/info">My Page</Link>
               )}
-          </div>}
+            </div>
+          )}
         </nav>
       </header>
       <main
@@ -70,10 +88,12 @@ function Layout({ children, noPadding, navFixed, colorfulLogo, noFooter, hideMen
       >
         {children}
       </main>
-      {!noFooter && <footer className="Layout__footer">
-        Team Surf @ 2019 | <Link to="/policy">이용약관</Link> |{" "}
-        <Link to="/privacy">개인정보취급방침</Link>
-      </footer>}
+      {!noFooter && (
+        <footer className="Layout__footer">
+          Team Surf @ 2019 | <Link to="/policy">이용약관</Link> |{" "}
+          <Link to="/privacy">개인정보취급방침</Link>
+        </footer>
+      )}
     </div>
   );
 }

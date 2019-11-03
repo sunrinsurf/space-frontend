@@ -48,6 +48,11 @@ const pages: RouteProps[] = [
     path: "/product/:id",
     exact: true,
     component: loadable(() => import("./ProductPage"))
+  },
+  {
+    path: "/chat/:id",
+    exact: true,
+    component: loadable(() => import("./ChatPage"))
   }
 ];
 
