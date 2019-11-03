@@ -10,6 +10,7 @@ const DISCONNECT = "Socket/DISCONNECT" as const;
 const DISCONNECT_SUCCESS = "Socket/DISCONNECT_SUCCESS" as const;
 const SOCKET_ERROR = "Socket/SOCKET_ERROR" as const;
 const ROOM_DATA = "Socket/ROOM_DATA" as const;
+const EMIT_CHAT = "Socket/EMIT_CHAT" as const;
 
 let client: SocketIOClient.Socket | undefined;
 
@@ -25,7 +26,12 @@ export function SocketDisconnect() {
     type: DISCONNECT
   };
 }
-
+export function emitChat(message: string) {
+  return {
+    type: EMIT_CHAT,
+    payload: message
+  };
+}
 function SocketConnectSuccess(id: string) {
   return {
     type: CONNECT_SUCCESS,
@@ -58,9 +64,15 @@ type ActionType =
   | ReturnType<typeof SocketDisconnect>
   | ReturnType<typeof SocketDisconnectSuccess>
   | ReturnType<typeof SocketError>
-  | ReturnType<typeof RoomData>;
+  | ReturnType<typeof RoomData>
+  | ReturnType<typeof emitChat>;
 
 // Redux-Saga
+function* takeDisconnect(worker: any) {
+  yield fork(function*() {
+    takeEvery(DISCONNECT as any, worker);
+  });
+}
 function ErrorChannel() {
   return eventChannel(emit => {
     client &&
@@ -79,10 +91,12 @@ function RoomDataChannel() {
         emit(data);
       });
     return () => {
+      console.log("channel closed.");
       client && client.off("room_data");
     };
   });
 }
+
 function* ConnectSaga({ payload }: { payload: string }) {
   const token = yield select((state: RootState) => state.Auth.token);
 
@@ -99,6 +113,9 @@ function* DisconnectSaga() {
 function* ErrorSaga() {
   const errorChannel = yield call(ErrorChannel);
 
+  yield takeDisconnect(() => {
+    errorChannel.close();
+  });
   while (true) {
     const payload = yield take(errorChannel);
     yield put(SocketError(payload));
@@ -106,30 +123,43 @@ function* ErrorSaga() {
 }
 function* RoomDataSaga() {
   const roomDataChannel = yield call(RoomDataChannel);
-
+  yield takeDisconnect(() => {
+    roomDataChannel.close();
+  });
   while (true) {
     const payload = yield take(roomDataChannel);
     yield put(RoomData(payload));
   }
 }
+function* EmitChatSaga(message: string) {
+  client && client.emit("chat", message);
+}
 export function* SocketSaga() {
   yield takeEvery(CONNECT as any, ConnectSaga);
   yield takeEvery(DISCONNECT as any, DisconnectSaga);
+  yield takeEvery(EMIT_CHAT as any, EmitChatSaga);
 }
 
 // 리듀서
+interface Message {
+  type: "MY" | "OTHER";
+  nickname?: string;
+  message: string;
+}
 export interface SocketType {
   connected?: boolean;
   roomId: string | null;
   error: string | null;
   onlineData: any;
+  messages: Message[];
 }
 
 const initialState: SocketType = {
   connected: false,
   roomId: null,
   error: null,
-  onlineData: null
+  onlineData: [],
+  messages: []
 };
 
 export default function(state = initialState, action: ActionType): SocketType {
