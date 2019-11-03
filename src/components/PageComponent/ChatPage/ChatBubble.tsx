@@ -4,10 +4,12 @@ import styled, { css } from "styled-components";
 const Bubble = styled.div<{ myChat?: boolean }>`
   padding: 0.5em;
   border-radius: 10px;
+  display: inline-block;
   ${props => {
     if (props.myChat) {
       return css`
-        background: yellow;
+        background: rgb(17, 131, 250);
+        color: white;
       `;
     }
     return css`
@@ -21,7 +23,14 @@ interface ChatBubbleProps {
   by?: string;
 }
 function ChatBubble({ message, myChat, by }: ChatBubbleProps) {
-  return <Bubble myChat={myChat}>{message}</Bubble>;
+  return (
+    <div
+      style={{ margin: ".75em 1em", textAlign: myChat ? "right" : undefined }}
+    >
+      {!myChat && <div>{by}</div>}
+      <Bubble myChat={myChat}>{message}</Bubble>
+    </div>
+  );
 }
 
 export default ChatBubble;

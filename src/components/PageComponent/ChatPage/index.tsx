@@ -7,7 +7,11 @@ import styled, { css } from "styled-components";
 import ChatUserList from "./UserList";
 import useClickToggler from "../../../lib/useClickToggler";
 import ChatForm from "./ChatForm";
-import { SocketConnect, SocketDisconnect } from "../../../store/Socket";
+import {
+  SocketConnect,
+  SocketDisconnect,
+  SocketInit
+} from "../../../store/Socket";
 import ChatList from "./ChatList";
 
 const Header = styled.header`
@@ -44,6 +48,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
 
   const toggleUser = useClickToggler(setOpenUser, openUser);
   React.useEffect(() => {
+    dispatch(SocketInit());
     dispatch(JoinChat(id));
     dispatch(SocketConnect(id));
 

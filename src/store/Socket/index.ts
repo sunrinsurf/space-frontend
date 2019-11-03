@@ -12,6 +12,7 @@ const SOCKET_ERROR = "Socket/SOCKET_ERROR" as const;
 const ROOM_DATA = "Socket/ROOM_DATA" as const;
 const EMIT_CHAT = "Socket/EMIT_CHAT" as const;
 const CHAT_DATA = "Socket/CHAT_DATA" as const;
+const INIT = "Socket/INIT" as const;
 
 let client: SocketIOClient.Socket | undefined;
 
@@ -31,6 +32,11 @@ export function emitChat(message: string) {
   return {
     type: EMIT_CHAT,
     payload: message
+  };
+}
+export function SocketInit() {
+  return {
+    type: INIT
   };
 }
 function SocketConnectSuccess(id: string) {
@@ -73,7 +79,8 @@ type ActionType =
   | ReturnType<typeof SocketError>
   | ReturnType<typeof RoomData>
   | ReturnType<typeof emitChat>
-  | ReturnType<typeof ChatData>;
+  | ReturnType<typeof ChatData>
+  | ReturnType<typeof SocketInit>;
 
 // Redux-Saga
 function* takeDisconnect(worker: any) {
@@ -166,6 +173,7 @@ function* ChatDataSaga() {
   }
 }
 function* EmitChatSaga({ payload }: { payload: string }) {
+  if (!payload) return;
   client && client.emit("chat", payload);
   yield put(
     ChatData({
@@ -233,6 +241,8 @@ export default function(state = initialState, action: ActionType): SocketType {
         ...state,
         messages: [...state.messages, action.payload]
       };
+    case INIT:
+      return initialState;
     default:
       return state;
   }
