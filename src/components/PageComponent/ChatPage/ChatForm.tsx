@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import Input from "../../Form/Input";
 import Button from "../../Form/Button";
+import { emitChat } from "../../../store/Socket";
 
-function ChatForm({ id }: { id: string }) {
+function ChatForm() {
+  const dispatch = useDispatch();
   const [chat, setChat] = useState("");
+
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      dispatch(emitChat(chat));
+      setChat("");
+    },
+    [dispatch, chat]
+  );
   return (
     <form
-      style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: "0 1em",
-        display: "flex",
-        alignItems: "center"
-      }}
+      style={{ flex: 0, display: "flex", alignItems: "center" }}
+      onSubmit={onSubmit}
     >
       <Input
         value={chat}

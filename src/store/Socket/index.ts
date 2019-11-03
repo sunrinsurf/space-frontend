@@ -1,8 +1,8 @@
 import { takeEvery, put, select, call, take, fork } from "redux-saga/effects";
-import { RootState } from "./reducer";
+import { RootState } from "../reducer";
 import { eventChannel } from "redux-saga";
 import io from "socket.io-client";
-import { baseURL } from "../lib/api/client";
+import { baseURL } from "../../lib/api/client";
 // Action Type 정의부
 const CONNECT = "Socket/CONNECT" as const;
 const CONNECT_SUCCESS = "Socket/CONNECT_SUCCESS" as const;
@@ -11,6 +11,7 @@ const DISCONNECT_SUCCESS = "Socket/DISCONNECT_SUCCESS" as const;
 const SOCKET_ERROR = "Socket/SOCKET_ERROR" as const;
 const ROOM_DATA = "Socket/ROOM_DATA" as const;
 const EMIT_CHAT = "Socket/EMIT_CHAT" as const;
+const CHAT_DATA = "Socket/CHAT_DATA" as const;
 
 let client: SocketIOClient.Socket | undefined;
 
@@ -56,6 +57,12 @@ function RoomData(data: any) {
     payload: data
   };
 }
+function ChatData(data: any) {
+  return {
+    type: CHAT_DATA,
+    payload: data
+  };
+}
 
 // ActionType 타입
 type ActionType =
@@ -65,7 +72,8 @@ type ActionType =
   | ReturnType<typeof SocketDisconnectSuccess>
   | ReturnType<typeof SocketError>
   | ReturnType<typeof RoomData>
-  | ReturnType<typeof emitChat>;
+  | ReturnType<typeof emitChat>
+  | ReturnType<typeof ChatData>;
 
 // Redux-Saga
 function* takeDisconnect(worker: any) {
@@ -91,7 +99,17 @@ function RoomDataChannel() {
         emit(data);
       });
     return () => {
-      console.log("channel closed.");
+      client && client.off("room_data");
+    };
+  });
+}
+function ChatChannel() {
+  return eventChannel(emit => {
+    client &&
+      client.on("chat", (data: any) => {
+        emit(data);
+      });
+    return () => {
       client && client.off("room_data");
     };
   });
@@ -104,6 +122,7 @@ function* ConnectSaga({ payload }: { payload: string }) {
   client.emit("connect_to", token);
   yield fork(ErrorSaga);
   yield fork(RoomDataSaga);
+  yield fork(ChatDataSaga);
   yield put(SocketConnectSuccess(payload));
 }
 function* DisconnectSaga() {
@@ -131,8 +150,29 @@ function* RoomDataSaga() {
     yield put(RoomData(payload));
   }
 }
-function* EmitChatSaga(message: string) {
-  client && client.emit("chat", message);
+function* ChatDataSaga() {
+  const chatChannel = yield call(ChatChannel);
+  yield takeDisconnect(() => {
+    chatChannel.close();
+  });
+  while (true) {
+    const payload = yield take(chatChannel);
+    yield put(
+      ChatData({
+        type: "OTHER",
+        ...payload
+      } as Message)
+    );
+  }
+}
+function* EmitChatSaga({ payload }: { payload: string }) {
+  client && client.emit("chat", payload);
+  yield put(
+    ChatData({
+      type: "MY",
+      message: payload
+    } as Message)
+  );
 }
 export function* SocketSaga() {
   yield takeEvery(CONNECT as any, ConnectSaga);
@@ -187,6 +227,11 @@ export default function(state = initialState, action: ActionType): SocketType {
       return {
         ...state,
         onlineData: action.payload
+      };
+    case CHAT_DATA:
+      return {
+        ...state,
+        messages: [...state.messages, action.payload]
       };
     default:
       return state;

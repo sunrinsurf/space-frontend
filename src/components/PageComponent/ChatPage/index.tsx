@@ -8,6 +8,7 @@ import ChatUserList from "./UserList";
 import useClickToggler from "../../../lib/useClickToggler";
 import ChatForm from "./ChatForm";
 import { SocketConnect, SocketDisconnect } from "../../../store/Socket";
+import ChatList from "./ChatList";
 
 const Header = styled.header`
   padding: 0.5em;
@@ -68,10 +69,12 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
       <div
         style={{
           height: "60vh",
-          position: "relative"
+          display: "flex",
+          flexDirection: "column"
         }}
       >
-        <ChatForm id={id} />
+        <ChatList />
+        <ChatForm />
       </div>
     </div>
   );
