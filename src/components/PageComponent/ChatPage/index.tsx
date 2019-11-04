@@ -26,15 +26,15 @@ const Toggler = styled.div<{ opened?: boolean }>`
   background: #eaeaea;
   &::before {
     ${props => {
-      if (props.opened) {
-        return css`
+    if (props.opened) {
+      return css`
           content: "▲";
         `;
-      }
-      return css`
+    }
+    return css`
         content: "▼";
       `;
-    }}
+  }}
     color: gray;
   }
 `;
@@ -43,21 +43,24 @@ interface ChatPageComponentProps {
 }
 function ChatPageComponent({ id }: ChatPageComponentProps) {
   const dispatch = useDispatch();
-  const { chatData, error } = useSelector((state: RootState) => state.Chat);
+  const { chatData, error, socketError, chatJoined } = useSelector((state: RootState) => ({ ...state.Chat, socketError: state.Socket.error }));
   const [openUser, setOpenUser] = useState(false);
 
   const toggleUser = useClickToggler(setOpenUser, openUser);
   React.useEffect(() => {
-    dispatch(SocketInit());
     dispatch(JoinChat(id));
+  }, [dispatch, id]);
+  React.useEffect(() => {
+    if (!chatJoined) return;
+    dispatch(SocketInit());
     dispatch(SocketConnect(id));
 
     return () => {
       dispatch(SocketDisconnect());
     };
-  }, [dispatch, id]);
+  }, [dispatch, id, chatJoined]);
 
-  if (error) return <ErrorComponent>{error}</ErrorComponent>;
+  if (error || socketError) return <ErrorComponent>{error || socketError}</ErrorComponent>;
   if (!chatData) return null;
 
   return (

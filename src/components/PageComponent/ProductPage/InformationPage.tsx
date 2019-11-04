@@ -5,6 +5,7 @@ import "./InformationPage.css";
 import Button from "../../Form/Button";
 import { RootState } from "../../../store/reducer";
 import { InviteChat } from "../../../store/Chat";
+import moment from 'moment';
 
 interface InformationPageProps {
   timeToUse: "selectTime" | "noLimit" | "afterContact";
@@ -34,6 +35,10 @@ function InformationPage({
     if (royalty === "afterContact") {
       return "로열티 협의";
     }
+
+    function priceSet(i: any) {
+      const s = i.toString();
+    }
     if (royalty === "monthly") return `월 ${royaltyPrice}원`;
     if (royalty === "weekly") return `주 ${royaltyPrice}원`;
   }, [royalty, royaltyPrice]);
@@ -45,7 +50,7 @@ function InformationPage({
       return "사용 날짜 제한 없음";
     }
     if (timeToUse === "selectTime") {
-      return `${(timeToUseDate as Date).toString()}까지`;
+      return `${moment(timeToUseDate as Date).format("YYYY년 MM월 DD일")}까지`;
     }
   }, [timeToUse, timeToUseDate]);
   const [isJoined, JoinText] = useMemo(() => {

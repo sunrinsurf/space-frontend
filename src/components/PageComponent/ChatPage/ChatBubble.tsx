@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
+import moment from 'moment';
 
 const Bubble = styled.div<{ myChat?: boolean }>`
   padding: 0.5em;
   border-radius: 10px;
   display: inline-block;
+  max-width: 60vw;
   ${props => {
     if (props.myChat) {
       return css`
@@ -21,14 +23,19 @@ interface ChatBubbleProps {
   message: string;
   myChat?: boolean;
   by?: string;
+  time: Date;
 }
-function ChatBubble({ message, myChat, by }: ChatBubbleProps) {
+function ChatBubble({ message, myChat, by, time }: ChatBubbleProps) {
+  const timeString = useMemo(() => moment(time).format('hh:mm A'), [time]);
   return (
     <div
       style={{ margin: ".75em 1em", textAlign: myChat ? "right" : undefined }}
     >
       {!myChat && <div>{by}</div>}
-      <Bubble myChat={myChat}>{message}</Bubble>
+      <div style={{ display: 'flex', flexDirection: myChat ? 'row-reverse' : undefined, alignItems: 'flex-end' }}>
+        <Bubble myChat={myChat}>{message}</Bubble>
+        <span>{timeString}</span>
+      </div>
     </div>
   );
 }

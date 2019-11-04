@@ -12,6 +12,7 @@ const SOCKET_ERROR = "Socket/SOCKET_ERROR" as const;
 const ROOM_DATA = "Socket/ROOM_DATA" as const;
 const EMIT_CHAT = "Socket/EMIT_CHAT" as const;
 const CHAT_DATA = "Socket/CHAT_DATA" as const;
+const BEFORE_CHAT_DATA = "Socket/BEFORE_CHAT_DATA" as const;
 const INIT = "Socket/INIT" as const;
 
 let client: SocketIOClient.Socket | undefined;
@@ -69,6 +70,12 @@ function ChatData(data: any) {
     payload: data
   };
 }
+function BeforeChatData(data: any) {
+  return {
+    type: BEFORE_CHAT_DATA,
+    payload: data
+  };
+}
 
 // ActionType 타입
 type ActionType =
@@ -80,11 +87,12 @@ type ActionType =
   | ReturnType<typeof RoomData>
   | ReturnType<typeof emitChat>
   | ReturnType<typeof ChatData>
-  | ReturnType<typeof SocketInit>;
+  | ReturnType<typeof SocketInit>
+  | ReturnType<typeof BeforeChatData>;
 
 // Redux-Saga
 function* takeDisconnect(worker: any) {
-  yield fork(function*() {
+  yield fork(function() {
     takeEvery(DISCONNECT as any, worker);
   });
 }
@@ -123,10 +131,13 @@ function ChatChannel() {
 }
 
 function* ConnectSaga({ payload }: { payload: string }) {
-  const token = yield select((state: RootState) => state.Auth.token);
+  const { token, chatId } = yield select((state: RootState) => ({
+    token: state.Auth.token,
+    chatId: state.Chat.chatData._id
+  }));
 
-  client = io.connect(`${baseURL}/${payload}`);
-  client.emit("connect_to", token);
+  client = io.connect(`${baseURL}`);
+  client.emit("connect_to", token, chatId);
   yield fork(ErrorSaga);
   yield fork(RoomDataSaga);
   yield fork(ChatDataSaga);
@@ -149,12 +160,37 @@ function* ErrorSaga() {
 }
 function* RoomDataSaga() {
   const roomDataChannel = yield call(RoomDataChannel);
+  const { _id } = yield select((state: RootState) => state.Auth.data);
   yield takeDisconnect(() => {
     roomDataChannel.close();
   });
   while (true) {
     const payload = yield take(roomDataChannel);
-    yield put(RoomData(payload));
+    console.log(payload);
+    yield put(RoomData(payload.room));
+    if (payload.chatLogs) {
+      yield put(
+        BeforeChatData(
+          payload.chatLogs.map(
+            (data: any): Message => {
+              if (data.by._id === _id) {
+                return {
+                  type: "MY",
+                  message: data.message,
+                  time: data.time
+                };
+              }
+              return {
+                type: "OTHER",
+                message: data.message,
+                time: data.time,
+                nickname: data.by.nickname
+              };
+            }
+          )
+        )
+      );
+    }
   }
 }
 function* ChatDataSaga() {
@@ -167,7 +203,8 @@ function* ChatDataSaga() {
     yield put(
       ChatData({
         type: "OTHER",
-        ...payload
+        ...payload,
+        time: new Date(payload.time)
       } as Message)
     );
   }
@@ -178,7 +215,8 @@ function* EmitChatSaga({ payload }: { payload: string }) {
   yield put(
     ChatData({
       type: "MY",
-      message: payload
+      message: payload,
+      time: new Date()
     } as Message)
   );
 }
@@ -193,6 +231,7 @@ interface Message {
   type: "MY" | "OTHER";
   nickname?: string;
   message: string;
+  time: Date;
 }
 export interface SocketType {
   connected?: boolean;
@@ -243,6 +282,12 @@ export default function(state = initialState, action: ActionType): SocketType {
       };
     case INIT:
       return initialState;
+    case BEFORE_CHAT_DATA:
+      console.log(action.payload);
+      return {
+        ...state,
+        messages: [...action.payload, ...state.messages]
+      };
     default:
       return state;
   }
