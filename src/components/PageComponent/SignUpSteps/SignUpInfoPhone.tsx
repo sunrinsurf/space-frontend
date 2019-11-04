@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { Column } from "./SignUpInfo";
 import styled from "styled-components";
 import Button from "../../Form/Button";
-import SignUpInfoCert from "./SignUpInfoCert";
 import Input from "../../Form/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store/reducer";
@@ -45,17 +44,10 @@ function SignUpInfoPhone() {
               type="text"
               placeholder="전화번호"
               value={phone}
-              style={{ flex: 1 }}
+              style={{ flex: 1, margin: "0px" }}
               onChange={onchange}
               disabled={success}
             />
-            <Button
-              style={{ margin: "1em 0 1em 1em", height: "fit-content" }}
-              onClick={SignUpInfoCert}
-              disabled={success}
-            >
-              본인인증
-          </Button>
           </Flex>
           {progress && <PhoneCode />}
           {success && <span style={{ color: 'green' }}>인증에 성공했습니다.</span>}

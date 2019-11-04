@@ -1,8 +1,14 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
+import SignUpInfoCert from "./SignUpInfoCert";
+
 import Input from "../../Form/Input";
 import Button from "../../Form/Button";
+import Favicon from "../../Layout/Favicon";
+
+import './SignUpInfo.css';
+
 import { RootState } from "../../../store/reducer";
 import {
   inputChange,
@@ -32,77 +38,81 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
   }, [form, token, toNext]);
   return (
     <div>
-      <form>
-        <Column column="id">
-          {(onchange, id) => (
-            <Input
-              type="text"
-              placeholder="아이디"
-              value={id}
-              onChange={onchange}
-            />
-          )}
-        </Column>
-        <Column column="password">
-          {(onchange, password) => (
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              autoComplete="new-password"
-              onChange={onchange}
-            />
-          )}
-        </Column>
-        <Column column="password_accept">
-          {(onchange, password_accept) => (
-            <Input
-              type="password"
-              placeholder="비밀번호 확인"
-              value={password_accept}
-              autoComplete="new-password"
-              onChange={onchange}
-            />
-          )}
-        </Column>
-        <Column column="username">
-          {(onchange, username) => (
-            <Input
-              type="text"
-              placeholder="닉네임"
-              value={username}
-              onChange={onchange}
-            />
-          )}
-        </Column>
-        <Column column="email">
-          {(onchange, email) => (
-            <Input type="email" placeholder="이메일" value={email} onChange={onchange} />
-          )}
-        </Column>
-        <Column column="name">
-          {(onchange, name) => (
-            <Input
-              type="text"
-              placeholder="이름 (본명)"
-              value={name}
-              onChange={onchange}
-            />
-          )}
-        </Column>
-        <SignUpInfoPhone />
-        <Column column="address">
-          {(onchange, address) => (
-            <Input
-              type="text"
-              placeholder="주소"
-              value={address}
-              onChange={onchange}
-            />
-          )}
-        </Column>
+      <form className="SignUpInfo__wrap">
+        <Favicon width="100" />
+        <h1>회원정보 입력</h1>
+        <div className="SignUpInfo__form">
+          <div>
+            <Column column="name">
+              {(onchange, name) => (
+                <Input
+                  type="text"
+                  placeholder="이름"
+                  value={name}
+                  onChange={onchange}
+                />
+              )}
+            </Column>
+            <Column column="id">
+              {(onchange, id) => (
+                <Input
+                  type="text"
+                  placeholder="아이디"
+                  value={id}
+                  onChange={onchange}
+                />
+              )}
+            </Column>
+            <Column column="password">
+              {(onchange, password) => (
+                <Input
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  autoComplete="new-password"
+                  onChange={onchange}
+                />
+              )}
+            </Column>
+            <Column column="password_accept">
+              {(onchange, password_accept) => (
+                <Input
+                  type="password"
+                  placeholder="비밀번호 확인"
+                  value={password_accept}
+                  autoComplete="new-password"
+                  onChange={onchange}
+                />
+              )}
+            </Column>
+          </div>
+          <div>
+            <Column column="email">
+              {(onchange, email) => (
+                <Input type="email" placeholder="이메일" value={email} onChange={onchange} />
+              )}
+            </Column>
+            <Column column="address">
+              {(onchange, address) => (
+                <Input
+                  type="text"
+                  placeholder="주소"
+                  value={address}
+                  onChange={onchange}
+                />
+              )}
+            </Column>
+            <SignUpInfoPhone />
+          </div>
+        </div>
+        <Button
+          style={{ borderRadius: 26, paddingLeft: "2em", paddingRight: "2em" }}
+          onClick={SignUpInfoCert}
+        >
+          본인인증
+          </Button>
       </form>
-      <Button fullWidth onClick={next}>
+      <Button fullWidth onClick={next} style={{ marginTop: "2em", borderRadius: 26 }}>
         다음으로
       </Button>
     </div>
