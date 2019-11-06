@@ -37,10 +37,10 @@ function InformationPage({
     }
 
     function priceSet(i: any) {
-      const s = i.toString();
+      return i.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    if (royalty === "monthly") return `월 ${royaltyPrice}원`;
-    if (royalty === "weekly") return `주 ${royaltyPrice}원`;
+    if (royalty === "monthly") return `월 ${priceSet(royaltyPrice)}원`;
+    if (royalty === "weekly") return `주 ${priceSet(royaltyPrice)}원`;
   }, [royalty, royaltyPrice]);
   const timeToUseText = useMemo(() => {
     if (timeToUse === "afterContact") {

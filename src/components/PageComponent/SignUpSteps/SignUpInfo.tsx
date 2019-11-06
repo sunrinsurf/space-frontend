@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
-import SignUpInfoCert from "./SignUpInfoCert";
 
 import Input from "../../Form/Input2";
 import Button from "../../Form/Button";

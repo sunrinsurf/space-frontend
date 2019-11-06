@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import moment from 'moment';
 
 const Bubble = styled.div<{ myChat?: boolean }>`
-  padding: 0.5em;
-  border-radius: 10px;
+  padding: 0.5em 1em;
+  border-radius: 30px;
   display: inline-block;
   max-width: 60vw;
   ${props => {
@@ -34,7 +34,7 @@ function ChatBubble({ message, myChat, by, time }: ChatBubbleProps) {
       {!myChat && <div>{by}</div>}
       <div style={{ display: 'flex', flexDirection: myChat ? 'row-reverse' : undefined, alignItems: 'flex-end' }}>
         <Bubble myChat={myChat}>{message}</Bubble>
-        <span>{timeString}</span>
+        <span style={{ margin: '0 1em' }}>{timeString}</span>
       </div>
     </div>
   );
