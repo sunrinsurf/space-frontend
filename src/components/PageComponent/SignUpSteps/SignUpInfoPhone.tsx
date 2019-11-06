@@ -2,10 +2,13 @@ import React, { useState, useCallback } from "react";
 import { Column } from "./SignUpInfo";
 import styled from "styled-components";
 import Button from "../../Form/Button";
-import Input from "../../Form/Input";
+import SignUpInfoCert from "./SignUpInfoCert";
+import Input from "../../Form/Input2";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store/reducer";
 import { verifyToken } from "../../../store/PhoneCert";
+
+import './SignUpInfo.css';
 
 const Flex = styled.div`
   display: flex;
@@ -40,20 +43,32 @@ function SignUpInfoPhone() {
       {(onchange, phone) => (
         <>
           <Flex>
-            <Input
-              type="text"
-              placeholder="전화번호"
-              value={phone}
-              style={{ flex: 1, margin: "0px" }}
-              onChange={onchange}
-              disabled={success}
-            />
+            <div className="SignUpInfo__Column">
+              <div className="SignUpInfo__title">전화번호</div>
+              <div className="SignUpInfo__Phone">
+                <Input
+                  type="text"
+                  value={phone}
+                  style={{ flex: 1 }}
+                  onChange={onchange}
+                  disabled={success}
+                />
+                <Button
+                  style={{ height: "fit-content", borderRadius: 26 }}
+                  onClick={SignUpInfoCert}
+                  disabled={success}
+                >
+                  본인인증
+          </Button>
+              </div>
+            </div>
           </Flex>
           {progress && <PhoneCode />}
           {success && <span style={{ color: 'green' }}>인증에 성공했습니다.</span>}
         </>
-      )}
-    </Column>
+      )
+      }
+    </Column >
   );
 }
 

@@ -5,5 +5,40 @@
     flex-direction: column;
 }
 .SignUpInfo__form{
+    width: 100%;
     display: flex;
+    justify-content: center;
+flex-wrap: wrap;
+}
+.SignUpInfo__Column{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+.SignUpInfo__Button{
+    max-width: 444px;
+    margin: 0px auto;
+}
+.SignUpInfo__left{
+    margin:0px 80px;
+    min-width: 400px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.SignUpInfo__right{
+    margin:0px 80px;
+    min-width: 400px;
+    justify-content: flex-start;
+}
+.SignUpInfo__Phone{
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+}
+.SignUpInfo__title{
+    min-width: fit-content;
+    color: #494949;
+    margin-right: 1rem;
 }

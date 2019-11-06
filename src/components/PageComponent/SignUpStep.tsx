@@ -11,7 +11,7 @@ import SignUpComplete from "./SignUpSteps/SignUpComplete";
 import { Redirect } from 'react-router-dom'
 
 const Box = styled.div`
-  max-width: 640px;
+  mix-width: 640px;
   margin: 0 auto;
   padding: 1em;
   box-sizing: border-box;

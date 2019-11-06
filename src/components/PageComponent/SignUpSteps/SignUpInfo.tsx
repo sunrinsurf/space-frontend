@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
 import SignUpInfoCert from "./SignUpInfoCert";
 
-import Input from "../../Form/Input";
+import Input from "../../Form/Input2";
 import Button from "../../Form/Button";
 import Favicon from "../../Layout/Favicon";
 
@@ -40,82 +40,122 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
     <div>
       <form className="SignUpInfo__wrap">
         <Favicon width="100" />
-        <h1>회원정보 입력</h1>
+        <h1 style={{ fontSize: 36 + "px" }}>회원정보 입력</h1>
         <div className="SignUpInfo__form">
-          <div>
+          <div className="SignUpInfo__left">
             <Column column="name">
               {(onchange, name) => (
-                <Input
-                  type="text"
-                  placeholder="이름"
-                  value={name}
-                  onChange={onchange}
-                />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">이름</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+                    <Input
+                      type="text"
+                      value={name}
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
               )}
             </Column>
             <Column column="id">
               {(onchange, id) => (
-                <Input
-                  type="text"
-                  placeholder="아이디"
-                  value={id}
-                  onChange={onchange}
-                />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">아이디</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+                    <Input
+                      type="text"
+                      value={id}
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
               )}
             </Column>
             <Column column="password">
               {(onchange, password) => (
-                <Input
-                  type="password"
-                  placeholder="비밀번호"
-                  value={password}
-                  autoComplete="new-password"
-                  onChange={onchange}
-                />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">비밀번호</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+
+                    <Input
+                      type="password"
+                      value={password}
+                      autoComplete="new-password"
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
               )}
             </Column>
             <Column column="password_accept">
               {(onchange, password_accept) => (
-                <Input
-                  type="password"
-                  placeholder="비밀번호 확인"
-                  value={password_accept}
-                  autoComplete="new-password"
-                  onChange={onchange}
-                />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">비밀번호 확인</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+
+                    <Input
+                      type="password"
+                      value={password_accept}
+                      autoComplete="new-password"
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
               )}
             </Column>
           </div>
-          <div>
+          <div className="SignUpInfo__right">
+            <Column column="username">
+              {(onchange, username) => (
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">닉네임</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+
+                    <Input
+                      type="text"
+                      value={username}
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
+              )}
+            </Column>
             <Column column="email">
               {(onchange, email) => (
-                <Input type="email" placeholder="이메일" value={email} onChange={onchange} />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">이메일</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+
+                    <Input type="email" value={email} onChange={onchange} />
+                  </div>
+                </div>
               )}
             </Column>
             <Column column="address">
               {(onchange, address) => (
-                <Input
-                  type="text"
-                  placeholder="주소"
-                  value={address}
-                  onChange={onchange}
-                />
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">주소 입력</div>
+                  <div style={{ minWidth: 80 + "%" }}>
+
+                    <Input
+                      type="text"
+                      value={address}
+                      onChange={onchange}
+                    />
+                  </div>
+                </div>
               )}
             </Column>
             <SignUpInfoPhone />
           </div>
         </div>
-        <Button
-          style={{ borderRadius: 26, paddingLeft: "2em", paddingRight: "2em" }}
-          onClick={SignUpInfoCert}
-        >
-          본인인증
-          </Button>
       </form>
-      <Button fullWidth onClick={next} style={{ marginTop: "2em", borderRadius: 26 }}>
-        다음으로
-      </Button>
-    </div>
+      <div className="SignUpInfo__Button">
+        <Button fullWidth onClick={next} style={{ marginTop: "2em", borderRadius: 26 }}>
+          동의하고 다음으로
+        </Button>
+      </div>
+    </div >
   );
 }
 
