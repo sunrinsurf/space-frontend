@@ -31,6 +31,11 @@ const Thumb = styled.div<ThumbProps>`
       background: gray;
     `;
   }}
+
+  @media (max-width: 640px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 const getName = getClassHandler("ShareCard");
 

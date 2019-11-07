@@ -4,6 +4,11 @@ import usePrefetch from "../../lib/usePrefetch";
 import { getShares } from "../../lib/api/getShares";
 import ErrorComponent from "../ErrorComponent";
 
+import './index.css';
+import getClassHandler from "../../lib/getClassHandler";
+
+const cls = getClassHandler("Shares");
+
 //interface SharesProps { }
 function Shares() {
   const [product, error] = usePrefetch("Shares", async () => {
@@ -13,7 +18,7 @@ function Shares() {
   if (error) return <ErrorComponent>{error}</ErrorComponent>;
   if (!product) return <div>로드 중...</div>;
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: 'center' }}>
+    <div className={cls("list")}>
       {product.map((data: any, i: any) => (
         <ShareCard
           key={i}

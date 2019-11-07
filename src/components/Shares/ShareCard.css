@@ -35,3 +35,19 @@
   font-size: 1.5em;
   word-break: normal;
 }
+
+@media (max-width: 640px) {
+  .ShareCard__wrap {
+    flex-direction: row;
+    width: 100%;
+    margin: 1em 0;
+    flex: 0 0 100%;
+  }
+  .ShareCard__title {
+    margin: 0;
+    margin-left: 1em;
+  }
+  .ShareCard__person {
+    left: -20px;
+  }
+}
