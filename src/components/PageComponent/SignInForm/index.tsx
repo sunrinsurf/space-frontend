@@ -49,7 +49,7 @@ function SignInForm() {
       </div>
       <form onSubmit={onSubmit} className={cls("form")}>
         <Input type="text" placeholder="ID" onChange={handleChange("uid")} value={uid} />
-        <Input type="password" placeholder="PW" onChange={handleChange("password")} value={password} />
+        <Input type="password" placeholder="Password" onChange={handleChange("password")} value={password} />
         <Button fullWidth>LOGIN</Button>
       </form>
       <div className={cls("forget")}>

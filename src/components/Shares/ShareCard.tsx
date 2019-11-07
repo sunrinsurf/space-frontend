@@ -28,7 +28,7 @@ const Thumb = styled.div<ThumbProps>`
       `;
     }
     return css`
-      background: gray;
+      /* background: gray; */
     `;
   }}
 
@@ -48,7 +48,7 @@ function ShareCard({ title, person, image, id }: ShareCardProps) {
   return (
     <div className={getName("wrap")} role="button" onClick={onClick}>
       <div className={getName("thumbWrap")}>
-        <div className={getName("person")}>{person}</div>
+        {/* <div className={getName("person")}>{person}</div> */}
         <Thumb image={image} />
       </div>
       <div className={getName("title")}>

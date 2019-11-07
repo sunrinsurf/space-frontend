@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import favicon from '../../assets/favicon.svg';
 
 const Wrap = styled.div`
   margin: 1em 2em;
@@ -20,7 +21,11 @@ const Thumb = styled.div<ThumbProps>`
       `;
     }
     return css`
-      background: gray;
+    /* change */
+  background-image: url(${favicon});
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
     `;
   }}
 `;

@@ -12,6 +12,10 @@
 }
 .ShareCard__thumbWrap {
   position: relative;
+  background-image: url("../../assets/favicon.svg");
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
 }
 .ShareCard__person {
   width: 50px;
