@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux';
-import { authLogout } from '../../store/Auth';
+import { unregisterToken } from '../../store/Auth';
 
 function LogoutMenu() {
     const dispatch = useDispatch();
 
     const onLogout = useCallback(() => {
-        dispatch(authLogout());
+        dispatch(unregisterToken());
     }, [dispatch]);
     return (
         <div style={{ cursor: 'pointer', display: 'inline' }} role="button" onClick={onLogout}>

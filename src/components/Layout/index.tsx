@@ -17,6 +17,7 @@ export type LayoutProps = {
   colorfulLogo?: boolean;
   noFooter?: boolean;
   hideMenu?: boolean;
+  noScrolling?: boolean;
 };
 
 function Layout({
@@ -25,7 +26,8 @@ function Layout({
   navFixed,
   colorfulLogo,
   noFooter,
-  hideMenu
+  hideMenu,
+  noScrolling
 }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
@@ -35,6 +37,9 @@ function Layout({
     history.push("/");
   }
   useEffect(() => {
+    if (noScrolling) {
+      return;
+    }
     const handler = () => {
       const y = window.scrollY;
       if (y <= 0 && navFixed) {
@@ -48,7 +53,7 @@ function Layout({
     return () => {
       window && window.removeEventListener("scroll", handler);
     };
-  }, [navFixed]);
+  }, [navFixed, noScrolling]);
   return (
     <div className={cls("wrap")}>
       <header

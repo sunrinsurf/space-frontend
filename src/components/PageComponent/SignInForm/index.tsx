@@ -8,16 +8,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { RootState } from "../../../store/reducer";
 import * as SignIn from '../../../store/SignIn';
-import useLogin from "../../../lib/useLogin";
 import Favicon from "../../Layout/Favicon";
 import getClassHandler from "../../../lib/getClassHandler";
+import RedirectIfLogined from "../../Page/RedirectIfLogined";
 
 const cls = getClassHandler("SignInForm");
 function SignInForm() {
   const { remember, uid, password, success } = useSelector((state: RootState) => ({ success: state.SignIn.success, ...state.SignIn.form }));
   const history = useHistory();
   const dispatch = useDispatch();
-  const isLogin = useLogin();
 
   const toggleRemember = useCallback(() => {
     dispatch(SignIn.changeForm({ remember: !remember }));
@@ -32,11 +31,15 @@ function SignInForm() {
     dispatch(SignIn.requestAuth());
   }, [dispatch]);
   useEffect(() => {
-    if (success || isLogin) history.push('/');
-  }, [success, history, isLogin]);
+    if (success) {
+      dispatch(SignIn.clearALL());
+      history.push('/');
+    };
+  }, [success, history, dispatch]);
 
   return (
     <div className={cls("wrap")}>
+      <RedirectIfLogined />
       <div className={cls("brand")}>
         <Favicon className={cls("favicon")} />
         <h1>LOGIN</h1>
