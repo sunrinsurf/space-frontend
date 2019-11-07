@@ -46,7 +46,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, name) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이름</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
                     <Input
                       type="text"
                       value={name}
@@ -60,7 +60,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, id) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">아이디</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
                     <Input
                       type="text"
                       value={id}
@@ -74,7 +74,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, password) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">비밀번호</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
 
                     <Input
                       type="password"
@@ -90,7 +90,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, password_accept) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">비밀번호 확인</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
 
                     <Input
                       type="password"
@@ -108,7 +108,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, username) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">닉네임</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
 
                     <Input
                       type="text"
@@ -123,7 +123,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, email) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이메일</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
 
                     <Input type="email" value={email} onChange={onchange} />
                   </div>
@@ -134,7 +134,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
               {(onchange, address) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">주소 입력</div>
-                  <div style={{ minWidth: 80 + "%" }}>
+                  <div className="Input__Column">
 
                     <Input
                       type="text"
@@ -209,7 +209,9 @@ export function Column({
   return (
     <div>
       {data}
-      {error && <div style={{ marginBottom: 10, color: "red" }}>{error}</div>}
+      <div className="SignUpInfo__error">
+        {error && <div style={{ color: "red", wordBreak: "break-all" }}>{error}</div>}
+      </div>
     </div>
   );
 }
