@@ -6,7 +6,7 @@ import Input from "../../Form/Input2";
 import Button from "../../Form/Button";
 import Favicon from "../../Layout/Favicon";
 
-import './SignUpInfo.css';
+import "./SignUpInfo.css";
 
 import { RootState } from "../../../store/reducer";
 import {
@@ -18,10 +18,22 @@ import SignUpInfoMatch from "./SignUpInfoMatch";
 import SignUpInfoPhone from "./SignUpInfoPhone";
 
 function SignUpInfo({ toNext }: SignUpStepProps) {
-  const { form, token } = useSelector((state: RootState) => ({ form: state.SignUp.form, token: state.SignUp.certToken }));
+  const { form, token } = useSelector((state: RootState) => ({
+    form: state.SignUp.form,
+    token: state.SignUp.certToken
+  }));
 
   const next = useCallback(() => {
-    if (!form.address || !form.id || !form.name || !form.password || !form.password_accept || !form.phone || !form.username || !form.email) {
+    if (
+      !form.address ||
+      !form.id ||
+      !form.name ||
+      !form.password ||
+      !form.password_accept ||
+      !form.phone ||
+      !form.username ||
+      !form.email
+    ) {
       alert("빈 칸을 모두 채워주세요.");
       return;
     }
@@ -30,7 +42,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
       return;
     }
     if (!token) {
-      alert('휴대폰 번호를 인증해주세요.');
+      alert("휴대폰 번호를 인증해주세요.");
       return;
     }
     toNext();
@@ -47,11 +59,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이름</div>
                   <div className="Input__Column">
-                    <Input
-                      type="text"
-                      value={name}
-                      onChange={onchange}
-                    />
+                    <Input type="text" value={name} onChange={onchange} />
                   </div>
                 </div>
               )}
@@ -61,11 +69,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">아이디</div>
                   <div className="Input__Column">
-                    <Input
-                      type="text"
-                      value={id}
-                      onChange={onchange}
-                    />
+                    <Input type="text" value={id} onChange={onchange} />
                   </div>
                 </div>
               )}
@@ -75,7 +79,6 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">비밀번호</div>
                   <div className="Input__Column">
-
                     <Input
                       type="password"
                       value={password}
@@ -91,7 +94,6 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">비밀번호 확인</div>
                   <div className="Input__Column">
-
                     <Input
                       type="password"
                       value={password_accept}
@@ -109,12 +111,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">닉네임</div>
                   <div className="Input__Column">
-
-                    <Input
-                      type="text"
-                      value={username}
-                      onChange={onchange}
-                    />
+                    <Input type="text" value={username} onChange={onchange} />
                   </div>
                 </div>
               )}
@@ -124,7 +121,6 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이메일</div>
                   <div className="Input__Column">
-
                     <Input type="email" value={email} onChange={onchange} />
                   </div>
                 </div>
@@ -135,12 +131,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">주소 입력</div>
                   <div className="Input__Column">
-
-                    <Input
-                      type="text"
-                      value={address}
-                      onChange={onchange}
-                    />
+                    <Input type="text" value={address} onChange={onchange} />
                   </div>
                 </div>
               )}
@@ -150,11 +141,15 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
         </div>
       </form>
       <div className="SignUpInfo__Button">
-        <Button fullWidth onClick={next} style={{ marginTop: "2em", borderRadius: 26 }}>
+        <Button
+          fullWidth
+          onClick={next}
+          style={{ marginTop: "2em", borderRadius: 26 }}
+        >
           동의하고 다음으로
         </Button>
       </div>
-    </div >
+    </div>
   );
 }
 
@@ -192,15 +187,16 @@ export function Column({
           })
         );
       }
-      Promise.resolve(SignUpInfoMatch(column, e.target.value)).then(([isValid, message]) => {
-
-        if (!isValid) {
-          const msg: string = message.toString();
-          dispatch(inputError({ [column]: msg }));
-        } else if (error) {
-          dispatch(inputErrorClear([column]));
+      Promise.resolve(SignUpInfoMatch(column, e.target.value)).then(
+        ([isValid, message]) => {
+          if (!isValid) {
+            const msg: string = message.toString();
+            dispatch(inputError({ [column]: msg }));
+          } else if (error) {
+            dispatch(inputErrorClear([column]));
+          }
         }
-      });
+      );
     },
     [dispatch, column, error, valueWrapper]
   );
@@ -210,7 +206,9 @@ export function Column({
     <div>
       {data}
       <div className="SignUpInfo__error">
-        {error && <div style={{ color: "red", wordBreak: "break-all" }}>{error}</div>}
+        {error && (
+          <div style={{ color: "red", wordBreak: "break-all" }}>{error}</div>
+        )}
       </div>
     </div>
   );
