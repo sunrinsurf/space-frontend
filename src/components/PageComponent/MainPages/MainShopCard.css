@@ -9,8 +9,10 @@
 .MainShopCard__Image {
     width: 200px;
     height: 200px;
-    background-color: gray;
     margin-bottom: 30px;
+    background-image: url("../../../assets/favicon.svg");
+    background-repeat: no-repeat;
+    background-size:contain
 }
 
 .MainShopCard__Content {

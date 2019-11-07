@@ -15,10 +15,12 @@
 
 .MainShareProcedure__Images {
     width: 200px;
-    height: 200px;
-    background-color: gray;
+    height: 140px;
     margin-top: 30px;
     margin-bottom: 30px;
+    background-image: url("../../../assets/favicon.svg");
+    background-repeat: no-repeat;
+    background-size:contain;
 }
 
 .MainShareProcedure__Info {
