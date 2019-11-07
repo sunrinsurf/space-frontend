@@ -7,6 +7,7 @@ const UNREGISTER_TOKEN = "Auth/UNREGISTER_TOKEN" as const;
 const UNREGISTER_TOKEN_SUCCESS = "Auth/UNREGISTER_TOKEN_SUCCESS" as const;
 const CHECK_TOKEN = "Auth/CHECK_TOKEN" as const;
 const CHECK_TOKEN_SUCCESS = "Auth/CHECK_TOKEN_SUCCESS" as const;
+const CLEAR = "Auth/CLEAR" as const;
 
 export function decodePayload(token: string): any {
   const payload = token.split(".")[1];
@@ -25,6 +26,11 @@ export function unregisterToken() {
 export function checkToken() {
   return {
     type: CHECK_TOKEN
+  };
+}
+export function authLogout() {
+  return {
+    type: CLEAR
   };
 }
 function registerToken_success({ token }: { token: string }) {
@@ -51,7 +57,8 @@ type ActionType =
   | ReturnType<typeof unregisterToken>
   | ReturnType<typeof unregisterToken_success>
   | ReturnType<typeof checkToken>
-  | ReturnType<typeof checkToken_success>;
+  | ReturnType<typeof checkToken_success>
+  | ReturnType<typeof authLogout>;
 
 function* registerTokenSaga(action: any) {
   const data = decodePayload(action.token);
@@ -76,10 +83,14 @@ function* checkTokenSaga() {
     })
   );
 }
+function logoutSaga() {
+  Cookies.remove("auth_token");
+}
 export function* AuthSaga() {
   yield takeEvery(REGISTER_TOKEN, registerTokenSaga);
   yield takeEvery(UNREGISTER_TOKEN, unregisterTokenSaga);
   yield takeEvery(CHECK_TOKEN, checkTokenSaga);
+  yield takeEvery(CLEAR, logoutSaga);
 }
 
 const token = Cookies.get("auth_token") || null;
@@ -106,6 +117,12 @@ export default function(state = initialState, action: ActionType): AuthType {
       };
     case CHECK_TOKEN_SUCCESS:
       return action.state;
+    case CLEAR:
+      return {
+        token: null,
+        autorized: false,
+        data: null
+      };
     default:
       return state;
   }

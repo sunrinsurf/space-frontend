@@ -7,6 +7,7 @@ import logoColorful from "../../assets/logo.svg";
 import useLogin from "../../lib/useLogin";
 import Favicon from "./Favicon";
 import getClassHandler from "../../lib/getClassHandler";
+import LogoutMenu from "./LogoutMenu";
 
 const cls = getClassHandler("Layout");
 export type LayoutProps = {
@@ -78,7 +79,11 @@ function Layout({
                   <Link to="/signup">Sign Up</Link>
                 </>
               ) : (
-                  <Link to="/info">My Page</Link>
+                  <>
+                    <Link to="/info">My Page</Link>
+                    <span> | </span>
+                    <LogoutMenu />
+                  </>
                 )}
             </div>
           )}
