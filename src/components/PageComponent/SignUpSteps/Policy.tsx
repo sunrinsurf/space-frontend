@@ -43,7 +43,7 @@ interface PolicyOpenerProps {
 }
 function PolicyOpener({ children, title, opened, onClick }: PolicyOpenerProps) {
   return (
-    <div style={{ width: '50%' }}>
+    <div className="Policy__Opener">
       <PolicyOpenerWrap role="button" className="Policy__OpenerWrap" style={{ cursor: 'pointer' }} onClick={onClick}>
         <Arrow strokeLen={5} style={{
           transform: (!opened && 'rotate(-90deg)' as any)
@@ -75,10 +75,10 @@ function PolicyStep({ toNext }: SignUpStepProps) {
       <PolicyOpener title="개인정보 보호방침" opened={opened[1]} onClick={() => { setToggle(1) }}>
         <Privacy />
       </PolicyOpener>
-      <Button style={{ marginTop: "2em", borderRadius: 26, width: 30 + "%" }} onClick={toNext}>
+      <Button style={{ marginTop: "2em", borderRadius: 26, minWidth: 30 + "%" }} onClick={toNext}>
         동의하고 다음으로
       </Button>
-    </PolicyBox>
+    </PolicyBox >
   );
 }
 

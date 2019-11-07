@@ -23,9 +23,6 @@
   object-fit: contain;
 }
 
-.MainInfo__BrandWrap > * {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-}
 .MainInfo__BrandWrap > h1 {
   font-size: 3em;
   margin-bottom: 0.3em;

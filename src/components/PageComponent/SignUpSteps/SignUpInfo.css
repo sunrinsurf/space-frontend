@@ -22,18 +22,18 @@ flex-wrap: wrap;
 }
 .SignUpInfo__left{
     margin:0px 80px;
-    min-width: 400px;
+    min-width: 510px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-direction: column;
 }
 .SignUpInfo__right{
     margin:0px 80px;
-    min-width: 400px;
+    min-width: 510px;
     justify-content: flex-start;
 }
 .SignUpInfo__Phone{
-    max-width: 80%;
+    min-width: 410px;
     display: flex;
     align-items: center;
 }
@@ -42,3 +42,21 @@ flex-wrap: wrap;
     color: #494949;
     margin-right: 1rem;
 }
+.Input__Column{
+    min-width: 410px;
+    transition: 0.8s;
+}
+.SignUpInfo__error{
+    height:24px;
+}
+@media (max-width: 600px) { 
+    .Input__Column{
+        min-width: 70%;
+    }
+    .SignUpInfo__left,.SignUpInfo__right{
+        min-width: 100%;
+    }
+    .SignUpInfo__error{
+        height: fit-content;
+    }
+ }

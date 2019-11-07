@@ -45,7 +45,7 @@ function SignUpInfoPhone() {
           <Flex>
             <div className="SignUpInfo__Column">
               <div className="SignUpInfo__title">전화번호</div>
-              <div className="SignUpInfo__Phone">
+              <div className="SignUpInfo__Phone Input__Column">
                 <Input
                   type="text"
                   value={phone}
