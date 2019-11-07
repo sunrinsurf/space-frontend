@@ -10,7 +10,9 @@ import { RootState } from "../../../store/reducer";
 import * as SignIn from '../../../store/SignIn';
 import useLogin from "../../../lib/useLogin";
 import Favicon from "../../Layout/Favicon";
+import getClassHandler from "../../../lib/getClassHandler";
 
+const cls = getClassHandler("SignInForm");
 function SignInForm() {
   const { remember, uid, password, success } = useSelector((state: RootState) => ({ success: state.SignIn.success, ...state.SignIn.form }));
   const history = useHistory();
@@ -34,31 +36,20 @@ function SignInForm() {
   }, [success, history, isLogin]);
 
   return (
-    <div className="SignInForm__wrap">
-      <div className="SignInForm__brand">
-        <Favicon width="200" />
+    <div className={cls("wrap")}>
+      <div className={cls("brand")}>
+        <Favicon className={cls("favicon")} />
         <h1>LOGIN</h1>
       </div>
-      <div className="SignInForm__remember">
+      <div className={cls("remember")}>
         <TextCheckLabel onClick={toggleRemember} checked={remember}>Remember Me</TextCheckLabel>
       </div>
-      <form onSubmit={onSubmit} className="SignInForm__form">
+      <form onSubmit={onSubmit} className={cls("form")}>
         <Input type="text" placeholder="ID" onChange={handleChange("uid")} value={uid} />
         <Input type="password" placeholder="PW" onChange={handleChange("password")} value={password} />
         <Button fullWidth>LOGIN</Button>
       </form>
-
-      <div className="SignInForm__social">
-        <div className="typo">
-          <hr />
-          <span>SNS로 시작하기</span>
-          <hr />
-        </div>
-        <div className="logins">
-
-        </div>
-      </div>
-      <div className="SignInForm__forget">
+      <div className={cls("forget")}>
         <Link to="/find">Forget password?</Link> /{" "}
         <Link to="/signup">Sign Up</Link>
       </div>

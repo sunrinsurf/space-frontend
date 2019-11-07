@@ -90,6 +90,20 @@ a {
   display: flex;
   align-items: center;
 }
-.Layout__brand > svg {
+.Layout__brand > .favicon {
   margin-right: 10px;
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.Layout__brand > .logo {
+  height: 30px;
+}
+
+@media (max-width: 640px) {
+  .Layout__brand > .favicon,
+  .Layout__brand > .logo {
+    height: 25px;
+  }
 }

@@ -6,6 +6,9 @@ import logo from "../../assets/logo-white.svg";
 import logoColorful from "../../assets/logo.svg";
 import useLogin from "../../lib/useLogin";
 import Favicon from "./Favicon";
+import getClassHandler from "../../lib/getClassHandler";
+
+const cls = getClassHandler("Layout");
 export type LayoutProps = {
   children?: React.ReactNode;
   noPadding?: boolean;
@@ -46,10 +49,10 @@ function Layout({
     };
   }, [navFixed]);
   return (
-    <div className="Layout__wrap">
+    <div className={cls("wrap")}>
       <header
         className={[
-          "Layout__header",
+          cls("header"),
           navFixed && "navFixed",
           transparent && "transparent",
           colorfulLogo && "colorful"
@@ -57,17 +60,17 @@ function Layout({
           .filter(Boolean)
           .join(" ")}
       >
-        <nav className="Layout__nav">
-          <div className="Layout__brand" role="button" onClick={goToMain}>
-            <Favicon white={!colorfulLogo} height="40" />
+        <nav className={cls("nav")}>
+          <div className={cls("brand")} role="button" onClick={goToMain}>
+            <Favicon white={!colorfulLogo} className="favicon" />
             <img
               src={colorfulLogo ? logoColorful : logo}
               alt="logo"
-              height="30"
+              className="logo"
             />
           </div>
           {!hideMenu && (
-            <div className="Layout__navContents">
+            <div className={cls("navContents")}>
               {!logined ? (
                 <>
                   <Link to="/signin">Sign In</Link>
@@ -75,21 +78,21 @@ function Layout({
                   <Link to="/signup">Sign Up</Link>
                 </>
               ) : (
-                <Link to="/info">My Page</Link>
-              )}
+                  <Link to="/info">My Page</Link>
+                )}
             </div>
           )}
         </nav>
       </header>
       <main
-        className={["Layout__contents", noPadding && "noPadding"]
+        className={[cls("contents"), noPadding && "noPadding"]
           .filter(Boolean)
           .join(" ")}
       >
         {children}
       </main>
       {!noFooter && (
-        <footer className="Layout__footer">
+        <footer className={cls("footer")}>
           Team Surf @ 2019 | <Link to="/policy">이용약관</Link> |{" "}
           <Link to="/privacy">개인정보취급방침</Link>
         </footer>
