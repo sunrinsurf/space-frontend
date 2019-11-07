@@ -14,7 +14,10 @@ import "./SelectCategory.css";
 const CategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom:100px;
+  margin-bottom:50px;
+  @media(max-width:768px){
+    margin-bottom:0px;
+  }
 `;
 
 function SelectCategory({ toNext }: SignUpStepProps) {
@@ -39,7 +42,7 @@ function SelectCategory({ toNext }: SignUpStepProps) {
   return (
     <div className="SelectCategory">
       {sign_error && <ErrorComponent>{sign_error}</ErrorComponent>}
-      <h1>흥미가 있는 카테고리를 선택해 주세요.</h1>
+      <h1 className="SelectCategory__Title">흥미가 있는 카테고리를 선택해 주세요.</h1>
       <CategoryList>
         {categorys.map((data, i) => (
           <Category
