@@ -1,18 +1,16 @@
 import React from "react";
 import "./SignLayout.css";
-import logo from '../../assets/logo.svg'
-
+import Page from "./index"
 interface SignLayoutProps {
   children: React.ReactNode;
 }
 function SignLayout({ children }: SignLayoutProps) {
   return (
-    <div className="SignLayout__wrap">
-      <header className="SignLayout__header">
-        <img src={logo} alt="logo" height="30" />
-      </header>
-      <main className="SignLayout__main">{children}</main>
-    </div>
+    <Page navFixed colorfulLogo noFooter noPadding hideMenu noScrolling>
+      <div className="SignLayout__wrap">
+        <main className="SignLayout__main">{children}</main>
+      </div>
+    </Page>
   );
 }
 

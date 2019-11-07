@@ -48,7 +48,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
     toNext();
   }, [form, token, toNext]);
   return (
-    <div>
+    <div style={{ marginTop: "74px" }}>
       <form className="SignUpInfo__wrap">
         <Favicon width="100" />
         <h1 style={{ fontSize: 36 + "px" }}>회원정보 입력</h1>

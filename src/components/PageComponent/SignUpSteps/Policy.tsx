@@ -14,6 +14,7 @@ const PolicyBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top:74px;
 `;
 const PolicyContentsBox = styled.div`
   overflow-y: auto;

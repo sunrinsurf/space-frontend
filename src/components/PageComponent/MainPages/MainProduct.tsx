@@ -25,7 +25,7 @@ function MainProduct() {
           />
           <MainShopCard
             title="날짜/시간대 협의 후 결정"
-            body="불타오르네"
+            body="별도 문의"
             price="제한 없음"
           />
         </div>
