@@ -13,6 +13,7 @@ const INVITE_CHAT_FAIL = "Chat/INVITE_CHAT_FAIL" as const;
 const CLEAN = "Chat/CLEAN" as const;
 
 export function CleanChat() {
+  console.log("cleanchat");
   return {
     type: CLEAN
   };

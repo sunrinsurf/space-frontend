@@ -51,7 +51,9 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
     dispatch(JoinChat(id));
   }, [dispatch, id]);
   React.useEffect(() => {
+
     if (!chatJoined) return;
+    console.log(chatJoined);
     dispatch(SocketInit());
     dispatch(SocketConnect(id));
 
