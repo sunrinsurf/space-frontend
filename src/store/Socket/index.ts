@@ -15,7 +15,7 @@ const CHAT_DATA = "Socket/CHAT_DATA" as const;
 const BEFORE_CHAT_DATA = "Socket/BEFORE_CHAT_DATA" as const;
 const INIT = "Socket/INIT" as const;
 
-let client: SocketIOClient.Socket | undefined;
+let client: SocketIOClient.Socket | undefined | null;
 
 // Action Dispatch 함수
 export function SocketConnect(id: string) {
@@ -145,6 +145,7 @@ function* ConnectSaga({ payload }: { payload: string }) {
 }
 function* DisconnectSaga() {
   client && client.disconnect();
+  client = null;
   yield put(SocketDisconnectSuccess());
 }
 function* ErrorSaga() {

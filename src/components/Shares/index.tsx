@@ -13,7 +13,7 @@ function Shares() {
   if (error) return <ErrorComponent>{error}</ErrorComponent>;
   if (!product) return <div>로드 중...</div>;
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: 'center' }}>
       {product.map((data: any, i: any) => (
         <ShareCard
           key={i}

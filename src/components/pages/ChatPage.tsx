@@ -9,7 +9,9 @@ function ChatPage(props: RouteComponentProps<{ id: string }>) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(CleanChat());
+    return () => {
+      dispatch(CleanChat());
+    }
   }, [dispatch, props.match.params.id]);
   return (
     <Page title="채팅" noPadding>
