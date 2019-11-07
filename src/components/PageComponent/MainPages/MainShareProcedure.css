@@ -39,6 +39,7 @@
 
 .MainShareProcedure__arrow {
     margin: 0px 3vw;
+    transform: rotate(-90deg);
 }
 .MainShareProcedure__Images_Element {
     display: flex;
@@ -47,5 +48,8 @@
 @media (max-width: 500px) {
     .MainShareProcedure__Images_Element {
         flex-direction: column;
+    }
+    .MainShareProcedure__arrow{
+        transform: rotate(0deg);
     }
 }

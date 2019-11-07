@@ -1,5 +1,6 @@
 import React from "react";
 import "./MainShareProcedure.css";
+import Arrow from "../../Design/Arrow"
 
 function MainShareProcedure() {
     return (
@@ -22,7 +23,7 @@ function MainShareProcedure() {
 function Step({ start }: { start?: boolean }) {
     return (
         <div className="MainShareProcedure__Images_Element">
-            {!start && <span role="img" aria-label="rocket" className="MainShareProcedure__arrow" >🚀</span>}
+            {!start && <Arrow strokeLen={10} className="MainShareProcedure__arrow"></Arrow>}
             <div className="MainShareProcedure__Images radius"></div>
         </div>
     )
