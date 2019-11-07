@@ -14,7 +14,7 @@ function ChatPage(props: RouteComponentProps<{ id: string }>) {
     }
   }, [dispatch, props.match.params.id]);
   return (
-    <Page title="채팅" noPadding>
+    <Page title="채팅" noFooter noPadding>
       <ChatPageComponent id={props.match.params.id} />
     </Page>
   );
