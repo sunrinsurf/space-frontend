@@ -18,6 +18,7 @@ export type LayoutProps = {
   noFooter?: boolean;
   hideMenu?: boolean;
   noScrolling?: boolean;
+  whiteColor?: boolean;
 };
 
 function Layout({
@@ -27,7 +28,8 @@ function Layout({
   colorfulLogo,
   noFooter,
   hideMenu,
-  noScrolling
+  noScrolling,
+  whiteColor
 }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
@@ -61,7 +63,8 @@ function Layout({
           cls("header"),
           navFixed && "navFixed",
           transparent && "transparent",
-          colorfulLogo && "colorful"
+          colorfulLogo && "colorful",
+          whiteColor && "whiteColor"
         ]
           .filter(Boolean)
           .join(" ")}

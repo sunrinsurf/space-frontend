@@ -58,7 +58,7 @@ p {
   background: white;
 }
 .Layout__header.transparent {
-  background: white;
+  background: transparent;
 }
 .Layout__navContents {
   flex: 1;
@@ -100,7 +100,9 @@ a {
 .Layout__brand > .logo {
   height: 30px;
 }
-
+.whiteColor{
+  background-color: white !important;
+}
 @media (max-width: 640px) {
   .Layout__brand > .favicon,
   .Layout__brand > .logo {

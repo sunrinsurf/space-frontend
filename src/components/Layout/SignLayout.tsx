@@ -6,7 +6,7 @@ interface SignLayoutProps {
 }
 function SignLayout({ children }: SignLayoutProps) {
   return (
-    <Page navFixed colorfulLogo noFooter noPadding hideMenu noScrolling>
+    <Page navFixed colorfulLogo noFooter noPadding hideMenu noScrolling whiteColor>
       <div className="SignLayout__wrap">
         <main className="SignLayout__main">{children}</main>
       </div>
