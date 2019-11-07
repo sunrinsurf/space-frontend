@@ -54,7 +54,7 @@ function SignUpInfoPhone() {
                   disabled={success}
                 />
                 <Button
-                  style={{ height: "fit-content", borderRadius: 26 }}
+                  style={{ height: "fit-content", borderRadius: 26, marginLeft: 10 + "px" }}
                   onClick={SignUpInfoCert}
                   disabled={success}
                 >
