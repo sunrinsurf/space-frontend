@@ -58,7 +58,7 @@ p {
   background: white;
 }
 .Layout__header.transparent {
-  background: transparent;
+  background: white;
 }
 .Layout__navContents {
   flex: 1;

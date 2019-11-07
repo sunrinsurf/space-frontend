@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Category = styled.div<{ select?: boolean }>`
   padding: 1em;
-  border-radius: 10px;
+  border-radius: 30px;
   width: fit-content;
   margin: 10px;
   transition: background 0.5s, color 0.5s;
@@ -15,7 +15,7 @@ const Category = styled.div<{ select?: boolean }>`
       `;
     }
     return css`
-      background: #b4b4b4;
+      background: #ddd;
     `;
   }}
 `;

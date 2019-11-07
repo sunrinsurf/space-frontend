@@ -8,10 +8,13 @@ import Button from "../../Form/Button";
 import ErrorComponent from "../../ErrorComponent";
 import Category from "../../Form/Category";
 
+import "./SelectCategory.css";
+
 
 const CategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom:100px;
 `;
 
 function SelectCategory({ toNext }: SignUpStepProps) {
@@ -34,7 +37,7 @@ function SelectCategory({ toNext }: SignUpStepProps) {
     if (success) toNext();
   }, [success, toNext])
   return (
-    <div>
+    <div className="SelectCategory">
       {sign_error && <ErrorComponent>{sign_error}</ErrorComponent>}
       <h1>흥미가 있는 카테고리를 선택해 주세요.</h1>
       <CategoryList>
@@ -49,9 +52,11 @@ function SelectCategory({ toNext }: SignUpStepProps) {
           </Category>
         ))}
       </CategoryList>
-      <Button fullWidth onClick={completeSignUp}>
-        회원가입 완료하기
+      <div className="SelectCategory__Button">
+        <Button fullWidth onClick={completeSignUp}>
+          회원가입 완료하기
       </Button>
+      </div>
     </div>
   );
 }
