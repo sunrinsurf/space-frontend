@@ -21,3 +21,9 @@
     flex-wrap: wrap;
     margin: 0 auto;
 }
+
+@media(max-width:1000px){
+    .MainProduct__List{
+        justify-content: center;
+    }
+}
