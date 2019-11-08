@@ -95,7 +95,7 @@ a {
   width: auto;
   display: block;
 }
-.Layout__header.bgctransparent{
+.Layout__header.bgctransparent {
   background-color: transparent !important;
 }
 .Layout__brand > .logo {
@@ -105,7 +105,9 @@ a {
   background-color: white !important;
 }
 .Layout__header.whiteColor .Layout__navContents,
-.Layout__header.whiteColor .Layout__navContents a {
+.Layout__header.whiteColor .Layout__navContents a,
+.Layout__header.bgctransparent .Layout__navContents,
+.Layout__header.bgctransparent .Layout__navContents a {
   color: black;
 }
 @media (max-width: 640px) {
