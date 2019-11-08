@@ -16,6 +16,7 @@ function ChatForm() {
     },
     [dispatch, chat]
   );
+
   return (
     <form
       style={{ flex: 0, display: "flex", alignItems: "center" }}
@@ -26,8 +27,17 @@ function ChatForm() {
         onChange={e => {
           setChat(e.target.value);
         }}
+        style={{ marginLeft: "1em" }}
       />
-      <Button style={{ padding: ".25em", height: 50, boxSizing: "border-box" }}>
+      <Button
+        style={{
+          padding: ".25em",
+          height: 50,
+          width: "7em",
+          margin: "1em",
+          boxSizing: "border-box"
+        }}
+      >
         보내기
       </Button>
     </form>
