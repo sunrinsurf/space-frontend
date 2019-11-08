@@ -16,6 +16,7 @@ function ChatForm() {
     },
     [dispatch, chat]
   );
+
   return (
     <form
       style={{ flex: 0, display: "flex", alignItems: "center" }}

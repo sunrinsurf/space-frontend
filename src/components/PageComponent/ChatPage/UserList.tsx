@@ -16,6 +16,7 @@ const Profile = styled.div`
   border-radius: 35px;
   background: gray;
 `;
+
 function ChatUser({ nickname, isOwner, online }: ChatUserProps) {
   return (
     <div
