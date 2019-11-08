@@ -20,6 +20,10 @@ function IndexPage() {
   )
   const props: any = {};
   if (!user) props.navFixed = true;
+  else {
+    props.whiteColor = true;
+    props.colorfulLogo = true;
+  }
   return (
     <Page noPadding {...props}>
       {!user ? beforeLogin : afterLogin}

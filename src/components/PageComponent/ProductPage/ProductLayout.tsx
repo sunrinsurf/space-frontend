@@ -49,9 +49,6 @@ function ProductLayout({ id }: ProductLayoutProps) {
   return (
     <div className="ProductLayout__wrap">
       <div className="ProductLayout__Left">
-        <div className="ProductLayout__Before">
-          <div>이전으로</div>
-        </div>
         <ArticlePage
           category={category}
           by={owner.nickname}

@@ -4,7 +4,7 @@ import Page from '../Page'
 
 function PolicyPage() {
     return (
-        <Page title="이용약관">
+        <Page title="이용약관" whiteColor colorfulLogo>
             <div style={{
                 padding: '2em',
                 maxWidth: 1024,

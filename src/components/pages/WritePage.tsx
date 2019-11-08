@@ -5,7 +5,7 @@ import RedirectIfNotLogined from '../Page/RedirectIfNotLogined'
 
 function WritePage() {
     return (
-        <Page>
+        <Page colorfulLogo whiteColor title="상품 올리기">
             <RedirectIfNotLogined />
             <WritePageForm />
         </Page>

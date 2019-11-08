@@ -5,7 +5,7 @@ import SignInForm from "../PageComponent/SignInForm";
 
 function SignInPage() {
   return (
-    <Page title="로그인" navFixed colorfulLogo noFooter noPadding hideMenu noScrolling>
+    <Page title="로그인" whiteColor colorfulLogo noFooter noPadding hideMenu noScrolling>
       <SignInForm />
     </Page>
   );

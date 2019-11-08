@@ -10,7 +10,7 @@ function NotFoundPage() {
     history.push("/");
   }
   return (
-    <Page title="404" central>
+    <Page title="404" central whiteColor colorfulLogo>
       <div style={{ padding: "10vh 0", boxSizing: "border-box" }}>
         <h1>Oops!</h1>
         <p>찾으시는 페이지가 없는 것 같네요.</p>

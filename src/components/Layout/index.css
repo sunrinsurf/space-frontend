@@ -100,8 +100,12 @@ a {
 .Layout__brand > .logo {
   height: 30px;
 }
-.whiteColor{
+.Layout__header.whiteColor {
   background-color: white !important;
+}
+.Layout__header.whiteColor .Layout__navContents,
+.Layout__header.whiteColor .Layout__navContents a {
+  color: black;
 }
 @media (max-width: 640px) {
   .Layout__brand > .favicon,

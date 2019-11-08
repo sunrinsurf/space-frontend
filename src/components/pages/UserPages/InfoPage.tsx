@@ -19,7 +19,7 @@ function InfoPage() {
   if (!user) return <Redirect to="/signin" />;
 
   return (
-    <Page title={data ? `${data.nickname}님의 정보` : ""}>
+    <Page title={data ? `${data.nickname}님의 정보` : ""} whiteColor colorfulLogo>
       {!data ? null : <InfoPageMain {...data} />}
     </Page>
   );
