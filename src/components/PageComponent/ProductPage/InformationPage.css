@@ -32,3 +32,18 @@
   background-size:contain;
   background-position: center;
 }
+.ProductLayout__Rectangle{
+  transition: 1s;
+}
+@media(max-width:650px){
+  .Information__container{
+    min-width: 200px;
+    min-height:200px;
+  }
+  .ProductLayout__Left{
+    height:40vh;
+  }
+  .ProductLayout__Rectangle{
+    display:none;
+  }
+}
