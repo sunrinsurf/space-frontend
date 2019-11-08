@@ -15,7 +15,9 @@ const Wrap = styled.div`
 function SignUpComplete({ toNext }: SignUpStepProps) {
     return (
         <Wrap>
-            <Favicon></Favicon>
+            <div style={{ width: "250px" }}>
+                <Favicon></Favicon>
+            </div>
             <h1>완료!</h1>
             <p>회원가입을 환영합니다.</p>
             <div style={{ maxWidth: "700px" }}>

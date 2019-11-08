@@ -150,7 +150,7 @@ function WritePageForm() {
             />
           </Section>
           <Section>
-            <h1>사용 날짜/시간대</h1>
+            <h1>공유 만료 날짜</h1>
             <WritePageFormSelect
               dispatcher={shareTimeSelect}
               objKey="timeToUse"
