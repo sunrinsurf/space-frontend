@@ -25,3 +25,6 @@
 .ArticlePage__wrap {
   width: 100%;
 }
+.ArticlePage__Text {
+  word-break: break-all;
+}
