@@ -50,7 +50,7 @@
 
 @media(max-width:1000px){
     .MainShareProcedure__Image{
-        width: 380px;
+        max-width: 300px;
     }
     .MainShareProcedure__Images_Element{
         flex-direction: column;
