@@ -2,8 +2,9 @@
   margin-top: 1em;
   color: gray;
 }
-.ArticlePage__title {
-  margin: 0;
+.ArticlePage__wrap > *{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .ArticlePage__User {
   margin-bottom: 1em;
@@ -22,9 +23,29 @@
   background: gray;
   margin: 0 1em;
 }
-.ArticlePage__wrap {
-  width: 100%;
+.ArticlePage__profile{
+  width: 24px;
+  height:24px;
+  margin-right: 5px;
+  background-image: url("../../../assets/favicon.svg");
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  
 }
 .ArticlePage__Text {
+  max-width: 318px;
   word-break: break-all;
+}
+.ArticlePage__Nickname{
+  display:flex;
+}
+.ArticlePage__Box{
+  display:flex;
+}
+.ArticlePage__Box > *{
+  margin-right: 10px;
+  padding: 10px;
+  box-shadow: 1px 1px 0.2px #ddd;
+  border-radius: 10px;
 }

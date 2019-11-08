@@ -19,6 +19,7 @@ export type LayoutProps = {
   hideMenu?: boolean;
   noScrolling?: boolean;
   whiteColor?: boolean;
+  bgctransparent?: boolean; // 배경을 투명하게 만들어줌
 };
 
 function Layout({
@@ -29,7 +30,8 @@ function Layout({
   noFooter,
   hideMenu,
   noScrolling,
-  whiteColor
+  whiteColor,
+  bgctransparent
 }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
@@ -64,7 +66,8 @@ function Layout({
           navFixed && "navFixed",
           transparent && "transparent",
           colorfulLogo && "colorful",
-          whiteColor && "whiteColor"
+          whiteColor && "whiteColor",
+          bgctransparent && "bgctransparent"
         ]
           .filter(Boolean)
           .join(" ")}

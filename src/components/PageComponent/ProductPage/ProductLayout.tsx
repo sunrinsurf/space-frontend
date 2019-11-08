@@ -48,16 +48,18 @@ function ProductLayout({ id }: ProductLayoutProps) {
   } = clientData || data;
   return (
     <div className="ProductLayout__wrap">
+      <div className="ProductLayout__Rectangle">
+
+      </div>
       <div className="ProductLayout__Left">
+        <InformationPage />
+      </div>
+      <div className="ProductLayout__Right">
         <ArticlePage
           category={category}
           by={owner.nickname}
           title={title}
           contents={contents}
-        />
-      </div>
-      <div className="ProductLayout__Right">
-        <InformationPage
           timeToUse={timeToUse}
           timeToUseDate={timeToUseDate}
           royalty={royalty}
