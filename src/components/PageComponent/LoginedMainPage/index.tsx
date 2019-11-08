@@ -18,7 +18,7 @@ function LoginedMainPage() {
         <div className={getName("wrap")}>
             <LoginedMainPageSearch />
             <section>
-                <h1>진행 중인 공유</h1>
+                <h1>최근 공유된 상품</h1>
                 <Shares />
             </section>
             <section>
