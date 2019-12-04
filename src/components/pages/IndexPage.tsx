@@ -5,19 +5,16 @@ import MainProduct from "../PageComponent/MainPages/MainProduct";
 import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure";
 import useLogin from "../../lib/useLogin";
 import LoginedMainPage from "../PageComponent/LoginedMainPage";
+import MainFullPage from "./MainFullpage";
 
 function IndexPage() {
   const user = useLogin();
   const beforeLogin = (
     <>
-      <MainInfo />
-      <MainProduct />
-      <MainShareProcedure />
+      <MainFullPage />
     </>
   );
-  const afterLogin = (
-    <LoginedMainPage />
-  )
+  const afterLogin = <LoginedMainPage />;
   const props: any = {};
   if (!user) props.navFixed = true;
   else {
