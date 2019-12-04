@@ -35,7 +35,7 @@ function Layout({
 }: LayoutProps) {
   const history = useHistory();
   const logined = useLogin();
-  const [transparent, setTransparent] = useState(navFixed || false);
+  const [transparent, setTransparent] = useState(noScrolling ? false : navFixed || false);
 
   function goToMain() {
     history.push("/");

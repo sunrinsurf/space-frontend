@@ -22,7 +22,7 @@ function IndexPage() {
     props.colorfulLogo = true;
   }
   return (
-    <Page noPadding {...props}>
+    <Page noPadding noScrolling {...props}>
       {!user ? beforeLogin : afterLogin}
     </Page>
   );
