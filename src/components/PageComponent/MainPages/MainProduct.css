@@ -6,27 +6,20 @@
 }
 
 .MainProduct__Info {
-    width: 70vw;
-    font-size: 36px;
-    font-weight: 900;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
+    width: 80vw;
 }
 
 .MainProduct__Title {
     font-size: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .MainProduct__List {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    margin: 0px auto 0px auto;
-
+    margin: 0 auto;
 }
 
 @media(max-width:1000px){
