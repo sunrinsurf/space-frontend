@@ -86,7 +86,7 @@ function ArticlePage({ category, title, by, contents, royalty,
         <div>{royaltyText}</div>
         <div>{person}인 사용 가능</div>
       </div>
-      <Button onClick={onClick} style={{ marginTop: "20px" }}>{JoinText}</Button>
+      <Button radius="10px" background="#1183fa" onClick={onClick} style={{ marginTop: "20px", paddingLeft: 50, paddingRight: 50 }}>{JoinText}</Button>
     </div>
   );
 }

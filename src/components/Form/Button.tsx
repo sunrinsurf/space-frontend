@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-type ButtonProps = { fullWidth?: Boolean; background?: string | false };
+type ButtonProps = { fullWidth?: Boolean; background?: string | false, radius?: string };
 const Button = styled.button<ButtonProps>`
   display: block;
   font-size: 1rem;
@@ -8,11 +8,11 @@ const Button = styled.button<ButtonProps>`
   padding: 0.7em 1em;
   border: 0;
   color: white;
-  border-radius: 5px;
   box-shadow: 2px 2px 3px rgba(41, 18, 66, 0.3);
   transition: background 1s;
   width: fit-content;
   word-break: keep-all;
+  ${props => props.radius ? css`border-radius: ${props.radius};` : css`border-radius: 5px;`}
   ${props => css`
     width: ${props.fullWidth && "100%"};
   `}
@@ -34,13 +34,13 @@ const Button = styled.button<ButtonProps>`
   }}
   &:focus {
     ${props => {
-      if (props.background === false) {
-        return css``;
-      }
-      return css`
+    if (props.background === false) {
+      return css``;
+    }
+    return css`
         background: #3f1e63;
       `;
-    }}
+  }}
     outline: 0;
   }
 `;
