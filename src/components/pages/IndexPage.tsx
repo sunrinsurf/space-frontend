@@ -5,13 +5,14 @@ import MainProduct from "../PageComponent/MainPages/MainProduct";
 import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure";
 import useLogin from "../../lib/useLogin";
 import LoginedMainPage from "../PageComponent/LoginedMainPage";
-import MainFullPage from "./MainFullpage";
 
 function IndexPage() {
   const user = useLogin();
   const beforeLogin = (
     <>
-      <MainFullPage />
+      <MainInfo />
+      <MainProduct />
+      <MainShareProcedure />
     </>
   );
   const afterLogin = <LoginedMainPage />;
