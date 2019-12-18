@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.6.0",
-    "@fullpage/react-fullpage": "^0.1.17",
     "@loadable/babel-plugin": "^5.10.3",
     "@loadable/component": "^5.10.3",
     "@loadable/server": "^5.10.3",
@@ -78,6 +77,7 @@
     "react-datepicker": "^2.9.6",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.10.2",
+    "react-fullpage": "^0.1.19",
     "react-helmet": "^5.2.1",
     "react-hot-loader": "^4.12.15",
     "react-motion": "^0.5.2",
