@@ -4,27 +4,13 @@ import MainShopCard from "./MainShopCard";
 import styled from "styled-components";
 
 const SmallBox = styled.div`
-  min-width: 300px;
-  height:300px;
+  max-width: 280px;
+  min-height:280px;
   object-fit: cover;
   background-color:gray;
   border-radius:10px;
+  margin : 0 auto;
 
-`
-const MiddleBox = styled.div`
-  min-width: 600px;
-  height:300px;
-  object-fit: cover;
-  background-color:gray;
-  border-radius:10px;
-
-`
-const BigBox = styled.div`
-  min-width:calc(1200px + 60px);
-  height:300px;
-  object-fit: cover;
-  background-color:gray;
-  border-radius:10px;
 `
 const BoxWrapper = styled.div`
   width:100%;
@@ -32,10 +18,13 @@ const BoxWrapper = styled.div`
 `
 
 const Box = styled.div`
-  margin:0px 15px;
+  margin:0px 30px;
 `
 const ProductTitle = styled.div`
-  font-size: 14px;
+margin:0 auto;
+  word-break: keep-all;
+  max-width:80%;
+  font-size: 20px;
   font-weight: 900;
   font-stretch: normal;
   font-style: normal;
@@ -47,7 +36,7 @@ const ProductTitle = styled.div`
 `
 
 const Inquiry = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -59,12 +48,12 @@ const Inquiry = styled.div`
 `
 
 const Personnel = styled.div`
-  width: 90px;
+  width: 100px;
   border-radius: 8px;
   background-color: #ff388a;
   text-align:center;
   margin: 0px auto 20px auto;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -95,15 +84,13 @@ function MainProduct() {
               <Personnel>최대 6인</Personnel>
             </Box>
             <Box>
-              <MiddleBox></MiddleBox>
+              <SmallBox></SmallBox>
               <ProductTitle>용산 메이커 스페이스 가족을 모집합니다!</ProductTitle>
               <Inquiry>별도문의</Inquiry>
               <Personnel>최대 6인</Personnel>
             </Box>
-          </div>
-          <div className="MainProduct__List">
             <Box>
-              <BigBox></BigBox>
+              <SmallBox></SmallBox>
               <ProductTitle>용산 메이커 스페이스 가족을 모집합니다!</ProductTitle>
               <Inquiry>별도문의</Inquiry>
               <Personnel>최대 6인</Personnel>

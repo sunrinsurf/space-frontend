@@ -22,8 +22,8 @@ const Footer = styled.div`
   justify-content: center;
 `;
 const StepCircle = styled.div<{ current?: boolean; prev?: boolean }>`
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   border-radius: 10px;
   margin: 0 0.5em;
   transition: background 0.5s;
@@ -31,12 +31,12 @@ const StepCircle = styled.div<{ current?: boolean; prev?: boolean }>`
   ${props => {
     if (props.current) {
       return css`
-        background: #6b32a8;
+        background: #1183fa;
       `;
     }
     if (props.prev) {
       return css`
-        background: #caabeb;
+        background: #1183fa;
         cursor: pointer;
       `;
     }
