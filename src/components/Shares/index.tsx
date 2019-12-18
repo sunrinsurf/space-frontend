@@ -11,7 +11,6 @@ function Shares() {
     return req.data.product;
   });
   if (error) return <ErrorComponent>{error}</ErrorComponent>;
-  if (!product) return <div>로드 중...</div>;
   return <ShareList product={product} />;
 }
 

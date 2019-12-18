@@ -2,6 +2,7 @@ import React from "react";
 import getClassHandler from "../../lib/getClassHandler";
 import ShareCard from "./ShareCard";
 import "./index.css";
+import ShareCardSkeleton from "./ShareCardSkeleton";
 
 const cls = getClassHandler("Shares");
 
@@ -9,10 +10,9 @@ interface ShareListProps {
   product?: any[];
 }
 function ShareList({ product }: ShareListProps) {
-  if (!product) return null;
   return (
     <div className={cls("list")}>
-      {product.map((data: any, i: any) => (
+      {product ? product.map((data: any, i: any) => (
         <ShareCard
           key={i}
           title={data.title}
@@ -20,7 +20,9 @@ function ShareList({ product }: ShareListProps) {
           image={data.images && data.images[0]}
           id={data._id}
         />
-      ))}
+      )) :
+        new Array(8).fill(<ShareCardSkeleton />)
+      }
     </div>
   );
 }
