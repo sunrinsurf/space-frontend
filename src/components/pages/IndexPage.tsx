@@ -15,7 +15,9 @@ function IndexPage() {
       <MainShareProcedure />
     </>
   );
-  const afterLogin = <LoginedMainPage />;
+  const afterLogin = (
+    <LoginedMainPage />
+  )
   const props: any = {};
   if (!user) props.navFixed = true;
   else {
@@ -23,7 +25,7 @@ function IndexPage() {
     props.colorfulLogo = true;
   }
   return (
-    <Page noPadding noScrolling {...props}>
+    <Page noPadding {...props}>
       {!user ? beforeLogin : afterLogin}
     </Page>
   );

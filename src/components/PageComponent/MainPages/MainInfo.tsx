@@ -16,7 +16,7 @@ const Flex = styled.div`
   align-items: center;
 `;
 
-function MainInfo(props: any) {
+function MainInfo() {
   return (
     <div className="MainInfo__wrap">
       <div className="MainInfo__Info">
@@ -34,7 +34,7 @@ function MainInfo(props: any) {
           </div>
         </Flex>
       </div>
-      <Guide props={props} />
+      <Guide />
     </div>
   );
 }
@@ -52,7 +52,7 @@ function GetStartButton() {
     </div>
   );
 }
-function Guide(props: any) {
+function Guide() {
   function goTo() {
     const product =
       window.document &&
@@ -67,11 +67,7 @@ function Guide(props: any) {
   }
   return (
     <div className="MainInfo__Guide">
-      <Arrow
-        role="button"
-        onClick={props.downFunction}
-        style={{ cursor: "pointer" }}
-      />
+      <Arrow role="button" onClick={goTo} style={{ cursor: 'pointer' }}/>
     </div>
   );
 }
