@@ -44,7 +44,8 @@ function ProductLayout({ id }: ProductLayoutProps) {
     royalty,
     royaltyPrice,
     participant,
-    person
+    person,
+    images
   } = clientData || data;
   return (
     <div className="ProductLayout__wrap">
@@ -52,7 +53,7 @@ function ProductLayout({ id }: ProductLayoutProps) {
 
       </div>
       <div className="ProductLayout__Left">
-        <InformationPage />
+        <InformationPage image={images && images[0] && images[0]} />
       </div>
       <div className="ProductLayout__Right">
         <ArticlePage

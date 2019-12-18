@@ -9,7 +9,7 @@ import {
   handleFromSelector
 } from "../../lib/getFormSelector";
 import loadImageBase64 from "../../lib/store/Share/loadImageBase64";
-import { PostProduct } from "../../lib/api/PostProduct";
+import { PostProduct, PostProductImage } from "../../lib/api/PostProduct";
 
 const CHANGE_ACTION = "Share/CHANGE_ACTION" as const;
 const CATEGORY_HANDLE = "Share/CATEGORY_HANDLE" as const;
@@ -21,6 +21,7 @@ const ADD_IMAGE_DONE = "Share/ADD_IMAGE_DONE" as const;
 const REMOVE_IMAGE = "Share/REMOVE_IMAGE" as const;
 const SUBMIT = "Share/SUBMIT" as const;
 const SUBMIT_SUCCESS = "Share/SUBMIT_SUCCESS" as const;
+const SUBMIT_IMAGE = "Share/SUBMIT_IMAGE" as const;
 const SUBMIT_FAIL = "Share/SUBMIT_FAIL" as const;
 
 interface ShareChangeInterface {
@@ -99,11 +100,15 @@ type ActionType =
   | ReturnType<typeof shareSubmitFail>;
 
 function* AddImageSaga({ payload }: { payload: File[] }) {
-  let previews = [];
-  for (const file of payload) {
-    previews.push(yield call(loadImageBase64, file));
+  try {
+    let previews = [];
+    for (const file of payload) {
+      previews.push(yield call(loadImageBase64, file));
+    }
+    yield put(shareAddImageDone({ previews, images: payload }));
+  } catch (e) {
+    window && window.alert(e.message);
   }
-  yield put(shareAddImageDone({ previews, images: payload }));
 }
 function* SubmitSaga() {
   try {
@@ -127,24 +132,28 @@ function* SubmitSaga() {
     const {
       title,
       contents,
-      previews,
       person,
       timeToUse,
       timeToUseDate,
       royaltyPrice,
       royalty,
-      category
+      category,
+      images
     } = share;
     if (category === null) {
       throw new Error("카테고리를 선택해야 합니다.");
     }
+    yield put({
+      type: SUBMIT_IMAGE
+    });
+    const uploadImage = yield call(PostProductImage as any, images, token);
     const req = yield call(
       PostProduct as any,
       {
         title,
         contents,
-        images: previews.map(data => ({ data, type: "image/png" })),
         person,
+        images: uploadImage,
         timeToUse: timeToUse.selected,
         timeToUseDate:
           timeToUse.selected === "selectTime" ? timeToUseDate : undefined,
@@ -168,6 +177,7 @@ export function* ShareSaga() {
 
 const initialState = {
   progress: false,
+  imageProgress: false,
   success: false,
   productId: null as number | null,
   error: null as string | null,
@@ -245,6 +255,11 @@ export default function Share(
         ...state,
         progress: false,
         error: (action as any).payload.message
+      };
+    case SUBMIT_IMAGE:
+      return {
+        ...state,
+        imageProgress: true
       };
     default:
       return state;

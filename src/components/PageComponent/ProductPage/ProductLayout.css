@@ -33,6 +33,7 @@
   opacity: 0.15;
   border: solid 1px #979797;
   background-color: #1183fa;
+  z-index: -1;
 }
 
 @media (max-width: 600px) {

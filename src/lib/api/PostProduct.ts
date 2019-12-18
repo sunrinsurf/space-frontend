@@ -26,3 +26,20 @@ export function PostProduct(data: PostProductInterface, token: string) {
     })
   );
 }
+
+export function PostProductImage(files: File[], token: string) {
+  return handleError(async () => {
+    const formData = new FormData();
+    files.forEach((data, i) => {
+      formData.append(`${i}`, data);
+    });
+
+    const data = await client.post("/shop/image", formData, {
+      headers: {
+        "x-access-token": token
+      }
+    });
+
+    return data.data;
+  });
+}

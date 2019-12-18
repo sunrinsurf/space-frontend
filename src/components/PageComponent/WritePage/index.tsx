@@ -54,7 +54,8 @@ function WritePageForm() {
     error,
     success,
     progress,
-    productId
+    productId,
+    imageProgress
   } = useSelector((state: RootState) => state.Forms.Share);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -121,7 +122,6 @@ function WritePageForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      {error && <ErrorComponent>{error}</ErrorComponent>}
       <Flex>
         <div>
           <Section>
@@ -175,7 +175,8 @@ function WritePageForm() {
         <h1>이미지 업로드</h1>
         <WritePageImageUpload />
       </Section>
-      <Button disabled={progress}>{progress ? "처리 중..." : "올리기"}</Button>
+      <Button disabled={progress}>{progress ? imageProgress ? "이미지 업로드 중..." : "처리 중..." : "올리기"}</Button>
+      {error && <ErrorComponent>{error}</ErrorComponent>}
     </form>
   );
 }

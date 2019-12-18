@@ -3,6 +3,7 @@
 */
 
 .ShareCard__wrap {
+  all: unset;
   margin: 1em 2em;
   max-width: 250px;
   display: flex;

@@ -24,14 +24,7 @@
 .Information__Personnel {
   font-size: 20px;
 }
-.Information__container{
-  min-width: 400px;
-  min-height:400px;
-  background-image: url("../../../assets/favicon.svg");
-  background-repeat: no-repeat;
-  background-size:contain;
-  background-position: center;
-}
+
 .ProductLayout__Rectangle{
   transition: 1s;
 }

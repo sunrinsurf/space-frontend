@@ -17,6 +17,7 @@ function ShareList({ product }: ShareListProps) {
           key={i}
           title={data.title}
           person={data.participant.length}
+          image={data.images && data.images[0]}
           id={data._id}
         />
       ))}

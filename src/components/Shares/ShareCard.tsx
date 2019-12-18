@@ -1,9 +1,9 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import getClassHandler from "../../lib/getClassHandler";
 import styled, { css } from "styled-components";
-/*image="https://avatars3.githubusercontent.com/u/23256775?s=460&v=4"*/
 import "./ShareCard.css";
+import { baseURL } from "../../lib/api/client";
 
 interface ShareCardProps {
   title: string;
@@ -22,7 +22,7 @@ const Thumb = styled.div<ThumbProps>`
   ${props => {
     if (props.image) {
       return css`
-        background: url(${props.image});
+        background: url(${baseURL + '/shop/image/' + props.image + '/thumbnail'});
         background-size: cover;
         background-position: center;
       `;
@@ -39,22 +39,16 @@ const Thumb = styled.div<ThumbProps>`
 `;
 const getName = getClassHandler("ShareCard");
 
-function ShareCard({ title, person, image, id }: ShareCardProps) {
-  const history = useHistory();
-
-  const onClick = React.useCallback(() => {
-    history.push(`/product/${id}`);
-  }, [history, id]);
+function ShareCard({ title, image, id }: ShareCardProps) {
   return (
-    <div className={getName("wrap")} role="button" onClick={onClick}>
+    <Link className={getName("wrap")} to={`/product/${id}`}>
       <div className={getName("thumbWrap")}>
-        {/* <div className={getName("person")}>{person}</div> */}
         <Thumb image={image} />
       </div>
       <div className={getName("title")}>
         <h3>{title}</h3>
       </div>
-    </div>
+    </Link>
   );
 }
 
