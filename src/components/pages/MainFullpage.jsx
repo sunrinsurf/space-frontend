@@ -2,10 +2,8 @@ import React from "react";
 import MainInfo from "../PageComponent/MainPages/MainInfo";
 import MainProduct from "../PageComponent/MainPages/MainProduct";
 import MainShareProcedure from "../PageComponent/MainPages/MainShareProcedure";
-import Arrow from "../Design/Arrow";
 
 import ReactFullPage from "@fullpage/react-fullpage";
-import "fullpage.js/vendors/scrolloverflow";
 
 function IndexPage() {
   return (
@@ -15,28 +13,11 @@ function IndexPage() {
       render={({ state, fullpageApi }) => {
         return (
           <ReactFullPage.Wrapper>
-            <div
-              className="section"
-              style={{
-                display: "flex"
-              }}
-            >
-              <MainInfo
-                downFunction={() => {
-                  fullpageApi.moveSectionUp();
-                }}
-              />
+            <div className="section">
+              <MainInfo />
             </div>
             <div className="section">
-              <div
-                className="slide"
-                style={{
-                  overflow: "visible",
-                  height: 200
-                }}
-              >
-                <MainProduct />
-              </div>
+              <MainProduct />
             </div>
             <div className="section">
               <MainShareProcedure />

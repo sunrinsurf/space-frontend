@@ -1407,13 +1407,6 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/fullpage.js@^2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@types/fullpage.js/-/fullpage.js-2.9.1.tgz#8db45b4177ef978c3b6173466c181f4604eb44c0"
-  integrity sha512-6HiGyLVej7ZgbwIbFF7qcCG32MqSaxo1donuEocGJs688XPfnN9RfUnOr1SlYzUMQFWPZfW7YuCFr9T5e08fnw==
-  dependencies:
-    "@types/jquery" "*"
-
 "@types/history@*":
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"
@@ -1463,13 +1456,6 @@
   integrity sha512-YYiqfSjocv7lk5H/T+v5MjATYjaTMsUkbDnjGqSMoO88jWdtJXJV4ST/7DKZcoMHMBvB2SeSfyOzZfkxXHR5xg==
   dependencies:
     "@types/jest-diff" "*"
-
-"@types/jquery@*":
-  version "3.3.31"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.31.tgz#27c706e4bf488474e1cb54a71d8303f37c93451b"
-  integrity sha512-Lz4BAJihoFw5nRzKvg4nawXPzutkv7wmfQ5121avptaSIXlDNJCUuxZxX/G+9EVidZGuO0UBlk+YjKbwRKJigg==
-  dependencies:
-    "@types/sizzle" "*"
 
 "@types/js-cookie@^2.2.4":
   version "2.2.4"
@@ -1658,11 +1644,6 @@
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
-
-"@types/sizzle@*":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
-  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
 
 "@types/socket.io-client@^1.4.32":
   version "1.4.32"
