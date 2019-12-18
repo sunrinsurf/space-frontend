@@ -53,7 +53,7 @@ function ProductLayout({ id }: ProductLayoutProps) {
 
       </div>
       <div className="ProductLayout__Left">
-        <InformationPage image={images && images[0] && images[0]} />
+        <InformationPage images={images} />
       </div>
       <div className="ProductLayout__Right">
         <ArticlePage

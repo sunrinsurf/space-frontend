@@ -11,7 +11,9 @@ const Image = styled.div<{ image?: string }>`
   ${props => props.image ? css`
     background: url(${baseURL + '/shop/image/' + props.image + '/thumbnail'}) no-repeat;
   ` : css`
-      background: url(${favicon}) no-repeat;
+      background: url(${favicon}) no-repeat, white;
+      background-size: 50%;
+      background-position: center;
     `}
     background-size: cover;
     background-position: center;
@@ -30,6 +32,8 @@ const ImageList = styled.div`
 const ImageBlock = styled.div<{ image?: string }>`
   ${props => props.image ? css`
     background: url(${baseURL + '/shop/image/' + props.image + '/thumbnail'}) no-repeat;
+    background-size: cover;
+    background-position: center;
   ` : css`
     background: url(${favicon}) no-repeat, white;
     background-size: 50%;
@@ -40,15 +44,25 @@ const ImageBlock = styled.div<{ image?: string }>`
   height: 120px;
   border-radius: 4pt;
 `;
-function InformationPage({ image }: any) {
+function InformationPage({ images }: { images: string[] }) {
+  const emptys: React.ReactNode[] = [];
+
+  for (let i = images.length; i < 4; i++) {
+    emptys.push(
+      <ImageBlock />
+    )
+  }
   return (
     <div className="Information__wrap">
-      <Image image={image} />
+      <Image image={images.length as any && images[0]} />
       <ImageList>
-        <ImageBlock />
-        <ImageBlock />
-        <ImageBlock />
-
+        {images.map((v, i) => {
+          if (i === 0) return null;
+          return (
+            <ImageBlock image={v} />
+          )
+        })}
+        {emptys}
       </ImageList>
     </div>
   );
