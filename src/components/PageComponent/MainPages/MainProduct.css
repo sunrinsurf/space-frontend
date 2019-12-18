@@ -6,7 +6,7 @@
 }
 
 .MainProduct__Info {
-    width: 70vw;
+    width: 90vw;
     font-size: 36px;
     font-weight: 900;
     font-stretch: normal;
@@ -18,7 +18,7 @@
 
 .MainProduct__Title {
     font-size: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .MainProduct__List {
