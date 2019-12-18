@@ -1,6 +1,5 @@
 import React from "react";
 import "./MainProduct.css";
-import MainShopCard from "./MainShopCard";
 import styled from "styled-components";
 
 const SmallBox = styled.div`

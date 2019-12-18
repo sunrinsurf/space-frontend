@@ -1,31 +1,44 @@
 import React from "react";
 import styled from 'styled-components';
-import Button from "../../Form/Button";
-import getClassHandler from "../../../lib/getClassHandler";
-import "./LoginedMainPageSearch.css";
+import searchIcon from '../../../assets/icons/ic-search.svg';
 
-const Search = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  border: 0;
-  border-bottom: 2px solid #494949;
-  outline: 0;
-  font-size: 1.5rem;
-  padding: 8.4px 14px;
-  transition: border-color 1s;
+const Form = styled.form`
+  margin-bottom: 3em;
+  position: relative;
+  .search {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 2px solid #494949;
+    outline: 0;
+    font-size: 1.5rem;
+    padding: 8.4px 14px;
+    transition: border-color 1s;
 
-  &:active {
-    border-color: black;
+    &:active {
+      border-color: black;
+    }
+  }
+
+  .searchButton {
+    all: unset;
+    position: absolute;
+    bottom: 8px;
+    right: 20px;
+    img {
+      width: 32px;
+      height: 32px;
+    }
   }
 `;
-const getName = getClassHandler("LoginedMainPageSearch");
 function LoginedMainPageSearch() {
   return (
-    <div className={getName("wrap")}>
-      <span style={{ display: "flex" }}>
-        <Search type="text" className={getName("input")} placeholder="상품명, 카테고리 등으로 다양한 상품을 검색해 보세요." />
-      </span>
-    </div>
+    <Form>
+      <input type="text" className="search" placeholder="상품명, 카테고리 등으로 다양한 상품을 검색해 보세요." />
+      <button className="searchButton">
+        <img src={searchIcon} draggable={false} alt="Search Icon" />
+      </button>
+    </Form>
   );
 }
 
