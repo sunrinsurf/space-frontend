@@ -1,13 +1,14 @@
 import client from "./client";
 
-export function getShares(token?: string | null) {
+export function getShares(token?: string | null, pagination?: number) {
   const options: any = {};
   if (token) {
     options.headers = {
       "x-access-token": token
     };
   }
-  return client.get("/shop", options);
+  const query = pagination ? `?page=${pagination}` : "";
+  return client.get("/shop" + query, options);
 }
 
 export async function getShare(id: string) {

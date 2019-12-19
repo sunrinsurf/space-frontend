@@ -16,19 +16,15 @@ function LoginedMainPage() {
     }
     return (
         <div className={getName("wrap")}>
+            <section style={{ marginBottom: 150 }}>
+                <h1>공유 시작하기</h1>
+                <h3>물건, 장소, 교통수단, 구독 서비스 등 무엇이든 공유하고, 수익을 남겨 보세요.</h3>
+                <Button onClick={goToWrite} fullWidth>상품 공유하기</Button>
+            </section>
             <LoginedMainPageSearch />
             <section>
                 <h1>최근 공유된 상품</h1>
                 <Shares />
-            </section>
-            <section>
-                <h1>나의 관심 카테고리</h1>
-                <FavoriteCategory />
-            </section>
-            <section>
-                <h1>공유 시작하기</h1>
-                <h3>물건, 장소, 교통수단, 구독 서비스 등 무엇이든 공유하고, 수익을 남겨 보세요.</h3>
-                <Button onClick={goToWrite} fullWidth>상품 공유하기</Button>
             </section>
         </div>
     )
