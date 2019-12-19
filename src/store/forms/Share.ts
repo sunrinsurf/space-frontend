@@ -146,7 +146,10 @@ function* SubmitSaga() {
     yield put({
       type: SUBMIT_IMAGE
     });
-    const uploadImage = yield call(PostProductImage as any, images, token);
+    const uploadImage =
+      images.length > 0
+        ? yield call(PostProductImage as any, images, token)
+        : [];
     const req = yield call(
       PostProduct as any,
       {

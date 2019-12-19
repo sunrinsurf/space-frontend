@@ -47,7 +47,7 @@ const ImageBlock = styled.div<{ image?: string }>`
 function InformationPage({ images }: { images: string[] }) {
   const emptys: React.ReactNode[] = [];
 
-  for (let i = images.length; i < 4; i++) {
+  for (let i = images.length === 0 ? 1 : images.length; i < 4; i++) {
     emptys.push(
       <ImageBlock />
     )
