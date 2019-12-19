@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 
 const Wrap = styled.div`
@@ -41,8 +41,13 @@ interface ImageViewModalProps {
     image: string;
 }
 function ImageViewModal({ open, onClose, image }: ImageViewModalProps) {
-    const [loading, setLoading] = useState(!open);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setLoading(open);
+    }, [open]);
+
     if (!open) return null;
+
     return (
         <Wrap onClick={onClose}>
             <div className="contents" onClick={e => { e.stopPropagation() }}>
