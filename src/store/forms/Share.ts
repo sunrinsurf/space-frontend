@@ -100,8 +100,14 @@ type ActionType =
   | ReturnType<typeof shareSubmitFail>;
 
 function* AddImageSaga({ payload }: { payload: File[] }) {
+  const images = yield select((root: RootState) => root.Forms.Share.images);
   try {
+    if (payload.length + images.length > 4) {
+      alert("이미지는 최대 4개까지만 올릴 수 있습니다.");
+      return;
+    }
     let previews = [];
+
     for (const file of payload) {
       previews.push(yield call(loadImageBase64, file));
     }
