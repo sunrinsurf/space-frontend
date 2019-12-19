@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 
 const Wrap = styled.div`
@@ -28,6 +28,11 @@ const Wrap = styled.div`
         padding: 10px;
         text-shadow: 0 0 10px white;
     }
+    .loading {
+        width: 500px;
+        height: 500px;
+        background: #bababa;
+    }
 `;
 
 interface ImageViewModalProps {
@@ -36,12 +41,14 @@ interface ImageViewModalProps {
     image: string;
 }
 function ImageViewModal({ open, onClose, image }: ImageViewModalProps) {
+    const [loading, setLoading] = useState(!open);
     if (!open) return null;
     return (
         <Wrap onClick={onClose}>
             <div className="contents" onClick={e => { e.stopPropagation() }}>
                 <div className="close" role="button" onClick={onClose}>&times;</div>
-                <img src={image} alt="Product" className="image" />
+                {loading && <div className="loading" />}
+                <img src={image} alt="Product" className="image" onLoad={() => setLoading(false)} />
             </div>
         </Wrap>
     )
