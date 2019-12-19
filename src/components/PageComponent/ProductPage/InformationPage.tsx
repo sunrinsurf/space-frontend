@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from 'styled-components';
 import favicon from '../../../assets/favicon.svg';
 import "./InformationPage.css";
 import { mobile } from "../../../lib/viewport";
 import { baseURL } from "../../../lib/api/client";
+import ImageViewModal from "./ImageViewModal";
 
 const Image = styled.div<{ image?: string }>`
   width: 400px;
@@ -45,6 +46,15 @@ const ImageBlock = styled.div<{ image?: string }>`
   border-radius: 4pt;
 `;
 function InformationPage({ images }: { images: string[] }) {
+  const [open, setOpen] = useState(false);
+  const [image, setImage] = useState("");
+
+  function openModal(image: string) {
+    return () => {
+      setImage(baseURL + '/shop/image/' + image);
+      setOpen(true);
+    }
+  }
   const emptys: React.ReactNode[] = [];
 
   for (let i = images.length === 0 ? 1 : images.length; i < 4; i++) {
@@ -54,12 +64,13 @@ function InformationPage({ images }: { images: string[] }) {
   }
   return (
     <div className="Information__wrap">
-      <Image image={images.length as any && images[0]} />
+      <ImageViewModal open={open} onClose={() => setOpen(false)} image={image} />
+      <Image image={images.length as any && images[0]} onClick={images.length ? openModal(images[0]) : undefined} />
       <ImageList>
         {images.map((v, i) => {
           if (i === 0) return null;
           return (
-            <ImageBlock image={v} />
+            <ImageBlock image={v} onClick={openModal(v)} />
           )
         })}
         {emptys}
