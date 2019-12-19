@@ -5,7 +5,6 @@ import getClassHandler from '../../../lib/getClassHandler'
 
 import './index.css';
 import Shares from '../../Shares';
-import FavoriteCategory from '../../FavoriteCategory';
 import Button from '../../Form/Button';
 
 const getName = getClassHandler('LoginedMainPage');
