@@ -6,9 +6,12 @@ const SmallBox = styled.div`
   max-width: 280px;
   min-height:280px;
   object-fit: cover;
-  background-color:gray;
   border-radius:10px;
   margin : 0 auto;
+  background-color:gray;
+  background-repeat: no-repeat;
+    background-size:contain;
+  background-position: center;
 
 `
 const BoxWrapper = styled.div`
