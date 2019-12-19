@@ -1,13 +1,20 @@
 import client from "./client";
 
-export function getShares(token?: string | null, pagination?: number) {
+export function getShares(
+  token?: string | null,
+  pagination?: number,
+  search?: string
+) {
   const options: any = {};
   if (token) {
     options.headers = {
       "x-access-token": token
     };
   }
-  const query = pagination ? `?page=${pagination}` : "";
+
+  const query = `?${pagination ? `page=${pagination}&` : ""}${
+    search ? `search=${search}` : ""
+  }`;
   return client.get("/shop" + query, options);
 }
 

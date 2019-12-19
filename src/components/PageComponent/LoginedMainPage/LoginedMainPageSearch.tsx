@@ -1,6 +1,10 @@
 import React from "react";
-import styled from 'styled-components';
-import searchIcon from '../../../assets/icons/ic-search.svg';
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import searchIcon from "../../../assets/icons/ic-search.svg";
+import { changeSearch } from "../../../store/forms/SearchShare";
+import { RootState } from "../../../store/reducer";
 
 const Form = styled.form`
   margin-bottom: 3em;
@@ -32,9 +36,20 @@ const Form = styled.form`
   }
 `;
 function LoginedMainPageSearch() {
+  const dispatch = useDispatch();
+  const { search } = useSelector((state: RootState) => state.Forms.SearchShare);
+  function onchange(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch(changeSearch(e.target.value));
+  }
   return (
     <Form>
-      <input type="text" className="search" placeholder="상품명, 카테고리 등으로 다양한 상품을 검색해 보세요." />
+      <input
+        value={search}
+        onChange={onchange}
+        type="text"
+        className="search"
+        placeholder="상품명, 카테고리 등으로 다양한 상품을 검색해 보세요."
+      />
       <button className="searchButton">
         <img src={searchIcon} draggable={false} alt="Search Icon" />
       </button>

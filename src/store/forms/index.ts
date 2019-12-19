@@ -1,18 +1,19 @@
-import { combineReducers } from 'redux';
-import { all } from 'redux-saga/effects'
-import Share, { ShareType, ShareSaga } from './Share';
+import { combineReducers } from "redux";
+import { all } from "redux-saga/effects";
+import Share, { ShareType, ShareSaga } from "./Share";
+import SearchShare, { SearchShareType } from "./SearchShare";
 
 export type FormsType = {
-    Share: ShareType
-}
+  Share: ShareType;
+  SearchShare: SearchShareType;
+};
 const Forms = combineReducers({
-    Share
+  Share,
+  SearchShare
 });
 
 export function* FormsSaga() {
-    yield all([
-        ShareSaga()
-    ])
+  yield all([ShareSaga()]);
 }
 
 export default Forms;
