@@ -21,7 +21,7 @@ function ShareList({ product }: ShareListProps) {
           id={data._id}
         />
       )) :
-        new Array(8).fill(<ShareCardSkeleton />)
+        new Array(8).fill(null).map((_, i) => <ShareCardSkeleton key={i} />)
       }
     </div>
   );
