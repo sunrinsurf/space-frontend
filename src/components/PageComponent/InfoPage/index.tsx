@@ -77,13 +77,13 @@ function InfoPageMain({
       <Button style={{ borderRadius: "25px", width: "180px", boxShadow: "0 0 8px 0 #ff388a", margin: "0.5em auto" }}>프로필 수정</Button>
       <Section>
         <Subject>내가 공유한 상품</Subject>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
           <ShareList product={invitedProducts} />
         </div>
       </Section>
       <Section>
         <Subject>내가 올린 상품</Subject>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
           <ShareList product={createdProducts} />
         </div>
       </Section>
