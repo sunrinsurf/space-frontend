@@ -3,6 +3,7 @@ import ShareList from "../../Shares/ShareList";
 import Button from "../../Form/Button";
 import favicon from "../../../assets/favicon.svg";
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 
 const Favicon = styled.div`
   width:100px;
@@ -74,7 +75,7 @@ function InfoPageMain({
       <Title>마이 페이지</Title>
       <Profile></Profile>
       <Welcome>안녕하세요, <span style={{ color: "#328fff" }}>{nickname}</span>님!</Welcome>
-      <Button style={{ borderRadius: "25px", width: "180px", boxShadow: "0 0 8px 0 #ff388a", margin: "0.5em auto" }}>프로필 수정</Button>
+      <Link to="/modified"><Button style={{ borderRadius: "25px", width: "180px", boxShadow: "0 0 8px 0 #ff388a", margin: "0.5em auto" }}>프로필 수정</Button></Link>
       <Section>
         <Subject>내가 공유한 상품</Subject>
         <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
