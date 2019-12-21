@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { baseURL } from "../../lib/api/client";
 import favicon from "../../assets/favicon.svg";
 import digitComma from "../../lib/digitComma";
+import { getImageURL } from "../../lib/api/UploadImage";
 
 interface ShareCardProps {
   title: string;
@@ -26,10 +27,7 @@ const Thumb = styled.div<ThumbProps>`
   ${props => {
     if (props.image) {
       return css`
-        background: url(${baseURL +
-          "/shop/image/" +
-          props.image +
-          "/thumbnail"});
+        background: url(${getImageURL(props.image, true)});
         background-size: cover;
         background-position: center;
       `;

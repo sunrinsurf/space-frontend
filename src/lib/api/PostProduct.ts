@@ -1,5 +1,6 @@
 import client from "./client";
 import handleError from "./handleError";
+import UploadImage from "./UploadImage";
 
 interface PostProductImage {
   data: string;
@@ -34,11 +35,7 @@ export function PostProductImage(files: File[], token: string) {
       formData.append(`${i}`, data);
     });
 
-    const data = await client.post("/shop/image", formData, {
-      headers: {
-        "x-access-token": token
-      }
-    });
+    const data = await UploadImage({ data: formData, token });
 
     return data.data;
   });
