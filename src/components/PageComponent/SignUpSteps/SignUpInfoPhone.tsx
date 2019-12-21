@@ -44,25 +44,28 @@ function SignUpInfoPhone() {
         <>
           <Flex>
             <div className="SignUpInfo__Column">
-              <div className="SignUpInfo__title">전화번호</div>
-              <div className="SignUpInfo__Phone Input__Column">
-                <Input
-                  type="text"
-                  value={phone}
-                  style={{ flex: 1 }}
-                  onChange={onchange}
-                  disabled={success}
-                />
-
+              <div style={{ width: "100%" }}>
+                <div className="SignUpInfo__title">전화번호</div>
+                <div className="SignUpInfo__Phone Input__Column">
+                  <Input
+                    type="text"
+                    value={phone}
+                    style={{ flex: 1 }}
+                    onChange={onchange}
+                    disabled={success}
+                  />
+                </div>
               </div>
-              <div className="SignUpInfo__title">본인인증</div>
-              <Button
-                style={{ height: "fit-content", borderRadius: 26, margin: "0 auto" }}
-                onClick={SignUpInfoCert}
-                disabled={success}
-              >
-                본인인증
+              <div style={{ width: "100%" }}>
+                <div className="SignUpInfo__title">본인인증</div>
+                <Button
+                  style={{ height: "fit-content", borderRadius: 26, margin: "0 auto" }}
+                  onClick={SignUpInfoCert}
+                  disabled={success}
+                >
+                  본인인증
                 </Button>
+              </div>
             </div>
           </Flex>
           {progress && <PhoneCode />}
