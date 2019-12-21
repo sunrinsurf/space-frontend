@@ -93,7 +93,7 @@ function Layout({
                   <>
                     <Link to="/info">My Page</Link>
                     <span> | </span>
-                    <LogoutMenu />
+                    <Link to="/"><LogoutMenu /></Link>
                   </>
                 )}
             </div>
