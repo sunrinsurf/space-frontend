@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { baseURL } from "../../lib/api/client";
 import favicon from "../../assets/favicon.svg";
 import digitComma from "../../lib/digitComma";
+import { getImageURL } from "../../lib/api/UploadImage";
 
 interface ShareCardProps {
   title: string;
@@ -14,6 +14,7 @@ interface ShareCardProps {
   royalty: string;
   royaltyPrice?: number;
   _id: string;
+  participant: any[];
 }
 interface ThumbProps {
   image?: string;
@@ -26,10 +27,7 @@ const Thumb = styled.div<ThumbProps>`
   ${props => {
     if (props.image) {
       return css`
-        background: url(${baseURL +
-          "/shop/image/" +
-          props.image +
-          "/thumbnail"});
+        background: url(${getImageURL(props.image, true)});
         background-size: cover;
         background-position: center;
       `;
@@ -72,7 +70,14 @@ const Wrap = styled(Link)`
       right: 0;
       padding: 10px;
       font-size: 14px;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 0 3px black;
+    }
+    .person {
+      position: absolute;
+      left: 0;
+      padding: 10px;
+      font-size: 14px;
+      text-shadow: 0 0 3px black;
     }
     .information {
       position: absolute;
@@ -87,6 +92,7 @@ const Wrap = styled(Link)`
         margin: 0;
         margin-top: 4px;
         font-weight: normal;
+        color: #CACACA;
       }
     }
   }
@@ -98,7 +104,9 @@ function ShareCard({
   _id,
   category,
   royalty,
-  royaltyPrice
+  royaltyPrice,
+  person,
+  participant
 }: ShareCardProps) {
   const rolaytyText = useMemo(() => {
     switch (royalty) {
@@ -122,6 +130,9 @@ function ShareCard({
     <Wrap to={`/product/${_id}`}>
       <Thumb image={image} className="thumbnail">
         <div className="bg" />
+        <h3 className="person">
+          {participant.length}/{person} 참여
+        </h3>
         <h3 className="category">{category}</h3>
         <div className="information">
           <h3 className="title">{ProductText}</h3>

@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import SignUpStepProps from './SignUpStepProps';
 import Button from '../../Form/Button';
 import Favicon from '../../Layout/Favicon';
+import { ReactComponent as Adventure } from '../../../assets/adventure.svg';
 const Wrap = styled.div`
     padding: 1.5em;
     text-align: center;
-    height:60vh;
+    height:55vh;
+    min-height: 500px;
     display:flex;
     justify-content :flex-end;
     align-items:center;
@@ -15,12 +17,12 @@ const Wrap = styled.div`
 function SignUpComplete({ toNext }: SignUpStepProps) {
     return (
         <Wrap>
-            <div style={{ width: "250px" }}>
-                <Favicon></Favicon>
+            <h1>완료!<br />회원가입을 환영합니다 :)</h1>
+            <div>
+                <Adventure style={{ maxWidth: '96%' }} />
             </div>
-            <h1>완료!</h1>
-            <p>회원가입을 환영합니다.</p>
-            <div style={{ maxWidth: "700px" }}>
+
+            <div style={{ maxWidth: "700px", marginTop: 20 }}>
                 <Button fullWidth onClick={toNext}>
                     메인으로 가기
                 </Button>

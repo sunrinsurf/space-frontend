@@ -51,13 +51,18 @@ function SelectCategory({ toNext }: SignUpStepProps) {
             key={i}
             onClick={onCategoryToggle(i)}
           >
-            {data}
+            <span className="chip">
+              {categorysOn && categorysOn[i] ? <>&times;</> : "+"}
+            </span>
+            <span className="category">
+              {data}
+            </span>
           </Category>
         ))}
       </CategoryList>
       <div className="SelectCategory__Button">
-        <Button fullWidth onClick={completeSignUp}>
-          회원가입 완료하기
+        <Button long onClick={completeSignUp}>
+          회원 가입 완료
       </Button>
       </div>
     </div>

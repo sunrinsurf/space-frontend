@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-type ButtonProps = { fullWidth?: Boolean; background?: string | false, radius?: string };
+type ButtonProps = { fullWidth?: Boolean; long?: boolean; background?: string | false, radius?: string };
 const Button = styled.button<ButtonProps>`
   display: block;
   font-size: 1rem;
@@ -16,6 +16,10 @@ const Button = styled.button<ButtonProps>`
   ${props => css`
     width: ${props.fullWidth && "100%"};
   `}
+  ${props => props.long && css`
+    padding: 8px 100px;
+    border-radius: 20px;
+    `}
   ${props => {
     if (props.background === false) {
       return css`

@@ -1,11 +1,14 @@
 import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import styled, { css } from 'styled-components';
 import "./ArticlePage.css";
 import Button from "../../Form/Button";
 import { RootState } from "../../../store/reducer";
 import { InviteChat } from "../../../store/Chat";
+import favicon from '../../../assets/favicon.svg';
 import moment from 'moment';
+import { getImageURL } from "../../../lib/api/UploadImage";
 interface ArticlePageProps {
   category: string;
   title: string;
@@ -19,8 +22,23 @@ interface ArticlePageProps {
   participant: any[];
   owner: any;
   productId: string;
+  profileImage?: string;
 }
 
+const ProfileImage = styled.div<{ image?: string }>`
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  ${props => props.image ? css`
+    background: url(${getImageURL(props.image, true)}) no-repeat;
+    background-size: cover;
+    border-radius: 25px;
+  ` : css`
+    background: url(${favicon}) no-repeat;
+    background-size: contain;
+  `}
+  background-position: center;
+`;
 function ArticlePage({ category, title, by, contents, royalty,
   royaltyPrice,
   timeToUse,
@@ -28,7 +46,8 @@ function ArticlePage({ category, title, by, contents, royalty,
   person,
   participant,
   owner,
-  productId }: ArticlePageProps) {
+  productId,
+  profileImage }: ArticlePageProps) {
 
   const { _id } = useSelector((state: RootState) => state.Auth.data);
   const dispatch = useDispatch();
@@ -78,7 +97,7 @@ function ArticlePage({ category, title, by, contents, royalty,
       <div className="ArticlePage__Category"><span style={{ color: "black" }}>{category}</span> | <span style={{ color: "#ff388a" }}>{participantText}/{person} 참여중</span> | <span style={{ color: "#ff388a" }}>{timeToUseText}</span></div>
       <h1 className="ArticlePage__title">{title}</h1>
       <div className="ArticlePage__Nickname">
-        <div className="ArticlePage__profile"></div>
+        <ProfileImage image={profileImage} role="image" aria-label={`${by} profile`} />
         <div style={{ fontWeight: "bold" }}>{by}</div>
       </div>
       <div className="ArticlePage__Text">{contents}</div>

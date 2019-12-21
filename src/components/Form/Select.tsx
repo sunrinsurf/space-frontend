@@ -6,7 +6,8 @@ const Select = styled.select`
     width: 100%;
     box-sizing: border-box;
     padding: .5em;
-    border-radius: 10px;
+    border-radius: 4px;
+    border: solid 1px #cecece;
     &:focus {
         outline: 0;
     }

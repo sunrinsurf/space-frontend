@@ -2,8 +2,9 @@ import React from "react";
 import ShareList from "../../Shares/ShareList";
 import Button from "../../Form/Button";
 import favicon from "../../../assets/favicon.svg";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { getImageURL } from "../../../lib/api/UploadImage";
 
 const Favicon = styled.div`
   width: 100px;
@@ -24,16 +25,18 @@ const Title = styled.div`
   color: #000000;
   margin-bottom: 0.7em;
 `;
-const Profile = styled.div`
+const Profile = styled.div<{ image?: string }>`
   width: 180px;
   height: 180px;
   object-fit: contain;
   border-radius: 100%;
   margin: 0 auto;
+  ${(props) => props.image ? css`
+    background: url(${getImageURL(props.image, true)});
+    background-size: cover;
+  ` : css`background: gray;`}
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: center;
-  background-color: gray;
 `;
 const Welcome = styled.div`
   font-size: 28px;
@@ -61,11 +64,13 @@ const Subject = styled.div`
 `;
 interface InfoPageMainProps {
   nickname: string;
+  profileImage?: string;
   invitedProducts: any[];
   createdProducts: any[];
 }
 function InfoPageMain({
   nickname,
+  profileImage,
   invitedProducts,
   createdProducts
 }: InfoPageMainProps) {
@@ -73,7 +78,7 @@ function InfoPageMain({
     <div>
       <Favicon></Favicon>
       <Title>마이 페이지</Title>
-      <Profile></Profile>
+      <Profile image={profileImage} />
       <Welcome>
         안녕하세요, <span style={{ color: "#328fff" }}>{nickname}</span>님!
       </Welcome>

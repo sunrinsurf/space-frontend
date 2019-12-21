@@ -5,7 +5,7 @@ const styles = css`
   width: 100%;
   box-sizing: border-box;
   font-size: 1rem;
-  padding: 8px 24px;
+  padding: 8px 10px;
   border-radius: 4px;
   border: solid 1px #cecece;
   background-color: #ffffff;
