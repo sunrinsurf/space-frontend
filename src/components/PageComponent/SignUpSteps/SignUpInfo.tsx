@@ -42,7 +42,6 @@ const Indication = styled.div`
   margin-left:20px;
   @media (max-width: 600px) {
     font-size:20px;
-    margin-left:0px;
   }
 `
 const Flex = styled.div`
@@ -87,26 +86,30 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
         <Title>회원정보 입력</Title>
         <Indication>하단의 빈칸을 모두 채워주세요</Indication>
         <div className="SignUpInfo__form">
-          <Column column="name">
-            {(onchange, name) => (
-              <div className="SignUpInfo__Column">
-                <div className="SignUpInfo__title">이름</div>
-                <div className="Input__Column">
-                  <Input type="text" value={name} onChange={onchange} />
+          <div style={{ width: "100%" }}>
+            <Column column="name">
+              {(onchange, name) => (
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">이름</div>
+                  <div className="Input__Column">
+                    <Input type="text" value={name} onChange={onchange} />
+                  </div>
                 </div>
-              </div>
-            )}
-          </Column>
-          <Column column="username">
-            {(onchange, username) => (
-              <div className="SignUpInfo__Column">
-                <div className="SignUpInfo__title">닉네임</div>
-                <div className="Input__Column">
-                  <Input type="text" value={username} onChange={onchange} />
+              )}
+            </Column>
+          </div>
+          <div style={{ width: "100%" }}>
+            <Column column="username">
+              {(onchange, username) => (
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">닉네임</div>
+                  <div className="Input__Column">
+                    <Input type="text" value={username} onChange={onchange} />
+                  </div>
                 </div>
-              </div>
-            )}
-          </Column>
+              )}
+            </Column>
+          </div>
           <Flex>
             <Column column="email">
               {(onchange, email) => (
@@ -162,17 +165,18 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
             </Column>
           </Flex>
 
-
-          <Column column="address">
-            {(onchange, address) => (
-              <div className="SignUpInfo__Column">
-                <div className="SignUpInfo__title">주소 입력</div>
-                <div className="Input__Column">
-                  <Input type="text" value={address} onChange={onchange} />
+          <div style={{ width: "100%" }}>
+            <Column column="address">
+              {(onchange, address) => (
+                <div className="SignUpInfo__Column">
+                  <div className="SignUpInfo__title">주소 입력</div>
+                  <div className="Input__Column">
+                    <Input type="text" value={address} onChange={onchange} />
+                  </div>
                 </div>
-              </div>
-            )}
-          </Column>
+              )}
+            </Column>
+          </div>
           <SignUpInfoPhone />
         </div>
       </form>
@@ -239,7 +243,7 @@ export function Column({
   const data = children(onChange, value);
 
   return (
-    <div style={{ width: "100%", margin: "0px 20px" }}>
+    <div style={{ flex: "1", margin: "0 20px" }}>
       {data}
       <div className="SignUpInfo__error">
         {error && (
