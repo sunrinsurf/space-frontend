@@ -13,6 +13,7 @@ const INPUT_ERROR = "SignUp/INPUT_ERROR" as const;
 const INPUT_ERROR_CLEAR = "SignUp/INPUT_ERROR_CLEAR" as const;
 const CERT_TOKEN_COMPLETE = "SignUp/CERT_TOKEN_COMPLETE" as const;
 const SET_PROFILE_IMAGE = "SignUp/SET_PROFILE_IMAGE" as const;
+const CLEAR = "SignUp/CLEAR" as const;
 const [
   SIGNUP_COMPLETE,
   SIGNUP_COMPLETE_SUCCESS,
@@ -112,6 +113,11 @@ export function signUpComplete() {
     type: SIGNUP_COMPLETE
   };
 }
+export function signUpClear() {
+  return {
+    type: CLEAR
+  };
+}
 
 type SignUpAction =
   | ReturnType<typeof categoryToggle>
@@ -123,6 +129,7 @@ type SignUpAction =
   | ReturnType<typeof setPage>
   | ReturnType<typeof certTokenComplete>
   | ReturnType<typeof setProfileImage>
+  | ReturnType<typeof signUpClear>
   | any;
 
 function* signUpCompleteSaga() {
@@ -253,6 +260,8 @@ function SignUp(state = initialState, action: SignUpAction) {
           profile: action.payload
         }
       };
+    case CLEAR:
+      return initialState;
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import PolicyStep from "./SignUpSteps/Policy";
@@ -6,7 +6,7 @@ import SignUpStepProps from "./SignUpSteps/SignUpStepProps";
 import SignUpInfo from "./SignUpSteps/SignUpInfo";
 import SelectCategory from "./SignUpSteps/SelectCategory";
 import { RootState } from "../../store/reducer";
-import { setPage } from "../../store/SignUp";
+import { setPage, signUpClear } from "../../store/SignUp";
 import SignUpComplete from "./SignUpSteps/SignUpComplete";
 import { Redirect } from 'react-router-dom'
 
@@ -72,6 +72,9 @@ function SignUpStep() {
     },
     [dispatch, page]
   );
+  useEffect(() => {
+    dispatch(signUpClear());
+  }, [dispatch]);
   const Step = steps[page];
   return (
     <Box>
