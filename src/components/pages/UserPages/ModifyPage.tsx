@@ -4,7 +4,7 @@ import useLogin from "../../../lib/useLogin";
 import { Redirect } from "react-router-dom";
 import { getUserData } from "../../../lib/api/getUserData";
 import Page from "../../Page";
-import ChangeInfo from "../../PageComponent/InfoPage/ProfileModify";
+import ProfileModify from "../../PageComponent/InfoPage/ProfileModify";
 function InfoPage() {
   const user = useLogin();
   const [data, error] = usePrefetch<any>("MyInfo", async () => {
@@ -24,7 +24,7 @@ function InfoPage() {
       whiteColor
       colorfulLogo
     >
-      {!data ? null : <ChangeInfo {...data} />}
+      {!data ? null : <ProfileModify {...data} />}
     </Page>
   );
 }

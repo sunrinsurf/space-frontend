@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import favicon from "../../../assets/favicon.svg";
+import ProfileModifyForm from "./ProfileModifyForm";
 
 const Wrap = styled.div`
   margin: 1em 2em;
@@ -30,7 +31,8 @@ function ChangeInfo() {
   return (
     <Wrap>
       <Favicon></Favicon>
-      <TItle>프로필수정</TItle>
+      <TItle>프로필 수정</TItle>
+      <ProfileModifyForm />
     </Wrap>
   );
 }

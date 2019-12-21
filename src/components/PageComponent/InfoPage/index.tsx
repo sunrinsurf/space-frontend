@@ -77,7 +77,7 @@ function InfoPageMain({
       <Welcome>
         안녕하세요, <span style={{ color: "#328fff" }}>{nickname}</span>님!
       </Welcome>
-      <Link to="/modify">
+      <Link to="/info/modify">
         <Button
           style={{
             borderRadius: "25px",
