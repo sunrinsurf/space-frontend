@@ -87,12 +87,12 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
         <Indication>하단의 빈칸을 모두 채워주세요</Indication>
         <div className="SignUpInfo__form">
           <div style={{ width: "100%" }}>
-            <Column column="name">
+            <Column column="name" >
               {(onchange, name) => (
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이름</div>
                   <div className="Input__Column">
-                    <Input type="text" value={name} onChange={onchange} />
+                    <Input type="text" value={name} onChange={onchange} placeholder="홍길동" />
                   </div>
                 </div>
               )}
@@ -104,7 +104,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">닉네임</div>
                   <div className="Input__Column">
-                    <Input type="text" value={username} onChange={onchange} />
+                    <Input type="text" value={username} onChange={onchange} placeholder="MisterHong" />
                   </div>
                 </div>
               )}
@@ -116,7 +116,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">이메일</div>
                   <div className="Input__Column">
-                    <Input type="email" value={email} onChange={onchange} />
+                    <Input type="email" value={email} onChange={onchange} placeholder="example@naver.com" />
                   </div>
                 </div>
               )}
@@ -126,7 +126,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">아이디</div>
                   <div className="Input__Column">
-                    <Input type="text" value={id} onChange={onchange} />
+                    <Input type="text" value={id} onChange={onchange} placeholder="Hong-ik" />
                   </div>
                 </div>
               )}
@@ -143,6 +143,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                       value={password}
                       autoComplete="new-password"
                       onChange={onchange}
+                      placeholder="비밀번호"
                     />
                   </div>
                 </div>
@@ -158,6 +159,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                       value={password_accept}
                       autoComplete="new-password"
                       onChange={onchange}
+                      placeholder="비밀번호 확인"
                     />
                   </div>
                 </div>
@@ -171,7 +173,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">주소 입력</div>
                   <div className="Input__Column">
-                    <Input type="text" value={address} onChange={onchange} />
+                    <Input type="text" value={address} onChange={onchange} placeholder="서울특별시 용산구 원효로97길 33-4" />
                   </div>
                 </div>
               )}
