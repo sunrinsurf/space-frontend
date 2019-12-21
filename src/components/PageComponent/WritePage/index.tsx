@@ -54,6 +54,14 @@ const Title = styled.div`
   text-align: center;
   color: #000000;
 `
+const Form = styled.form`
+  width:60%;
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+`
 function DateButton({ value, onClick }: any) {
   return (
     <Button
@@ -144,7 +152,7 @@ function WritePageForm() {
   );
 
   return (
-    <form onSubmit={onSubmit} style={{ width: "60%", margin: "0 auto" }}>
+    <Form onSubmit={onSubmit} >
       <Favicon />
       <Title>상품 등록</Title>
       <Section>
@@ -192,7 +200,7 @@ function WritePageForm() {
       </Section>
       <Section>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-          <h1>사진 업로드</h1>
+          <h1 style={{ minWidth: "100px" }}>사진 업로드</h1>
           <h3 className="sub">사진은 최대 4장까지 업로드 할 수 있습니다.</h3>
         </div>
         <WritePageImageUpload />
@@ -201,7 +209,7 @@ function WritePageForm() {
         <Button disabled={progress} fullWidth style={{ boxShadow: "0 0 6px 0 #ff388a" }}>{progress ? imageProgress ? "이미지 업로드 중..." : "처리 중..." : "올리기"}</Button>
       </div>
       {error && <ErrorComponent>{error}</ErrorComponent>}
-    </form>
+    </Form >
   );
 }
 
