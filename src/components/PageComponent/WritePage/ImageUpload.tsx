@@ -67,10 +67,10 @@ function WritePageImageUpload() {
             title={data.name}
           />
         ))}
-        <UploadImage onClick={onAdd}>
+        {images.length < 4 && <UploadImage onClick={onAdd}>
           <div className="image" role="img" aria-label="Space Favicon" />
           사진 추가
-        </UploadImage>
+        </UploadImage>}
 
       </Flex>
       <input style={{ display: 'none' }} type="file" ref={fileRef} accept="image/*" />
