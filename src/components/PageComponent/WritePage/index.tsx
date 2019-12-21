@@ -26,6 +26,12 @@ const Section = styled.section`
     font-weight: normal;
     font-size: 20px;
   }
+  .sub {
+    color: #797979;
+    font-size: 15px;
+    font-weight: normal;
+    margin-left: 30px;
+  }
 `;
 
 function DateButton({ value, onClick }: any) {
@@ -163,7 +169,10 @@ function WritePageForm() {
         />
       </Section>
       <Section>
-        <h1>이미지 업로드</h1>
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <h1>사진 업로드</h1>
+          <h3 className="sub">사진은 최대 4장까지 업로드 할 수 있습니다.</h3>
+        </div>
         <WritePageImageUpload />
       </Section>
       <Button disabled={progress}>{progress ? imageProgress ? "이미지 업로드 중..." : "처리 중..." : "올리기"}</Button>

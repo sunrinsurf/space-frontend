@@ -57,7 +57,7 @@ function WritePageImageUpload() {
     fileRef.current.addEventListener('change', onchange);
   }, [dispatch, fileRef]);
   return (
-    <div>
+    <div style={{ overflowX: 'auto' }}>
       <Flex style={{ flexWrap: "wrap" }}>
         {images.map((data, i) => (
           <WritePageImageUploadPreview
@@ -71,6 +71,7 @@ function WritePageImageUpload() {
           <div className="image" role="img" aria-label="Space Favicon" />
           사진 추가
         </UploadImage>
+
       </Flex>
       <input style={{ display: 'none' }} type="file" ref={fileRef} accept="image/*" />
     </div>
