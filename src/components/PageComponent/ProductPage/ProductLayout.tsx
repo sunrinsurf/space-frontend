@@ -69,6 +69,7 @@ function ProductLayout({ id }: ProductLayoutProps) {
           participant={participant}
           owner={owner}
           productId={id}
+          profileImage={owner.profileImage}
         />
       </div>
     </div>
