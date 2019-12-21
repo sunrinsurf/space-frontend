@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { baseURL } from "../../lib/api/client";
 import favicon from "../../assets/favicon.svg";
 import digitComma from "../../lib/digitComma";
 import { getImageURL } from "../../lib/api/UploadImage";

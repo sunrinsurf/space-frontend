@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import favicon from "../../../assets/favicon.svg";
 import "./InformationPage.css";
 import { mobile } from "../../../lib/viewport";
-import { baseURL } from "../../../lib/api/client";
 import ImageViewModal from "./ImageViewModal";
 import { getImageURL } from "../../../lib/api/UploadImage";
 
