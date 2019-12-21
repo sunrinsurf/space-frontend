@@ -110,6 +110,13 @@ function ShareCard({
         return "별도 문의";
     }
   }, [royalty, royaltyPrice]);
+  const ProductText = useMemo(() => {
+    const limit = 13;
+    if (title.length > limit) {
+      return title.slice(0, limit) + "...";
+    }
+    return title;
+  }, [title]);
 
   return (
     <Wrap to={`/product/${_id}`}>
@@ -117,7 +124,7 @@ function ShareCard({
         <div className="bg" />
         <h3 className="category">{category}</h3>
         <div className="information">
-          <h3 className="title">{title}</h3>
+          <h3 className="title">{ProductText}</h3>
           <h5 className="royalty">{rolaytyText}</h5>
         </div>
       </Thumb>
