@@ -7,17 +7,16 @@ interface ShareListProps {
 function ShareList({ product }: ShareListProps) {
   return (
     <>
-      {product ? product.map((data: any, i: any) => (
-        <ShareCard
-          key={i}
-          title={data.title}
-          person={data.participant.length}
-          image={data.images && data.images[0]}
-          id={data._id}
-        />
-      )) :
-        null
-      }
+      {product
+        ? product.map((data: any, i: any) => (
+            <ShareCard
+              key={i}
+              person={data.participant.length}
+              image={data.images && data.images[0]}
+              {...data}
+            />
+          ))
+        : null}
     </>
   );
 }
