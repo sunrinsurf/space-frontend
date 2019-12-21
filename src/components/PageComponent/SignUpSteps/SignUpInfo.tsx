@@ -17,6 +17,7 @@ import {
 } from "../../../store/SignUp";
 import SignUpInfoMatch from "./SignUpInfoMatch";
 import SignUpInfoPhone from "./SignUpInfoPhone";
+import UploadProfile from "../../Form/UploadProfile";
 
 const Title = styled.div`
   font-size: 36px;
@@ -49,6 +50,9 @@ const Flex = styled.div`
   width:100%;
   flex-wrap:wrap;
 ;`
+const FullDiv = styled.div`
+  width: 100%;
+`;
 function SignUpInfo({ toNext }: SignUpStepProps) {
   const { form, token } = useSelector((state: RootState) => ({
     form: state.SignUp.form,
@@ -86,7 +90,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
         <Title>회원정보 입력</Title>
         <Indication>하단의 빈칸을 모두 채워주세요</Indication>
         <div className="SignUpInfo__form">
-          <div style={{ width: "100%" }}>
+          <FullDiv>
             <Column column="name" >
               {(onchange, name) => (
                 <div className="SignUpInfo__Column">
@@ -97,8 +101,8 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 </div>
               )}
             </Column>
-          </div>
-          <div style={{ width: "100%" }}>
+          </FullDiv>
+          <FullDiv>
             <Column column="username">
               {(onchange, username) => (
                 <div className="SignUpInfo__Column">
@@ -109,7 +113,11 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 </div>
               )}
             </Column>
-          </div>
+          </FullDiv>
+          <FullDiv style={{ flex: "1", margin: "0 20px 20px" }}>
+            <div className="SignUpInfo__title" style={{ marginBottom: 10 }}>프로필 사진</div>
+            <UploadProfile />
+          </FullDiv>
           <Flex>
             <Column column="email">
               {(onchange, email) => (

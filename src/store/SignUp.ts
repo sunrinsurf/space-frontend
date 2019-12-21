@@ -1,8 +1,8 @@
 import sagaType from "../lib/sagaType";
-import { takeEvery, put, call, select } from 'redux-saga/effects'
+import { takeEvery, put, call, select } from "redux-saga/effects";
 import { RootState } from "./reducer";
 import { signUpCompleteAPI } from "../lib/api/signup";
-import { handleSagaError } from '../lib/api/handleError'
+import { handleSagaError } from "../lib/api/handleError";
 
 const INPUT_CHANGE = "SignUp/INPUT_CHANGE" as const;
 const INPUT_CLEAR = `SignUp/INPUT_CLEAR` as const;
@@ -11,8 +11,13 @@ const CATEGORY_TOGGLE = "SignUp/CATEGORY_TOGGLE" as const;
 const CATEGORY_TOGGLE_DONE = "SignUp/CATEGORY_TOGGLE_DONE" as const;
 const INPUT_ERROR = "SignUp/INPUT_ERROR" as const;
 const INPUT_ERROR_CLEAR = "SignUp/INPUT_ERROR_CLEAR" as const;
-const CERT_TOKEN_COMPLETE = 'SignUp/CERT_TOKEN_COMPLETE' as const;
-const [SIGNUP_COMPLETE, SIGNUP_COMPLETE_SUCCESS, SIGNUP_COMPLETE_FAIL] = sagaType("SignUp/SIGNUP_COMPLETE");
+const CERT_TOKEN_COMPLETE = "SignUp/CERT_TOKEN_COMPLETE" as const;
+const SET_PROFILE_IMAGE = "SignUp/SET_PROFILE_IMAGE" as const;
+const [
+  SIGNUP_COMPLETE,
+  SIGNUP_COMPLETE_SUCCESS,
+  SIGNUP_COMPLETE_FAIL
+] = sagaType("SignUp/SIGNUP_COMPLETE");
 
 interface dataTypes {
   id: string;
@@ -23,10 +28,7 @@ interface dataTypes {
   phone: string;
   address: string;
   email: string;
-}
-interface category {
-  name: string;
-  checked?: boolean;
+  profile?: string;
 }
 
 const initialDataState: dataTypes = {
@@ -67,6 +69,12 @@ export function setPage(i: number) {
     payload: i
   };
 }
+export function setProfileImage(profile: string) {
+  return {
+    type: SET_PROFILE_IMAGE,
+    payload: profile
+  };
+}
 export function categoryToggle(i: number) {
   return {
     type: CATEGORY_TOGGLE,
@@ -77,7 +85,7 @@ function categoryToggleDone(categorys: boolean[]) {
   return {
     type: CATEGORY_TOGGLE_DONE,
     payload: categorys
-  }
+  };
 }
 export function inputError(payload: { [key: string]: string }) {
   return {
@@ -97,12 +105,12 @@ export function certTokenComplete(token: string) {
     payload: {
       token
     }
-  }
+  };
 }
 export function signUpComplete() {
   return {
     type: SIGNUP_COMPLETE
-  }
+  };
 }
 
 type SignUpAction =
@@ -114,28 +122,32 @@ type SignUpAction =
   | ReturnType<typeof inputErrorClear>
   | ReturnType<typeof setPage>
   | ReturnType<typeof certTokenComplete>
+  | ReturnType<typeof setProfileImage>
   | any;
 
 function* signUpCompleteSaga() {
   try {
-    const { form, categorys, categorysOn, certToken } = yield select((state: RootState) => ({
-      form: state.SignUp.form,
-      categorysOn: state.SignUp.categorysOn,
-      categorys: state.Categorys.categorys,
-      certToken: state.SignUp.certToken
-    }));
+    const { form, categorys, categorysOn, certToken } = yield select(
+      (state: RootState) => ({
+        form: state.SignUp.form,
+        categorysOn: state.SignUp.categorysOn,
+        categorys: state.Categorys.categorys,
+        certToken: state.SignUp.certToken
+      })
+    );
     const interest = (categorys as string[]).filter((_, i) => {
       if (!categorysOn) return false;
       return categorysOn[i];
     });
     yield call(signUpCompleteAPI, {
-      uid: form.id || '',
-      password: form.password || '',
-      address: form.address || '',
-      nickname: form.username || '',
+      uid: form.id || "",
+      password: form.password || "",
+      address: form.address || "",
+      nickname: form.username || "",
       phone: form.phone,
-      email: form.email || '',
-      ptoken: certToken || '',
+      email: form.email || "",
+      ptoken: certToken || "",
+      profileImage: form.profile,
       interest
     });
     yield put({ type: SIGNUP_COMPLETE_SUCCESS });
@@ -153,15 +165,16 @@ function* categoryToggleSaga({ payload }: { payload: number }) {
     yield put(categoryToggleDone(categorysOn));
   } else {
     const bools = [];
-    categorys.forEach(() => { bools.push(false) });
+    categorys.forEach(() => {
+      bools.push(false);
+    });
     bools[payload] = true;
     yield put(categoryToggleDone(bools));
   }
-
 }
 export function* SignUpSaga() {
   yield takeEvery(SIGNUP_COMPLETE, signUpCompleteSaga);
-  yield takeEvery((CATEGORY_TOGGLE as any), categoryToggleSaga);
+  yield takeEvery(CATEGORY_TOGGLE as any, categoryToggleSaga);
 }
 const initialState = {
   success: false,
@@ -170,7 +183,7 @@ const initialState = {
   error: initialDataErrorState,
   categorysOn: [],
   page: 0,
-  certToken: ''
+  certToken: ""
 };
 
 function SignUp(state = initialState, action: SignUpAction) {
@@ -220,18 +233,26 @@ function SignUp(state = initialState, action: SignUpAction) {
       return {
         ...state,
         certToken: action.payload.token
-      }
+      };
     case SIGNUP_COMPLETE_SUCCESS:
       return {
         ...state,
         success: true
-      }
+      };
     case SIGNUP_COMPLETE_FAIL:
       return {
         ...state,
         success: false,
         sign_error: action.payload.message
-      }
+      };
+    case SET_PROFILE_IMAGE:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          profile: action.payload
+        }
+      };
     default:
       return state;
   }

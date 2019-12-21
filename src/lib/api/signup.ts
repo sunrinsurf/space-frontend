@@ -16,16 +16,27 @@ export function phoneCertVerify(phone: string, code?: string, token?: string) {
     if (!code || !token) {
       throw new Error("필수 항목이 필요합니다");
     }
-    const req = await client.put('/user/sms/' + code, {
-      phone, token
+    const req = await client.put("/user/sms/" + code, {
+      phone,
+      token
     });
     return req;
-  })
+  });
 }
 
-export function signUpCompleteAPI(data: { uid: string, password: string, nickname: string, email: string, phone: string, address: string, interest: any[], ptoken: string }) {
+export function signUpCompleteAPI(data: {
+  uid: string;
+  password: string;
+  nickname: string;
+  email: string;
+  phone: string;
+  address: string;
+  interest: any[];
+  ptoken: string;
+  profileImage?: string;
+}) {
   return handleError(async () => {
-    const req = await client.post('/user', data);
+    const req = await client.post("/user", data);
     return req;
   });
 }
