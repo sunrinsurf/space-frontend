@@ -53,14 +53,16 @@ function SignUpInfoPhone() {
                   onChange={onchange}
                   disabled={success}
                 />
-                <Button
-                  style={{ height: "fit-content", borderRadius: 26, marginLeft: 10 + "px" }}
-                  onClick={SignUpInfoCert}
-                  disabled={success}
-                >
-                  본인인증
-          </Button>
+
               </div>
+              <div className="SignUpInfo__title">본인인증</div>
+              <Button
+                style={{ height: "fit-content", borderRadius: 26, margin: "0 auto" }}
+                onClick={SignUpInfoCert}
+                disabled={success}
+              >
+                본인인증
+                </Button>
             </div>
           </Flex>
           {progress && <PhoneCode />}

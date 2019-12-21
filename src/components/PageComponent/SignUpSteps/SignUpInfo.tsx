@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SignUpStepProps from "./SignUpStepProps";
+import styled from "styled-components"
 
 import Input from "../../Form/Input2";
 import Button from "../../Form/Button";
@@ -17,6 +18,38 @@ import {
 import SignUpInfoMatch from "./SignUpInfoMatch";
 import SignUpInfoPhone from "./SignUpInfoPhone";
 
+const Title = styled.div`
+  font-size: 36px;
+  font-weight: 100;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+`
+
+const Indication = styled.div`
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin-bottom:30px;
+  margin-left:20px;
+  @media (max-width: 600px) {
+    font-size:20px;
+    margin-left:0px;
+  }
+`
+const Flex = styled.div`
+  display:flex;
+  width:100%;
+  flex-wrap:wrap;
+;`
 function SignUpInfo({ toNext }: SignUpStepProps) {
   const { form, token } = useSelector((state: RootState) => ({
     form: state.SignUp.form,
@@ -50,16 +83,37 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
   return (
     <div>
       <form className="SignUpInfo__wrap">
-        <Favicon width="100" />
-        <h1 style={{ fontSize: 36 + "px" }}>회원정보 입력</h1>
+        <Favicon width="100" style={{ margin: "0 auto" }} />
+        <Title>회원정보 입력</Title>
+        <Indication>하단의 빈칸을 모두 채워주세요</Indication>
         <div className="SignUpInfo__form">
-          <div className="SignUpInfo__left">
-            <Column column="name">
-              {(onchange, name) => (
+          <Column column="name">
+            {(onchange, name) => (
+              <div className="SignUpInfo__Column">
+                <div className="SignUpInfo__title">이름</div>
+                <div className="Input__Column">
+                  <Input type="text" value={name} onChange={onchange} />
+                </div>
+              </div>
+            )}
+          </Column>
+          <Column column="username">
+            {(onchange, username) => (
+              <div className="SignUpInfo__Column">
+                <div className="SignUpInfo__title">닉네임</div>
+                <div className="Input__Column">
+                  <Input type="text" value={username} onChange={onchange} />
+                </div>
+              </div>
+            )}
+          </Column>
+          <Flex>
+            <Column column="email">
+              {(onchange, email) => (
                 <div className="SignUpInfo__Column">
-                  <div className="SignUpInfo__title">이름</div>
+                  <div className="SignUpInfo__title">이메일</div>
                   <div className="Input__Column">
-                    <Input type="text" value={name} onChange={onchange} />
+                    <Input type="email" value={email} onChange={onchange} />
                   </div>
                 </div>
               )}
@@ -74,6 +128,8 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 </div>
               )}
             </Column>
+          </Flex>
+          <Flex>
             <Column column="password">
               {(onchange, password) => (
                 <div className="SignUpInfo__Column">
@@ -104,40 +160,20 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 </div>
               )}
             </Column>
-          </div>
-          <div className="SignUpInfo__right">
-            <Column column="username">
-              {(onchange, username) => (
-                <div className="SignUpInfo__Column">
-                  <div className="SignUpInfo__title">닉네임</div>
-                  <div className="Input__Column">
-                    <Input type="text" value={username} onChange={onchange} />
-                  </div>
+          </Flex>
+
+
+          <Column column="address">
+            {(onchange, address) => (
+              <div className="SignUpInfo__Column">
+                <div className="SignUpInfo__title">주소 입력</div>
+                <div className="Input__Column">
+                  <Input type="text" value={address} onChange={onchange} />
                 </div>
-              )}
-            </Column>
-            <Column column="email">
-              {(onchange, email) => (
-                <div className="SignUpInfo__Column">
-                  <div className="SignUpInfo__title">이메일</div>
-                  <div className="Input__Column">
-                    <Input type="email" value={email} onChange={onchange} />
-                  </div>
-                </div>
-              )}
-            </Column>
-            <Column column="address">
-              {(onchange, address) => (
-                <div className="SignUpInfo__Column">
-                  <div className="SignUpInfo__title">주소 입력</div>
-                  <div className="Input__Column">
-                    <Input type="text" value={address} onChange={onchange} />
-                  </div>
-                </div>
-              )}
-            </Column>
-            <SignUpInfoPhone />
-          </div>
+              </div>
+            )}
+          </Column>
+          <SignUpInfoPhone />
         </div>
       </form>
       <div className="SignUpInfo__Button">
@@ -203,7 +239,7 @@ export function Column({
   const data = children(onChange, value);
 
   return (
-    <div>
+    <div style={{ width: "100%", margin: "0px 20px" }}>
       {data}
       <div className="SignUpInfo__error">
         {error && (
