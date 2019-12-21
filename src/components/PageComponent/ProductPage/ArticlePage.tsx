@@ -97,7 +97,7 @@ function ArticlePage({ category, title, by, contents, royalty,
       <div className="ArticlePage__Category"><span style={{ color: "black" }}>{category}</span> | <span style={{ color: "#ff388a" }}>{participantText}/{person} 참여중</span> | <span style={{ color: "#ff388a" }}>{timeToUseText}</span></div>
       <h1 className="ArticlePage__title">{title}</h1>
       <div className="ArticlePage__Nickname">
-        <ProfileImage image={profileImage} />
+        <ProfileImage image={profileImage} role="image" aria-label={`${by} profile`} />
         <div style={{ fontWeight: "bold" }}>{by}</div>
       </div>
       <div className="ArticlePage__Text">{contents}</div>
