@@ -74,6 +74,7 @@ function* InviteSaga({ payload }: InviteSagaInterface) {
     yield call(InviteChatAPI, payload, token);
     yield put(InviteChatSuccess());
   } catch (e) {
+    alert((e.response && e.response.data.message) || e.message);
     yield put(InviteChatFail(e));
   }
 }
