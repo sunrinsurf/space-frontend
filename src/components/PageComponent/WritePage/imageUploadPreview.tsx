@@ -7,13 +7,25 @@ interface ImageProps {
   url: string;
 }
 const Image = styled.div<ImageProps>`
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  position: relative;
   ${props => css`
     background: url(${props.url});
     background-size: cover;
     background-position: center;
   `}
+  .delete {
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 3px black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+  }
 `;
 
 interface ImageUploadPreviewProps {
@@ -33,13 +45,11 @@ function WritePageImageUploadPreview({
   }, [dispatch, idx]);
   return (
     <div style={{ margin: "1em" }}>
-      <div style={{ textAlign: "right" }}>
-        <span role="button" style={{ cursor: "pointer" }} onClick={onRemove}>
+      <Image url={image} role="image" aria-label={title + " Preview"}>
+        <span className="delete" role="button" onClick={onRemove}>
           &times;
         </span>
-      </div>
-      <Image url={image} role="image" aria-label={title + " Preview"} />
-      <h3>{title}</h3>
+      </Image>
     </div>
   );
 }

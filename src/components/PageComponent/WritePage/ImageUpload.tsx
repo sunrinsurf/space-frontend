@@ -1,15 +1,37 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Input from "../../Form/Input";
 import { shareAddImage } from "../../../store/forms/Share";
 import { RootState } from "../../../store/reducer";
 import styled from "styled-components";
-import Button from "../../Form/Button";
+import favicon from '../../../assets/favicon.svg';
 import WritePageImageUploadPreview from "./imageUploadPreview";
 
 const Flex = styled.div`
   display: flex;
   align-items: center;
+`;
+const UploadImage = styled.div`
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 0 rgba(34, 34, 34, 0.15);
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+
+  .image {
+    width: 60px;
+    height: 42px;
+    background: url(${favicon}) no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.3;
+    margin-bottom: 8px;
+  }
 `;
 
 function WritePageImageUpload() {
@@ -19,12 +41,20 @@ function WritePageImageUpload() {
   const dispatch = useDispatch();
 
   const fileRef = useRef<HTMLInputElement>(null);
-  const onAdd = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const onAdd = useCallback(() => {
     if (!fileRef.current) return;
-    const file = fileRef.current;
-    if (!file.files) return;
-    dispatch(shareAddImage(Array.from(file.files)));
+    fileRef.current.click();
+  }, [fileRef]);
+
+  useEffect(() => {
+    if (!fileRef.current) return;
+
+    function onchange(e: any) {
+      const { files } = e.target;
+      if (!files) return;
+      dispatch(shareAddImage(Array.from(files)));
+    }
+    fileRef.current.addEventListener('change', onchange);
   }, [dispatch, fileRef]);
   return (
     <div>
@@ -37,20 +67,12 @@ function WritePageImageUpload() {
             title={data.name}
           />
         ))}
+        <UploadImage onClick={onAdd}>
+          <div className="image" role="img" aria-label="Space Favicon" />
+          사진 추가
+        </UploadImage>
       </Flex>
-      <Flex>
-        <Input style={{ flex: 1 }} type="file" ref={fileRef} accept="image/*" />
-        <div
-          style={{
-            flex: 0,
-            boxSizing: "border-box",
-            margin: "0 1em",
-            width: "100%"
-          }}
-        >
-          <Button onClick={onAdd}>+추가</Button>
-        </div>
-      </Flex>
+      <input style={{ display: 'none' }} type="file" ref={fileRef} accept="image/*" />
     </div>
   );
 }

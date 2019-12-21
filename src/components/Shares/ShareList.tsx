@@ -9,13 +9,12 @@ function ShareList({ product }: ShareListProps) {
     <>
       {product
         ? product.map((data: any, i: any) => (
-            <ShareCard
-              key={i}
-              person={data.participant.length}
-              image={data.images && data.images[0]}
-              {...data}
-            />
-          ))
+          <ShareCard
+            key={i}
+            image={data.images && data.images[0]}
+            {...data}
+          />
+        ))
         : null}
     </>
   );

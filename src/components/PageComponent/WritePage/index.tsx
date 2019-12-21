@@ -21,16 +21,13 @@ import ErrorComponent from "../../ErrorComponent";
 
 const Section = styled.section`
   padding: 1em;
-`;
-const Flex = styled.div`
-  display: flex;
-  & > * {
-    flex: 1;
-  }
-  @media (max-width: 800px) {
-    flex-direction: column;
+
+  h1 {
+    font-weight: normal;
+    font-size: 20px;
   }
 `;
+
 function DateButton({ value, onClick }: any) {
   return (
     <Button
@@ -122,55 +119,49 @@ function WritePageForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <Flex>
-        <div>
-          <Section>
-            <h1>카테고리 선택</h1>
-            <WritePageCategorySelect />
-          </Section>
-          <Section>
-            <h1>공유 상품 제목</h1>
-            <Input value={title} onChange={onchange("title")} />
-          </Section>
-          <Section>
-            <h1>공유 내용</h1>
-            <TextArea value={contents} onChange={onchange("contents")} />
-          </Section>
-        </div>
-        <div>
-          <Section>
-            <h1>로열티 지불 방식</h1>
-            <WritePageFormSelect
-              dispatcher={shareRoyaltySelect}
-              objKey="royalty"
-              showConditions={{
-                monthly: priceForm("월"),
-                weekly: priceForm("주")
-              }}
-            />
-          </Section>
-          <Section>
-            <h1>공유 만료 날짜</h1>
-            <WritePageFormSelect
-              dispatcher={shareTimeSelect}
-              objKey="timeToUse"
-              showConditions={{
-                selectTime: timeToUseDatepicker
-              }}
-            />
-          </Section>
-          <Section>
-            <h1>공유 가능 인원</h1>
-            <Input
-              type="number"
-              min="2"
-              max="8"
-              onChange={onchange("person")}
-              value={person}
-            />
-          </Section>
-        </div>
-      </Flex>
+      <Section>
+        <h1>카테고리 선택</h1>
+        <WritePageCategorySelect />
+      </Section>
+      <Section>
+        <h1>공유 상품 제목</h1>
+        <Input value={title} onChange={onchange("title")} />
+      </Section>
+      <Section>
+        <h1>공유 내용</h1>
+        <TextArea value={contents} onChange={onchange("contents")} />
+      </Section>
+      <Section>
+        <h1>로열티 지불 방식</h1>
+        <WritePageFormSelect
+          dispatcher={shareRoyaltySelect}
+          objKey="royalty"
+          showConditions={{
+            monthly: priceForm("월"),
+            weekly: priceForm("주")
+          }}
+        />
+      </Section>
+      <Section>
+        <h1>공유 만료 날짜</h1>
+        <WritePageFormSelect
+          dispatcher={shareTimeSelect}
+          objKey="timeToUse"
+          showConditions={{
+            selectTime: timeToUseDatepicker
+          }}
+        />
+      </Section>
+      <Section>
+        <h1>공유 가능 인원</h1>
+        <Input
+          type="number"
+          min="2"
+          max="8"
+          onChange={onchange("person")}
+          value={person}
+        />
+      </Section>
       <Section>
         <h1>이미지 업로드</h1>
         <WritePageImageUpload />
