@@ -126,7 +126,7 @@ function SignUpInfo({ toNext }: SignUpStepProps) {
                 <div className="SignUpInfo__Column">
                   <div className="SignUpInfo__title">아이디</div>
                   <div className="Input__Column">
-                    <Input type="text" value={id} onChange={onchange} placeholder="Hong-ik" />
+                    <Input type="text" value={id} onChange={onchange} placeholder="Hongik" />
                   </div>
                 </div>
               )}
