@@ -53,6 +53,7 @@ function SignUpInfoPhone() {
                     style={{ flex: 1 }}
                     onChange={onchange}
                     disabled={success}
+                    placeholder="010-1234-1234"
                   />
                 </div>
               </div>
