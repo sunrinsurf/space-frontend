@@ -10,3 +10,4 @@ function makeViewport(condition: string) {
 
 export const mobile = makeViewport("max-width: 640px");
 export const tablet = makeViewport("min-width: 768px");
+export const desktop = makeViewport("min-width: 1440px");
