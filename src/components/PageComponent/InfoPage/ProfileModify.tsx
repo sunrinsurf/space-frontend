@@ -16,7 +16,7 @@ const Favicon = styled.div`
   background-image: url(${favicon});
   margin: 0 auto;
 `;
-const TItle = styled.div`
+const Title = styled.h1`
   font-size: 36px;
   font-weight: 100;
   font-stretch: normal;
@@ -31,7 +31,7 @@ function ChangeInfo() {
   return (
     <Wrap>
       <Favicon></Favicon>
-      <TItle>프로필 수정</TItle>
+      <Title>프로필 수정</Title>
       <ProfileModifyForm />
     </Wrap>
   );
