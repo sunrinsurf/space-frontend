@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../Form/Button";
 import WritePageImageUpload from "./ImageUpload";
 import ErrorComponent from "../../ErrorComponent";
+import favicon from "../../../assets/favicon.svg";
 
 const Section = styled.section`
   padding: 1em;
@@ -34,6 +35,33 @@ const Section = styled.section`
   }
 `;
 
+const Favicon = styled.div`
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(${favicon});
+  margin: 0 auto;
+`;
+const Title = styled.div`
+    font-size: 32px;
+  font-weight: 100;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+`
+const Form = styled.form`
+  width:60%;
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+`
 function DateButton({ value, onClick }: any) {
   return (
     <Button
@@ -124,18 +152,20 @@ function WritePageForm() {
   );
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} >
+      <Favicon />
+      <Title>상품 등록</Title>
       <Section>
         <h1>카테고리 선택</h1>
         <WritePageCategorySelect />
       </Section>
       <Section>
         <h1>공유 상품 제목</h1>
-        <Input value={title} onChange={onchange("title")} />
+        <Input value={title} onChange={onchange("title")} placeholder="홍길동" />
       </Section>
       <Section>
         <h1>공유 내용</h1>
-        <TextArea value={contents} onChange={onchange("contents")} />
+        <TextArea value={contents} onChange={onchange("contents")} placeholder="example@naver.com" style={{ height: "200px" }} />
       </Section>
       <Section>
         <h1>로열티 지불 방식</h1>
@@ -170,14 +200,16 @@ function WritePageForm() {
       </Section>
       <Section>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-          <h1>사진 업로드</h1>
+          <h1 style={{ minWidth: "100px" }}>사진 업로드</h1>
           <h3 className="sub">사진은 최대 4장까지 업로드 할 수 있습니다.</h3>
         </div>
         <WritePageImageUpload />
       </Section>
-      <Button disabled={progress}>{progress ? imageProgress ? "이미지 업로드 중..." : "처리 중..." : "올리기"}</Button>
+      <div style={{ width: "230px", margin: "0 auto" }}>
+        <Button disabled={progress} fullWidth style={{ boxShadow: "0 0 6px 0 #ff388a" }}>{progress ? imageProgress ? "이미지 업로드 중..." : "처리 중..." : "올리기"}</Button>
+      </div>
       {error && <ErrorComponent>{error}</ErrorComponent>}
-    </form>
+    </Form >
   );
 }
 

@@ -19,15 +19,12 @@ const PolicyContentsBox = styled.div`
   overflow-y: auto;
   max-height: 40vh;
 `;
-
 const PolicyOpenerWrap = styled.div`
   padding: .7em 1em;
   display: flex;
   align-items: center;
   border-top: 1px solid #979797;
   border-bottom: 1px solid #979797;
-
-  
   & h1 {
     margin: 0;
     margin-left: 20px;

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import SignUpStepProps from './SignUpStepProps';
 import Button from '../../Form/Button';
-import Favicon from '../../Layout/Favicon';
 import { ReactComponent as Adventure } from '../../../assets/adventure.svg';
 const Wrap = styled.div`
     padding: 1.5em;

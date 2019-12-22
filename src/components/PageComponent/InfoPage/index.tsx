@@ -118,7 +118,7 @@ function InfoPageMain({
           <ShareList product={createdProducts} />
         </div>
       </Section>
-    </div>
+    </ div >
   );
 }
 
