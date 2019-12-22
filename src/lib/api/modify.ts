@@ -27,3 +27,17 @@ export function modifyNickname(nickname: string, token: string) {
     );
   });
 }
+
+export function modifyInterest(interest: string[], token: string) {
+  return handleError(async () => {
+    await client.put(
+      "/user/interest",
+      { interest },
+      {
+        headers: {
+          "x-access-token": token
+        }
+      }
+    );
+  });
+}

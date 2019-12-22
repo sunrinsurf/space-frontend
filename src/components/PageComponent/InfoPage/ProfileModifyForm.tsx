@@ -7,7 +7,7 @@ import { RootState } from "../../../store/reducer";
 import Category from "../../Form/Category";
 import ProfileImageModify from "./ProfileImageModify";
 import Button from "../../Form/Button";
-import { modifyNickname } from "../../../lib/api/modify";
+import { modifyNickname, modifyInterest } from "../../../lib/api/modify";
 
 const Form = styled.form`
   margin-top: 55px;
@@ -47,6 +47,11 @@ const Form = styled.form`
     justify-content: center;
     margin-bottom: 40px;
   }
+  .submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
 `;
 
 interface ProfileModifyFormProps {
@@ -75,6 +80,13 @@ function ProfileModifyForm(data: ProfileModifyFormProps) {
       .then(() => alert("완료"))
       .catch(e => alert(e.message));
   }, [nickname]);
+  const submitInterest = useCallback(() => {
+    if (!token) return;
+    const interest: string[] = categorys.map((data, i) => selected[i] && data).filter((data) => typeof data === 'string') as any;
+    modifyInterest(interest, token)
+      .then(() => alert("완료"))
+      .catch(e => alert(e.message));
+  }, [categorys, selected, token]);
   return (
     <Form onSubmit={e => e.preventDefault()}>
       <div className="profile">
@@ -92,6 +104,10 @@ function ProfileModifyForm(data: ProfileModifyFormProps) {
         <h1>관심 있는 카테고리</h1>
         <div className="categorys">
           {categorys.map((name, i) => <Category key={i} select={selected[i]} onClick={toggle(i)}>{name}</Category>)}
+        </div>
+        <div className="submit">
+          <Button onClick={submitInterest} long>적용</Button>
+
         </div>
       </div>
     </Form>
