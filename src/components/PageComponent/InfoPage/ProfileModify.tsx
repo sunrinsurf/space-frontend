@@ -28,7 +28,6 @@ const Title = styled.h1`
 `;
 
 function ChangeInfo(data: any) {
-  console.log(data);
   return (
     <Wrap>
       <Favicon></Favicon>
