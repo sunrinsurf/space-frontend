@@ -38,11 +38,6 @@ const Thumb = styled.div<ThumbProps>`
       background-position: center;
     `;
   }}
-
-  @media (max-width: 640px) {
-    width: 100px;
-    height: 100px;
-  }
 `;
 const Wrap = styled(Link)`
   all: unset;

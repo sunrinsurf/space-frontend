@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 import { getShares } from "../../lib/api/getShares";
 import ErrorComponent from "../ErrorComponent";
 import ShareList from "./ShareList";
 import { RootState } from "../../store/reducer";
-import { mobile } from "../../lib/viewport";
 import ShareListSkeleton from "./ShareListSkeleton";
 
 const List = styled.div`
@@ -14,12 +13,6 @@ const List = styled.div`
   flex-wrap: wrap;
   padding: 0 1em;
   justify-content: center;
-
-  ${mobile(css`
-    flex-direction: column;
-    flex-wrap: initial;
-    justify-content: initial;
-  `)}
 `;
 //interface SharesProps { }
 function Shares() {

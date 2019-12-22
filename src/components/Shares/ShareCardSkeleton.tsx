@@ -9,24 +9,16 @@ const Wrap = styled.div`
     align-items: center;
 
     .thumbnail {
-        width: 200px;
-        height: 200px;
+        width:  300px;
+        height: 300px;
         border-radius: 20px;
         background: #bababa;
-    }
-    .title {
-        margin-top: 1em;
-        height: 36px;
-        background: #bababa;
-        width: 70%;
-        border-radius: 10px;
     }
 `;
 function ShareCardSkeleton() {
     return (
         <Wrap>
             <div className="thumbnail"></div>
-            <div className="title"></div>
         </Wrap>
     )
 }

@@ -16,8 +16,8 @@ const Wrap = styled.div`
         position: relative;
     }
     .image {
-        max-height: 70vh;
-        max-width: 70vw;
+        max-height: 90vh;
+        max-width: 90vw;
     }
     .close {
         font-size: 30px;
