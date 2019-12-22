@@ -1,1 +1,6 @@
 .wrap::-webkit-scrollbar { width: 0px; }
+@media(max-width:768px){
+    .wrap{
+        width: 100% !important;
+    }
+}
