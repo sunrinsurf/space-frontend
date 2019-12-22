@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducer";
 import ChatBubble from "./ChatBubble";
-
+import "./ChatList.css";
 function ChatList() {
   const messages = useSelector((state: RootState) => state.Socket.messages);
   const list = useRef<HTMLDivElement>();
@@ -12,7 +12,7 @@ function ChatList() {
     l.scrollTop = l.scrollHeight;
   }, [messages, list]);
   return (
-    <div style={{ flex: "1", overflowY: "scroll" }} ref={list as any}>
+    <div style={{ flex: "1", overflowY: "scroll", width: "70%", margin: "0 auto" }} ref={list as any} className="wrap">
       {messages.map((data, i) => {
         if (data.type === "MY") {
           return <ChatBubble myChat={true} message={data.message} time={data.time} key={i} />;

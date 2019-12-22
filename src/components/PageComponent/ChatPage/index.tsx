@@ -19,7 +19,20 @@ const Header = styled.header`
   text-align: center;
   background: white;
   color: #494949;
+  display:flex;
+  width:80%;
+  margin: 0 auto;
+  justify-content:space-between;
 `;
+const Title = styled.div`
+font-size: 24px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #494949;
+  `
 const Toggler = styled.div<{ opened?: boolean }>`
   cursor: pointer;
   padding: 0.5em 1em;
@@ -66,15 +79,16 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
   if (!chatData) return null;
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "100%", marginTop: "60px" }}>
       <Header>
-        <h1>{chatData.product.title}</h1>
-
+        <Title>{chatData.product.title}</Title>
+        <div style={{ width: "fit-content" }}>
+          <Toggler opened={openUser} onClick={toggleUser}>
+            참여자 목록
+        </Toggler>
+        </div>
       </Header>
       <div>
-        <Toggler opened={openUser} onClick={toggleUser}>
-          참여자 목록
-        </Toggler>
         {openUser && <ChatUserList />}
       </div>
       <div
