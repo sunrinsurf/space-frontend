@@ -22,3 +22,7 @@ export async function getShare(id: string) {
   const req = await client.get(`/shop/${id}`);
   return req.data.product;
 }
+
+export function getMainShare() {
+  return client.get("/shop?limit=4");
+}
