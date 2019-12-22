@@ -79,7 +79,7 @@ function ProfileModifyForm(data: ProfileModifyFormProps) {
     modifyNickname(nickname, token)
       .then(() => alert("완료"))
       .catch(e => alert(e.message));
-  }, [nickname]);
+  }, [nickname, token]);
   const submitInterest = useCallback(() => {
     if (!token) return;
     const interest: string[] = categorys.map((data, i) => selected[i] && data).filter((data) => typeof data === 'string') as any;
