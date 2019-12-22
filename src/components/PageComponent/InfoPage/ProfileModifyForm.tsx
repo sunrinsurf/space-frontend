@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducer";
 import Category from "../../Form/Category";
 import ProfileImageModify from "./ProfileImageModify";
+import Button from "../../Form/Button";
+import { modifyNickname } from "../../../lib/api/modify";
 
 const Form = styled.form`
   margin-top: 55px;
@@ -47,20 +49,6 @@ const Form = styled.form`
   }
 `;
 
-interface FieldProps {
-  fieldName: string;
-  value?: string;
-  set?: any;
-}
-
-function Field({ fieldName, value, set }: FieldProps) {
-  return (
-    <div className="field">
-      <span>{fieldName}</span>
-      <Input value={value} />
-    </div>
-  );
-}
 interface ProfileModifyFormProps {
   uid: string,
   nickname: string,
@@ -70,7 +58,7 @@ interface ProfileModifyFormProps {
 }
 function ProfileModifyForm(data: ProfileModifyFormProps) {
   const [nickname, setNickname] = useState(data.nickname);
-  const { categorys } = useSelector((state: RootState) => state.Categorys);
+  const { categorys, token } = useSelector((state: RootState) => ({ ...state.Categorys, ...state.Auth }));
   const [selected, setSelected] = useState(categorys.map((category) => data.interest.includes(category)));
 
   const toggle = useCallback((i: number) => {
@@ -81,13 +69,23 @@ function ProfileModifyForm(data: ProfileModifyFormProps) {
       setSelected(_selected);
     }
   }, [selected]);
+  const submitNickname = useCallback(() => {
+    if (!token) return;
+    modifyNickname(nickname, token)
+      .then(() => alert("완료"))
+      .catch(e => alert(e.message));
+  }, [nickname]);
   return (
-    <Form>
+    <Form onSubmit={e => e.preventDefault()}>
       <div className="profile">
         <ProfileImageModify nickname={nickname} image={data.profileImage} />
       </div>
       <div className="fields">
-        <Field fieldName="닉네임" value={nickname} set={setNickname} />
+        <div className="field">
+          <span>닉네임</span>
+          <Input value={nickname} onChange={e => setNickname(e.target.value)} />
+          <Button onClick={submitNickname} style={{ marginLeft: 10 }}>수정</Button>
+        </div>
       </div>
       <hr />
       <div className="category">
