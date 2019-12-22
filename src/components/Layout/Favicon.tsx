@@ -16,8 +16,8 @@ function Favicon({
     >
       <g>
         <linearGradient id="Favicon__1" x1="0%" y1="25.181%" y2="74.819%">
-            <stop offset="0%" stop-color="#FF388A"/>
-            <stop offset="100%" stop-color="#0091FF"/>
+            <stop offset="0%" stopColor="#FF388A"/>
+            <stop offset="100%" stopColor="#0091FF"/>
         </linearGradient>
         <path
           style={{ fill: white ? "white" : "url(#Favicon__1)" }}
@@ -36,8 +36,8 @@ function Favicon({
 			C107.7,82.4,101.1,94.1,90.5,101.1L90.5,101.1z"
         />
       <linearGradient id="Favicon__2" x1="0%" y1="25.181%" y2="74.819%">
-            <stop offset="0%" stop-color="#FF388A"/>
-            <stop offset="100%" stop-color="#0091FF"/>
+            <stop offset="0%" stopColor="#FF388A"/>
+            <stop offset="100%" stopColor="#0091FF"/>
         </linearGradient>
         <path
           style={{ opacity: 0.33, fill: white ? "white" : `url(#Favicon__2)` }}
