@@ -8,23 +8,16 @@ function Favicon({
   ...props
 }: FaviconProps & React.SVGProps<SVGAElement>) {
   return (
+    
     <svg
       viewBox="0 0 140 140"
       xmlns="http://www.w3.org/2000/svg"
       {...(props as any)}
     >
       <g>
-        <linearGradient
-          id="Favicon__1"
-          gradientUnits="userSpaceOnUse"
-          x1="9.7391"
-          y1="-201.9191"
-          x2="150.8387"
-          y2="-265.7958"
-          gradientTransform="matrix(1 0 0 -1 0 -159.2)"
-        >
-          <stop offset="0" style={{ stopColor: "#FD437C" }} />
-          <stop offset="1" style={{ stopColor: "#22C6C2" }} />
+        <linearGradient id="Favicon__1" x1="0%" y1="25.181%" y2="74.819%">
+            <stop offset="0%" stop-color="#FF388A"/>
+            <stop offset="100%" stop-color="#0091FF"/>
         </linearGradient>
         <path
           style={{ fill: white ? "white" : "url(#Favicon__1)" }}
@@ -42,23 +35,13 @@ function Favicon({
 			C106.4,40,104.5,37.7,102.4,35.5z M90.5,101.1c-10.6,7-24,8.4-35.9,3.8c9.5-5,18.7-10.4,27.6-16.3c8.9-5.8,17.6-12.2,25.9-18.9
 			C107.7,82.4,101.1,94.1,90.5,101.1L90.5,101.1z"
         />
-
-        <linearGradient
-          id="Favicon__2"
-          gradientUnits="userSpaceOnUse"
-          x1="16.9105"
-          y1="-186.0902"
-          x2="158.0001"
-          y2="-249.9669"
-          gradientTransform="matrix(1 0 0 -1 0 -159.2)"
-        >
-          <stop offset="0" style={{ stopColor: "#FD437C" }} />
-          <stop offset="1" style={{ stopColor: "#22C6C2" }} />
+      <linearGradient id="Favicon__2" x1="0%" y1="25.181%" y2="74.819%">
+            <stop offset="0%" stop-color="#FF388A"/>
+            <stop offset="100%" stop-color="#0091FF"/>
         </linearGradient>
         <path
           style={{ opacity: 0.33, fill: white ? "white" : `url(#Favicon__2)` }}
-          d="M107.4,76.2c2.9-1.7,5.7-3.5,8.4-5.4c0.1-2.5,0.1-5-0.2-7.5c-2.7,2.5-4.4,3.9-7.4,6.3
-                C108.1,71.8,107.8,74,107.4,76.2z"
+          d="M34 18a54.702 54.702 0 0 0 2.975-1.667 12.63 12.63 0 0 0-.07-2.333c-.96.762-1.54 1.21-2.63 1.97A11.16 11.16 0 0 1 34 18z" opacity=".33"
         />
       </g>
     </svg>
