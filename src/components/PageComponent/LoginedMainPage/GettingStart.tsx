@@ -58,12 +58,16 @@ const Wrap = styled.div`
       font-size: 57px;
       background: url(${rectangle}) no-repeat;
       background-position: left bottom;
-      ${mobile(css`
-        font-size: 34px;
+      
+    }
+    ${mobile(css`
+      left: 5vw;
+      h1 {
+        font-size: 45px;
         width: fit-content;
         background-size: contain;
-      `)}
-    }
+      }
+    `)}
   }
 `;
 const StartShareButton = styled(Link)`
