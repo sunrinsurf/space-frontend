@@ -29,6 +29,7 @@ const Form = styled.form`
     position: absolute;
     bottom: 8px;
     right: 20px;
+    z-index:100;
     img {
       width: 32px;
       height: 32px;
