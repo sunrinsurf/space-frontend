@@ -17,8 +17,8 @@ import ChatList from "./ChatList";
 const Header = styled.header`
   padding: 0.5em;
   text-align: center;
-  background: rgb(17, 131, 250);
-  color: white;
+  background: white;
+  color: #494949;
 `;
 const Toggler = styled.div<{ opened?: boolean }>`
   cursor: pointer;
@@ -69,6 +69,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
     <div style={{ height: "100%" }}>
       <Header>
         <h1>{chatData.product.title}</h1>
+
       </Header>
       <div>
         <Toggler opened={openUser} onClick={toggleUser}>
