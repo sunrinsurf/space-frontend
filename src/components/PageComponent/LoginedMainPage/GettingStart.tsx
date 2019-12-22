@@ -13,6 +13,8 @@ const Wrap = styled.div`
   height: 813px;
   background: #0085ff;
   position: relative;
+  color: white;
+  
   .bg {
     position: absolute;
     left: 0;
@@ -58,17 +60,21 @@ const Wrap = styled.div`
       font-size: 57px;
       background: url(${rectangle}) no-repeat;
       background-position: left bottom;
-      
+      color: white;
     }
     ${mobile(css`
-      left: 5vw;
+      left: 10px;
       h1 {
-        font-size: 45px;
+        font-size: 40px;
         width: fit-content;
         background-size: contain;
       }
     `)}
   }
+
+  ${mobile(css`
+    height: 80vh;
+  `)}
 `;
 const StartShareButton = styled(Link)`
   all: unset;
