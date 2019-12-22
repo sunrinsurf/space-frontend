@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styled, { css } from "styled-components";
 import Input from "../../Form/Input";
-import { tablet } from "../../../lib/viewport";
+import { mobile } from "../../../lib/viewport";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducer";
+import Category from "../../Form/Category";
+import ProfileImageModify from "./ProfileImageModify";
 
 const Form = styled.form`
   margin-top: 55px;
-  .row {
+  .category {
+    margin-top: 40px;
+    .categorys {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .fields {
+    margin-bottom: 20px;
     .field {
       display: flex;
       align-items: center;
@@ -13,49 +25,76 @@ const Form = styled.form`
       span {
         word-break: keep-all;
         white-space: nowrap;
-        font-size: 20px;
         margin-right: 24px;
         display: block;
-        width: 200pt;
+        flex: 1;
         text-align: right;
+
+        ${mobile(css`
+          margin-right: 10px;
+          flex: 1.2;
+        `)}
       }
+  }
+    input {
+      flex: 2;
     }
   }
-
-  ${tablet(css`
+  .profile {
     display: flex;
-    max-width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: space-around;
-  `)}
+    justify-content: center;
+    margin-bottom: 40px;
+  }
 `;
+
 interface FieldProps {
   fieldName: string;
+  value?: string;
+  set?: any;
 }
 
-function Field({ fieldName }: FieldProps) {
+function Field({ fieldName, value, set }: FieldProps) {
   return (
     <div className="field">
       <span>{fieldName}</span>
-      <Input />
+      <Input value={value} />
     </div>
   );
 }
-function ProfileModifyForm() {
+interface ProfileModifyFormProps {
+  uid: string,
+  nickname: string,
+  email: string,
+  interest: string[]
+  profileImage?: string;
+}
+function ProfileModifyForm(data: ProfileModifyFormProps) {
+  const [nickname, setNickname] = useState(data.nickname);
+  const { categorys } = useSelector((state: RootState) => state.Categorys);
+  const [selected, setSelected] = useState(categorys.map((category) => data.interest.includes(category)));
+
+  const toggle = useCallback((i: number) => {
+    return () => {
+      const _selected = [...selected];
+      _selected[i] = !_selected[i];
+
+      setSelected(_selected);
+    }
+  }, [selected]);
   return (
     <Form>
-      <div className="row">
-        <Field fieldName="이름" />
-        <Field fieldName="아이디" />
-        <Field fieldName="비밀번호" />
-        <Field fieldName="비밀번호 재입력" />
+      <div className="profile">
+        <ProfileImageModify nickname={nickname} image={data.profileImage} />
       </div>
-      <div className="row">
-        <Field fieldName="이메일" />
-        <Field fieldName="닉네임" />
-        <Field fieldName="주소 입력" />
-        <Field fieldName="전화번호" />
+      <div className="fields">
+        <Field fieldName="닉네임" value={nickname} set={setNickname} />
+      </div>
+      <hr />
+      <div className="category">
+        <h1>관심 있는 카테고리</h1>
+        <div className="categorys">
+          {categorys.map((name, i) => <Category key={i} select={selected[i]} onClick={toggle(i)}>{name}</Category>)}
+        </div>
       </div>
     </Form>
   );

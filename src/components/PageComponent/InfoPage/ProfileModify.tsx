@@ -27,12 +27,13 @@ const Title = styled.h1`
   color: #000000;
 `;
 
-function ChangeInfo() {
+function ChangeInfo(data: any) {
+  console.log(data);
   return (
     <Wrap>
       <Favicon></Favicon>
       <Title>프로필 수정</Title>
-      <ProfileModifyForm />
+      <ProfileModifyForm {...data} />
     </Wrap>
   );
 }
