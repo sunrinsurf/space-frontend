@@ -161,11 +161,11 @@ function WritePageForm() {
       </Section>
       <Section>
         <h1>공유 상품 제목</h1>
-        <Input value={title} onChange={onchange("title")} placeholder="홍길동" />
+        <Input value={title} onChange={onchange("title")} />
       </Section>
       <Section>
         <h1>공유 내용</h1>
-        <TextArea value={contents} onChange={onchange("contents")} placeholder="example@naver.com" style={{ height: "200px" }} />
+        <TextArea value={contents} onChange={onchange("contents")} style={{ height: "200px" }} />
       </Section>
       <Section>
         <h1>로열티 지불 방식</h1>
