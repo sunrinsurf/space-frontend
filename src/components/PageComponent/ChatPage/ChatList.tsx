@@ -17,7 +17,7 @@ function ChatList() {
         if (data.type === "MY") {
           return <ChatBubble myChat={true} message={data.message} time={data.time} key={i} />;
         }
-        return <ChatBubble message={data.message} by={data.nickname} time={data.time} key={i} />;
+        return <ChatBubble profileImage={data.profileImage} message={data.message} by={data.nickname} time={data.time} key={i} />;
       })}
     </div>
   );

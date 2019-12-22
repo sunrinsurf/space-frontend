@@ -1,23 +1,36 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducer";
+import profile from '../../../assets/profile.svg';
+import { getImageURL } from "../../../lib/api/UploadImage";
 
 interface ChatUserProps {
   nickname: string;
   isOwner?: boolean;
   online?: boolean;
+  profileImage?: string;
 }
 
-const Profile = styled.div`
+const Profile = styled.div<{ image?: string }>`
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  background: gray;
+
+  ${props => props.image ?
+    css`
+      background: url(${getImageURL(props.image)}) no-repeat;
+    ` :
+    css`
+      background: url(${profile}) no-repeat;
+    `}
+    background-size: cover;
+    background-position: center;
+    
 `;
 
-function ChatUser({ nickname, isOwner, online }: ChatUserProps) {
+function ChatUser({ nickname, isOwner, online, profileImage }: ChatUserProps) {
   return (
     <div
       style={{
@@ -27,7 +40,7 @@ function ChatUser({ nickname, isOwner, online }: ChatUserProps) {
         alignItems: "center"
       }}
     >
-      <Profile />
+      <Profile image={profileImage} />
       <div style={{ marginLeft: "1.5em" }}>
         <h3 style={{ marginBottom: 5 }}>
           {isOwner && (
@@ -52,14 +65,17 @@ function ChatUserList() {
       <ChatUser
         online={onlineData[chatData.product.owner._id]}
         nickname={chatData.product.owner.nickname}
+        profileImage={chatData.product.owner.profileImage}
         isOwner
       />
       {chatData.product.participant.map((data: any) => {
+        console.log(data);
         return (
           <ChatUser
             online={onlineData[data._id]}
             nickname={data.nickname}
             key={data._id}
+            profileImage={data.profileImage}
           />
         );
       })}

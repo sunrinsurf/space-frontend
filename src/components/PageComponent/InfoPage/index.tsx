@@ -1,9 +1,11 @@
 import React from "react";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+
 import ShareList from "../../Shares/ShareList";
 import Button from "../../Form/Button";
 import favicon from "../../../assets/favicon.svg";
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import profile from '../../../assets/profile.svg';
 import { getImageURL } from "../../../lib/api/UploadImage";
 
 const Favicon = styled.div`
@@ -33,8 +35,9 @@ const Profile = styled.div<{ image?: string }>`
   margin: 0 auto;
   ${(props) => props.image ? css`
     background: url(${getImageURL(props.image, true)});
-    background-size: cover;
-  ` : css`background: gray;`}
+  ` : css`background: url(${profile});`}
+  background-size: cover;
+
   background-repeat: no-repeat;
   background-position: center;
 `;

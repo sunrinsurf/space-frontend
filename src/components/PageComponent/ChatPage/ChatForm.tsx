@@ -20,6 +20,7 @@ const Button = styled.button`
   width:120px;
   height:100%;
   border-radius: 24px;
+  border: 0;
   box-shadow: 3px 5px 10px -1px rgba(34, 34, 34, 0.1);
   background-color: #1183fa;
   padding: .25em;
@@ -32,6 +33,7 @@ const Paper = styled.img`
   background-size: contain;
   background-position: center;
   background-image: url(${paper});
+  border: 0;
   width:32px;
   height:24px;
 `
@@ -41,8 +43,10 @@ const Input = styled.input`
  border-radius: 24px;
   background-color: #d8d8d8;
   box-shadow:0;
+  border: 0;
+  outline: 0;
   flex:1;
-  padding:5px 0px;
+  padding:5px 15px;
 `
 function ChatForm() {
   const dispatch = useDispatch();
@@ -70,7 +74,7 @@ function ChatForm() {
         style={{ marginLeft: "1em", }}
       />
       <Button>
-        <Paper></Paper>
+        <Paper />
       </Button>
     </Form>
   );

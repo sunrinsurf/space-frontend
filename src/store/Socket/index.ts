@@ -185,7 +185,8 @@ function* RoomDataSaga() {
                 type: "OTHER",
                 message: data.message,
                 time: data.time,
-                nickname: data.by.nickname
+                nickname: data.by.nickname,
+                profileImage: data.by.profileImage
               };
             }
           )
@@ -201,6 +202,7 @@ function* ChatDataSaga() {
   });
   while (true) {
     const payload = yield take(chatChannel);
+    console.log(payload);
     yield put(
       ChatData({
         type: "OTHER",
@@ -233,6 +235,7 @@ interface Message {
   nickname?: string;
   message: string;
   time: Date;
+  profileImage?: string;
 }
 export interface SocketType {
   connected?: boolean;
