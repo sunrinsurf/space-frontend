@@ -3,8 +3,9 @@ import ShareCard from "./ShareCard";
 
 interface ShareListProps {
   product?: any[];
+  notLogined?: boolean
 }
-function ShareList({ product }: ShareListProps) {
+function ShareList({ product, notLogined }: ShareListProps) {
   return (
     <>
       {product
@@ -12,6 +13,7 @@ function ShareList({ product }: ShareListProps) {
           <ShareCard
             key={i}
             image={data.images && data.images[0]}
+            notLogined={notLogined}
             {...data}
           />
         ))

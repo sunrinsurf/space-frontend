@@ -25,7 +25,7 @@ function MainProduct() {
       <div className="MainProduct__Info">
         <div className="MainProduct__Title">최근 공유된 상품</div>
         <Flex>
-          <ShareList product={data && data.product ? data.product : undefined} />
+          <ShareList notLogined product={data && data.product ? data.product : undefined} />
         </Flex>
       </div>
     </div>

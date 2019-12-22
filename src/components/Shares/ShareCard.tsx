@@ -15,6 +15,7 @@ interface ShareCardProps {
   royaltyPrice?: number;
   _id: string;
   participant: any[];
+  notLogined?: boolean;
 }
 interface ThumbProps {
   image?: string;
@@ -101,7 +102,8 @@ function ShareCard({
   royalty,
   royaltyPrice,
   person,
-  participant
+  participant,
+  notLogined
 }: ShareCardProps) {
   const rolaytyText = useMemo(() => {
     switch (royalty) {
@@ -122,7 +124,7 @@ function ShareCard({
   }, [title]);
 
   return (
-    <Wrap to={`/product/${_id}`}>
+    <Wrap to={`/product/${_id}`} onClick={(e) => notLogined && e.preventDefault()}>
       <Thumb image={image} className="thumbnail">
         <div className="bg" />
         <h3 className="person">
