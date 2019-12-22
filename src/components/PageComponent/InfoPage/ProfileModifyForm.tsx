@@ -9,13 +9,14 @@ const Form = styled.form`
     .field {
       display: flex;
       align-items: center;
+      margin: .5em 0;
       span {
         word-break: keep-all;
         white-space: nowrap;
         font-size: 20px;
         margin-right: 24px;
         display: block;
-        width: 200px;
+        width: 200pt;
         text-align: right;
       }
     }
