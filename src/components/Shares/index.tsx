@@ -76,6 +76,11 @@ function Shares() {
   }, [fetch, page]);
 
   if (error) return <ErrorComponent>{error}</ErrorComponent>;
+  if (product === null) return (
+    <List>
+      <ShareListSkeleton />
+    </List>
+  )
   return (
     <List>
       <ShareList product={product} />
