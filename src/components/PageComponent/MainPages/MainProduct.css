@@ -6,7 +6,8 @@
 }
 
 .MainProduct__Info {
-    width: 90vw;
+    width: 80vw;
+    font-weight: 900;
 }
 
 .MainProduct__Title {

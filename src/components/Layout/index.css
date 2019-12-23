@@ -80,7 +80,8 @@ a {
 }
 .Layout__footer {
   border-top: 1px solid #eaeaea;
-  padding: 2.5em;
+  padding: 1.3em;
+  word-break: keep-all;
 }
 .Layout__brand {
   margin: 0;
