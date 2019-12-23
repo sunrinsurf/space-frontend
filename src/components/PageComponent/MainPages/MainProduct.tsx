@@ -9,7 +9,6 @@ const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content:center;
-  
 
   h3, h5 {
     font-size: 20px;
