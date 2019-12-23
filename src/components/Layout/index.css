@@ -48,7 +48,7 @@ p {
   margin: 0;
 }
 .Layout__header {
-  z-index: 10001;
+  z-index: 9000;
   top: 0;
   left: 0;
   right: 0;
@@ -81,6 +81,8 @@ p {
   margin: 0 auto;
   padding: 1em 1.5em;
   color: white;
+  z-index: 9000;
+
 }
 a {
   text-decoration: none;

@@ -11,22 +11,27 @@ const Wrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3000;
+    z-index:10002;
     .contents {
         position: relative;
+        z-index:10002;
     }
     .image {
         max-height: 90vh;
         max-width: 90vw;
     }
     .close {
+        line-height: 0.6;
         font-size: 30px;
+        top:5px;
+        right:5px;
         position: absolute;
-        right: 10px;
-        top: 10px;
+        text-align:center;
         cursor: pointer;
-        padding: 10px;
         text-shadow: 0 0 10px white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
     .loading {
         width: 500px;
