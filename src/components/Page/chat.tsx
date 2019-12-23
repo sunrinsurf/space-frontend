@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import Layout, { LayoutProps } from "../Layout";
+import Layout, { LayoutProps } from "../Layout/chat";
 
 type PageProps = {
     title?: string;

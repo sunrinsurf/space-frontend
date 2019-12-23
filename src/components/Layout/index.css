@@ -33,9 +33,16 @@ p {
   flex-direction: column;
   min-height: 100vh;
 }
+.Layout__wrapC{
+  display: flex;
+  flex-direction: column;
+}
 .Layout__contents {
   margin: 1em;
   flex: 1;
+}
+.Layout__contentsC {
+  margin: 1em;
 }
 .Layout__contents.noPadding {
   margin: 0;
