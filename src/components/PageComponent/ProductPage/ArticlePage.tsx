@@ -23,6 +23,7 @@ interface ArticlePageProps {
   owner: any;
   productId: string;
   profileImage?: string;
+  tags: string[];
 }
 
 const ProfileImage = styled.div<{ image?: string }>`
@@ -39,6 +40,10 @@ const ProfileImage = styled.div<{ image?: string }>`
   `}
   background-position: center;
 `;
+const Tag = styled.div`
+  color: #1183fa;
+  margin-right: 10px;
+`;
 function ArticlePage({ category, title, by, contents, royalty,
   royaltyPrice,
   timeToUse,
@@ -47,7 +52,7 @@ function ArticlePage({ category, title, by, contents, royalty,
   participant,
   owner,
   productId,
-  profileImage }: ArticlePageProps) {
+  profileImage, tags }: ArticlePageProps) {
 
   const { _id } = useSelector((state: RootState) => state.Auth.data);
   const dispatch = useDispatch();
@@ -104,6 +109,9 @@ function ArticlePage({ category, title, by, contents, royalty,
       <div className="ArticlePage__Box">
         <div>{royaltyText}</div>
         <div>{person}인 사용 가능</div>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {tags.map((tag, i) => <Tag key={i}>#{tag}</Tag>)}
       </div>
       <Button radius="10px" background="#1183fa" onClick={onClick} style={{ marginTop: "20px", paddingLeft: 50, paddingRight: 50 }}>{JoinText}</Button>
     </div>

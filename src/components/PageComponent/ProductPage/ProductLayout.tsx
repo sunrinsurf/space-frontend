@@ -45,7 +45,8 @@ function ProductLayout({ id }: ProductLayoutProps) {
     royaltyPrice,
     participant,
     person,
-    images
+    images,
+    tags
   } = clientData || data;
   return (
     <div className="ProductLayout__wrap">
@@ -70,6 +71,7 @@ function ProductLayout({ id }: ProductLayoutProps) {
           owner={owner}
           productId={id}
           profileImage={owner.profileImage}
+          tags={tags}
         />
       </div>
     </div>

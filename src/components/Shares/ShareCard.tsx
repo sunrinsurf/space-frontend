@@ -16,6 +16,7 @@ interface ShareCardProps {
   _id: string;
   participant: any[];
   notLogined?: boolean;
+  tags: string[]
 }
 interface ThumbProps {
   image?: string;
@@ -90,8 +91,19 @@ const Wrap = styled(Link)`
         font-weight: normal;
         color: #CACACA;
       }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
   }
+`;
+const Tag = styled.div`
+  margin: 10px 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+  font-size: .7rem;
 `;
 
 function ShareCard({
@@ -103,7 +115,8 @@ function ShareCard({
   royaltyPrice,
   person,
   participant,
-  notLogined
+  notLogined,
+  tags
 }: ShareCardProps) {
   const rolaytyText = useMemo(() => {
     switch (royalty) {
@@ -134,6 +147,12 @@ function ShareCard({
         <div className="information">
           <h3 className="title">{ProductText}</h3>
           <h5 className="royalty">{rolaytyText}</h5>
+          <div className="tags">
+            {tags.slice(0, 2).map((v, i) => <Tag key={i}>#{v}</Tag>)}
+            {tags.length > 2 &&
+              <span style={{ alignSelf: 'flex-end', padding: '10px 0' }}>...</span>
+            }
+          </div>
         </div>
       </Thumb>
     </Wrap>
