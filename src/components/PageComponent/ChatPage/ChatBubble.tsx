@@ -23,7 +23,7 @@ const Bubble = styled.div<{ myChat?: boolean }>`
 const Flex = styled.div<{ myChat?: boolean; }>`
   display: flex;
   align-items: center;
-  margin: 1em;
+  margin: 1em 0em;
   ${props => props.myChat && "justify-content: flex-end;"}
 `;
 const ProfileImage = styled.div<{ image?: string }>`

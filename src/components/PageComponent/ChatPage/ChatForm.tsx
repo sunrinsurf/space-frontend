@@ -25,7 +25,7 @@ const Button = styled.button`
   box-shadow: 3px 5px 10px -1px rgba(34, 34, 34, 0.1);
   background-color: #1183fa;
   padding: .25em;
-  margin: 1em;
+  margin: 1em 1em;
   box-sizing: border-box;
   flex: 0.2;
 `

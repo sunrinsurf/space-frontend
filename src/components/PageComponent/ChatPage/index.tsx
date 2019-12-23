@@ -19,10 +19,9 @@ const Header = styled.header`
   background: white;
   color: #494949;
   display:flex;
-  margin-bottom:10px;
   height:30%;
   width:80%;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   justify-content:space-between;
   @media(max-width:768px) {
     width:100%;
@@ -102,7 +101,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
       </div>
       <div
         style={{
-          height: "80vh",
+          height: "70vh",
           display: "flex",
           flexDirection: "column"
         }}
