@@ -56,15 +56,15 @@ const Toggler = styled.div<{ opened?: boolean }>`
   background: #eaeaea;
   &::before {
     ${props => {
-      if (props.opened) {
-        return css`
+    if (props.opened) {
+      return css`
           content: "▲";
         `;
-      }
-      return css`
+    }
+    return css`
         content: "▼";
       `;
-    }}
+  }}
     color: gray;
   }
 `;
@@ -112,27 +112,29 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
   if (error || socketError)
     return <ErrorComponent>{error || socketError}</ErrorComponent>;
   if (!chatData) return null;
+
+  const setStatusBtn = data._id === chatData.product.owner._id &&
+    chatData.product.status !== "END" && (
+      <div className="fit">
+        <Button onClick={statusChange}>
+          {chatData.product.status === "PRE_SHARE"
+            ? "공유 시작"
+            : "공유 종료"}
+        </Button>
+      </div>
+    );
   return (
     <div style={{ marginTop: "20px" }}>
       <Header>
-        {data._id === chatData.product.owner._id &&
-          chatData.product.status !== "END" && (
-            <div className="fit">
-              <Button onClick={statusChange}>
-                {chatData.product.status === "PRE_SHARE"
-                  ? "공유 시작"
-                  : "공유 종료"}
-              </Button>
-            </div>
-          )}
+
         <Title>{chatData.product.title}</Title>
         <div className="fit">
           <Toggler opened={openUser} onClick={toggleUser}>
-            참여자 목록
+            참여자 목록 & 설정
           </Toggler>
         </div>
       </Header>
-      <div>{openUser && <ChatUserList />}</div>
+      <div>{openUser && <div><div style={{ maxWidth: 1080, margin: 'auto', padding: '1em' }}>{setStatusBtn}</div><ChatUserList /></div>}</div>
       <div
         style={{
           height: "65vh",
