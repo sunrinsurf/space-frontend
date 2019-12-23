@@ -52,7 +52,7 @@ const Wrap = styled.div`
   }
   .contents {
     position: absolute;
-    top: 20vh;
+    top: 22vh;
     left: 12vw;
     padding: 20px;
     color: white;
@@ -99,8 +99,6 @@ function GettingStart() {
   return (
     <Wrap>
       <div className="bg" />
-      <div className="plant" />
-      <div className="persons" />
       <div className="contents">
         <h1>
           누구나, 무엇이든 <br />
