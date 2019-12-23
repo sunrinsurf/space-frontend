@@ -13,23 +13,27 @@ const Form = styled.form`
   margin-top: 55px;
   .category {
     margin-top: 40px;
+    width:60%;
+    margin: 0 auto;
     .categorys {
       display: flex;
       flex-wrap: wrap;
     }
   }
   .fields {
+    display:flex;
+    justify-content:center;
     margin-bottom: 20px;
     .field {
+      width:60%;
       display: flex;
+      justify-content:center;
       align-items: center;
       margin: .5em 0;
       span {
-        word-break: keep-all;
         white-space: nowrap;
         margin-right: 24px;
         display: block;
-        flex: 1;
         text-align: right;
 
         ${mobile(css`
@@ -99,7 +103,6 @@ function ProfileModifyForm(data: ProfileModifyFormProps) {
           <Button onClick={submitNickname} style={{ marginLeft: 10 }}>수정</Button>
         </div>
       </div>
-      <hr />
       <div className="category">
         <h1>관심 있는 카테고리</h1>
         <div className="categorys">
