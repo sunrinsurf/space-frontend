@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import SignUpStepProps from './SignUpStepProps';
 import Button from '../../Form/Button';
-import { ReactComponent as Adventure } from '../../../assets/adventure.svg';
+import { ReactComponent as Adventure } from '../../../assets/favicon2.svg';
 const Wrap = styled.div`
     padding: 1.5em;
     text-align: center;
@@ -18,7 +18,7 @@ function SignUpComplete({ toNext }: SignUpStepProps) {
         <Wrap>
             <h1>완료!<br />회원가입을 환영합니다 :)</h1>
             <div>
-                <Adventure style={{ maxWidth: '96%' }} />
+                <Adventure />
             </div>
 
             <div style={{ maxWidth: "700px", marginTop: 20 }}>
