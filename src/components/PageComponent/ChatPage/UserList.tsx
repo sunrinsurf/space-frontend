@@ -61,7 +61,7 @@ function ChatUserList() {
     onlineData: state.Socket.onlineData
   }));
   return (
-    <div style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "100%" }}>
+    <div style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "80%" }}>
       <ChatUser
         online={onlineData[chatData.product.owner._id]}
         nickname={chatData.product.owner.nickname}

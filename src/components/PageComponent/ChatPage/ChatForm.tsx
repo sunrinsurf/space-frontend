@@ -63,7 +63,7 @@ function ChatForm() {
 
   return (
     <Form
-      style={{ flex: 0, display: "flex", alignItems: "center" }}
+      style={{ flex: 0, display: "flex", alignItems: "center", position: "sticky" }}
       onSubmit={onSubmit}
     >
       <Input

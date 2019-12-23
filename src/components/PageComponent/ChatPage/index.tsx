@@ -15,11 +15,11 @@ import {
 import ChatList from "./ChatList";
 
 const Header = styled.header`
-  padding: 0.5em;
   text-align: center;
   background: white;
   color: #494949;
   display:flex;
+  margin-bottom:10px;
   width:80%;
   margin: 0 auto;
   justify-content:space-between;
@@ -35,10 +35,15 @@ font-size: 24px;
   line-height: normal;
   letter-spacing: normal;
   color: #494949;
+  text-align:left;
+  margin: auto 0;
+  word-break:break-all;
+  @media(max-width:768px) {
+  }
   `
 const Toggler = styled.div<{ opened?: boolean }>`
   cursor: pointer;
-  padding: 0.5em 1em;
+  padding: 0.5em 0.7em;
   background: #eaeaea;
   &::before {
     ${props => {
@@ -82,12 +87,12 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
   if (!chatData) return null;
 
   return (
-    <div style={{ height: "100%", marginTop: "60px" }}>
+    <div style={{ height: "100%", marginTop: "20px" }}>
       <Header>
         <Title>{chatData.product.title}</Title>
-        <div style={{ width: "fit-content" }}>
+        <div style={{ minWidth: "fit-content" }}>
           <Toggler opened={openUser} onClick={toggleUser}>
-            참여자 목록
+            설정
         </Toggler>
         </div>
       </Header>
@@ -96,7 +101,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
       </div>
       <div
         style={{
-          height: "70vh",
+          height: "80vh",
           display: "flex",
           flexDirection: "column"
         }}
