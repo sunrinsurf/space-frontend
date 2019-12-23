@@ -101,7 +101,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
       </div>
       <div
         style={{
-          height: "70vh",
+          height: "65vh",
           display: "flex",
           flexDirection: "column"
         }}
