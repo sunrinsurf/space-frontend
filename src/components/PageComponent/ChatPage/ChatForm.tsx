@@ -12,8 +12,8 @@ const Form = styled.form`
   height:45px;
   margin:0 auto;
   @media(max-width:768px){
-    width:100%;
-    height:45px;
+    min-width:100%;
+    min-height:45px;
   }
 
 `
