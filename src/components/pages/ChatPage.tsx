@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import Page from "../Page";
+import Page from "../Page/chat";
 import { CleanChat } from "../../store/Chat";
 import ChatPageComponent from "../PageComponent/ChatPage";
 
