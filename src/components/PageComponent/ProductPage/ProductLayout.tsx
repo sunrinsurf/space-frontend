@@ -50,9 +50,7 @@ function ProductLayout({ id }: ProductLayoutProps) {
   } = clientData || data;
   return (
     <div className="ProductLayout__wrap">
-      <div className="ProductLayout__Rectangle">
-
-      </div>
+      <div className="ProductLayout__Rectangle"></div>
       <div className="ProductLayout__Left">
         <InformationPage images={images} />
       </div>

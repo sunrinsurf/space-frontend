@@ -16,7 +16,8 @@ interface ShareCardProps {
   _id: string;
   participant: any[];
   notLogined?: boolean;
-  tags: string[]
+  tags: string[];
+  status: "PRE_SHARE" | "IN_PROGRESS" | "END";
 }
 interface ThumbProps {
   image?: string;
@@ -41,12 +42,18 @@ const Thumb = styled.div<ThumbProps>`
     `;
   }}
 `;
-const Wrap = styled(Link)`
+const Wrap = styled(Link)<{ inProgress?: boolean }>`
   all: unset;
   margin: 1.5em;
   cursor: pointer;
   width: 300px;
   position: relative;
+
+  ${props =>
+    props.inProgress &&
+    css`
+      cursor: not-allowed;
+    `}
   .thumbnail {
     color: white;
     .bg {
@@ -89,12 +96,21 @@ const Wrap = styled(Link)`
         margin: 0;
         margin-top: 4px;
         font-weight: normal;
-        color: #CACACA;
+        color: #cacaca;
       }
       .tags {
         display: flex;
         flex-wrap: wrap;
       }
+    }
+    .progress {
+      position: absolute;
+      background: black;
+      left: 0;
+      right: 0;
+      top: 30%;
+      padding: 10px;
+      text-align: center;
     }
   }
 `;
@@ -103,7 +119,7 @@ const Tag = styled.div`
   padding: 5px 10px;
   border-radius: 5px;
   border: 1px solid #cecece;
-  font-size: .7rem;
+  font-size: 0.7rem;
 `;
 
 function ShareCard({
@@ -116,7 +132,8 @@ function ShareCard({
   person,
   participant,
   notLogined,
-  tags
+  tags,
+  status
 }: ShareCardProps) {
   const rolaytyText = useMemo(() => {
     switch (royalty) {
@@ -137,7 +154,11 @@ function ShareCard({
   }, [title]);
 
   return (
-    <Wrap to={`/product/${_id}`} onClick={(e) => notLogined && e.preventDefault()}>
+    <Wrap
+      to={`/product/${_id}`}
+      onClick={e => notLogined && status !== "PRE_SHARE" && e.preventDefault()}
+      inProgress={status === "IN_PROGRESS"}
+    >
       <Thumb image={image} className="thumbnail">
         <div className="bg" />
         <h3 className="person">
@@ -148,12 +169,17 @@ function ShareCard({
           <h3 className="title">{ProductText}</h3>
           <h5 className="royalty">{rolaytyText}</h5>
           <div className="tags">
-            {tags.slice(0, 2).map((v, i) => <Tag key={i}>#{v}</Tag>)}
-            {tags.length > 2 &&
-              <span style={{ alignSelf: 'flex-end', padding: '10px 0' }}>...</span>
-            }
+            {tags.slice(0, 2).map((v, i) => (
+              <Tag key={i}>#{v}</Tag>
+            ))}
+            {tags.length > 2 && (
+              <span style={{ alignSelf: "flex-end", padding: "10px 0" }}>
+                ...
+              </span>
+            )}
           </div>
         </div>
+        {status !== "PRE_SHARE" && <div className="progress">진행 중...</div>}
       </Thumb>
     </Wrap>
   );
