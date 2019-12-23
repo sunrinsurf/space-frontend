@@ -42,18 +42,12 @@ const Thumb = styled.div<ThumbProps>`
     `;
   }}
 `;
-const Wrap = styled(Link)<{ inProgress?: boolean }>`
+const Wrap = styled(Link)`
   all: unset;
   margin: 1.5em;
   cursor: pointer;
   width: 300px;
   position: relative;
-
-  ${props =>
-    props.inProgress &&
-    css`
-      cursor: not-allowed;
-    `}
   .thumbnail {
     color: white;
     .bg {
@@ -157,7 +151,7 @@ function ShareCard({
   return (
     <Wrap
       to={`/product/${_id}`}
-      onClick={e => notLogined && status !== "PRE_SHARE" && e.preventDefault()}
+      onClick={e => notLogined && e.preventDefault()}
       inProgress={status === "IN_PROGRESS"}
     >
       <Thumb image={image} className="thumbnail">
