@@ -26,7 +26,7 @@ function LoginedMainPage() {
       <GettingStart />
       <div className={getName("wrap")}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "65px", marginTop: "3%" }}>
-          <Arrow></Arrow>
+          <Arrow height={60} ></Arrow>
         </div>
         <Title>상품 검색</Title>
         <LoginedMainPageSearch />
