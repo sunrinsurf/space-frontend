@@ -152,7 +152,6 @@ function ShareCard({
     <Wrap
       to={`/product/${_id}`}
       onClick={e => notLogined && e.preventDefault()}
-      inProgress={status === "IN_PROGRESS"}
     >
       <Thumb image={image} className="thumbnail">
         <div className="bg" />
