@@ -22,14 +22,23 @@ const Form = styled.form`
     &:active {
       border-color: black;
     }
+    @media(max-width:768px){
+      &::-webkit-input-placeholder {
+        color: transparent;
+      }
+      &:-ms-input-placeholder {
+        color: transparent;
+      }
+    }
   }
 
   .searchButton {
     all: unset;
     position: absolute;
     bottom: 8px;
-    right: 20px;
+    right: 5px;
     z-index:100;
+    background-color:white;
     img {
       width: 32px;
       height: 32px;
