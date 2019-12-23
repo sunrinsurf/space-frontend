@@ -6,7 +6,7 @@ import "./index.css";
 import Shares from "../../Shares";
 import GettingStart from "./GettingStart";
 import styled from "styled-components"
-
+import Arrow from "../../Design/Arrow"
 const Title = styled.div`
   font-size: 32px;
   font-weight: bold;
@@ -25,6 +25,9 @@ function LoginedMainPage() {
     <>
       <GettingStart />
       <div className={getName("wrap")}>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "65px", marginTop: "3%" }}>
+          <Arrow></Arrow>
+        </div>
         <Title>상품 검색</Title>
         <LoginedMainPageSearch />
         <section>
