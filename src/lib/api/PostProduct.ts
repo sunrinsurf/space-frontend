@@ -16,6 +16,7 @@ interface PostProductInterface {
   timeToUse: String;
   timeToUseDate?: Date;
   person: Number;
+  tags: string[];
 }
 
 export function PostProduct(data: PostProductInterface, token: string) {

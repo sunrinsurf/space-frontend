@@ -19,6 +19,7 @@ const CLEAR_FORM = "Share/CLEAR_FORM" as const;
 const ADD_IMAGE = "Share/ADD_IMAGE" as const;
 const ADD_IMAGE_DONE = "Share/ADD_IMAGE_DONE" as const;
 const REMOVE_IMAGE = "Share/REMOVE_IMAGE" as const;
+const SET_TAG = "Share/SET_TAG" as const;
 const SUBMIT = "Share/SUBMIT" as const;
 const SUBMIT_SUCCESS = "Share/SUBMIT_SUCCESS" as const;
 const SUBMIT_IMAGE = "Share/SUBMIT_IMAGE" as const;
@@ -89,6 +90,12 @@ function shareSubmitFail(e: any) {
     payload: e
   };
 }
+export function shareSetTag(tags: string[]) {
+  return {
+    type: SET_TAG,
+    payload: tags
+  };
+}
 type ActionType =
   | ReturnType<typeof shareChange>
   | ReturnType<typeof shareCategoryHandle>
@@ -97,7 +104,8 @@ type ActionType =
   | ReturnType<typeof shareRemoveImage>
   | ReturnType<typeof shareSubmit>
   | ReturnType<typeof shareSubmitSuccess>
-  | ReturnType<typeof shareSubmitFail>;
+  | ReturnType<typeof shareSubmitFail>
+  | ReturnType<typeof shareSetTag>;
 
 function* AddImageSaga({ payload }: { payload: File[] }) {
   const images = yield select((root: RootState) => root.Forms.Share.images);
@@ -144,7 +152,8 @@ function* SubmitSaga() {
       royaltyPrice,
       royalty,
       category,
-      images
+      images,
+      tags
     } = share;
     if (category === null) {
       throw new Error("카테고리를 선택해야 합니다.");
@@ -169,7 +178,8 @@ function* SubmitSaga() {
         royalty: royalty.selected,
         royaltyPrice:
           royalty.selected !== "afterContact" ? royaltyPrice : undefined,
-        category: categoryString[category]
+        category: categoryString[category],
+        tags
       },
       token
     );
@@ -207,7 +217,8 @@ const initialState = {
     noLimit: "제한 없음"
   }),
   images: [] as File[],
-  previews: [] as string[]
+  previews: [] as string[],
+  tags: [] as string[]
 };
 export type ShareType = typeof initialState;
 
@@ -269,6 +280,11 @@ export default function Share(
       return {
         ...state,
         imageProgress: true
+      };
+    case SET_TAG:
+      return {
+        ...state,
+        tags: (action as any).payload
       };
     default:
       return state;

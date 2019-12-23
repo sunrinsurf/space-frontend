@@ -19,6 +19,7 @@ import Button from "../../Form/Button";
 import WritePageImageUpload from "./ImageUpload";
 import ErrorComponent from "../../ErrorComponent";
 import favicon from "../../../assets/favicon.svg";
+import TagWrite from "./TagWrite";
 
 const Section = styled.section`
   padding: 1em;
@@ -197,6 +198,10 @@ function WritePageForm() {
           onChange={onchange("person")}
           value={person}
         />
+      </Section>
+      <Section>
+        <h1>태그</h1>
+        <TagWrite />
       </Section>
       <Section>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
