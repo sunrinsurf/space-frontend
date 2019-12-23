@@ -110,6 +110,7 @@ const Wrap = styled(Link)<{ inProgress?: boolean }>`
       right: 0;
       top: 30%;
       padding: 10px;
+      font-size: 1rem;
       text-align: center;
     }
   }
