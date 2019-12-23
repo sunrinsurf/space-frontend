@@ -18,44 +18,44 @@ const Header = styled.header`
   text-align: center;
   background: white;
   color: #494949;
-  display:flex;
-  height:30%;
-  width:80%;
+  display: flex;
+  height: 30%;
+  width: 80%;
   margin: 0 auto 20px auto;
-  justify-content:space-between;
-  @media(max-width:768px) {
-    width:100%;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 const Title = styled.div`
-font-size: 24px;
+  font-size: 24px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #494949;
-  text-align:left;
+  text-align: left;
   margin: auto 0;
-  word-break:break-all;
-  @media(max-width:768px) {
+  word-break: break-all;
+  @media (max-width: 768px) {
   }
-  `
+`;
 const Toggler = styled.div<{ opened?: boolean }>`
   cursor: pointer;
   padding: 0.5em 0.7em;
   background: #eaeaea;
   &::before {
     ${props => {
-    if (props.opened) {
-      return css`
+      if (props.opened) {
+        return css`
           content: "▲";
         `;
-    }
-    return css`
+      }
+      return css`
         content: "▼";
       `;
-  }}
+    }}
     color: gray;
   }
 `;
@@ -64,7 +64,15 @@ interface ChatPageComponentProps {
 }
 function ChatPageComponent({ id }: ChatPageComponentProps) {
   const dispatch = useDispatch();
-  const { chatData, error, socketError, chatJoined } = useSelector((state: RootState) => ({ ...state.Chat, socketError: state.Socket.error }));
+  const {
+    chatData,
+    error,
+    socketError,
+    chatJoined
+  } = useSelector((state: RootState) => ({
+    ...state.Chat,
+    socketError: state.Socket.error
+  }));
   const [openUser, setOpenUser] = useState(false);
 
   const toggleUser = useClickToggler(setOpenUser, openUser);
@@ -72,7 +80,6 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
     dispatch(JoinChat(id));
   }, [dispatch, id]);
   React.useEffect(() => {
-
     if (!chatJoined) return;
     console.log(chatJoined);
     dispatch(SocketInit());
@@ -83,7 +90,8 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
     };
   }, [dispatch, id, chatJoined]);
 
-  if (error || socketError) return <ErrorComponent>{error || socketError}</ErrorComponent>;
+  if (error || socketError)
+    return <ErrorComponent>{error || socketError}</ErrorComponent>;
   if (!chatData) return null;
 
   return (
@@ -93,12 +101,10 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
         <div style={{ minWidth: "fit-content" }}>
           <Toggler opened={openUser} onClick={toggleUser}>
             설정
-        </Toggler>
+          </Toggler>
         </div>
       </Header>
-      <div>
-        {openUser && <ChatUserList />}
-      </div>
+      <div>{openUser && <ChatUserList />}</div>
       <div
         style={{
           height: "65vh",
