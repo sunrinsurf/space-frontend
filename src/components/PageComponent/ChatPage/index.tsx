@@ -20,6 +20,7 @@ const Header = styled.header`
   color: #494949;
   display:flex;
   margin-bottom:10px;
+  height:30%;
   width:80%;
   margin: 0 auto;
   justify-content:space-between;
@@ -87,7 +88,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
   if (!chatData) return null;
 
   return (
-    <div style={{ height: "100%", marginTop: "20px" }}>
+    <div style={{ marginTop: "20px" }}>
       <Header>
         <Title>{chatData.product.title}</Title>
         <div style={{ minWidth: "fit-content" }}>
@@ -101,7 +102,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
       </div>
       <div
         style={{
-          height: "70vh",
+          height: "80vh",
           display: "flex",
           flexDirection: "column"
         }}
