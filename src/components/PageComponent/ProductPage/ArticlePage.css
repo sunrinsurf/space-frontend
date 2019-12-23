@@ -6,8 +6,17 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.ArticlePage__wrap{
+  width: 100%;
+}
 .ArticlePage__User {
   margin-bottom: 1em;
+}
+@media(max-width:768px){
+  .ArticlePage__title{
+    font-size:28px;
+    word-break: keep-all;
+  }
 }
 .ArticlePage__Images_wrap {
   overflow-x: auto;

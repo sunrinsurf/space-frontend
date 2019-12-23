@@ -23,6 +23,8 @@
   justify-content: center;
   align-items: center;
   height:80vh;
+  margin-right: 1em;
+
 }
 .ProductLayout__Rectangle{
   width: 40vw;
