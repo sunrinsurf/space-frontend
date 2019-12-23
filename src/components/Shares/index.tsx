@@ -79,7 +79,6 @@ function Shares() {
   return (
     <List>
       <ShareList product={product} />
-      {pending && <ShareListSkeleton />}
     </List>
   );
 }
