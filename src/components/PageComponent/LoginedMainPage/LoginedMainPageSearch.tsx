@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import searchIcon from "../../../assets/icons/ic-search.svg";
 import { changeSearch } from "../../../store/forms/SearchShare";
-import { RootState } from "../../../store/reducer";
 
 const Form = styled.form`
   margin-bottom: 3em;
@@ -47,14 +46,26 @@ const Form = styled.form`
 `;
 function LoginedMainPageSearch() {
   const dispatch = useDispatch();
-  const { search } = useSelector((state: RootState) => state.Forms.SearchShare);
+  const [searchValue, setSearch] = useState('');
+
   function onchange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(changeSearch(e.target.value));
+    setSearch(e.target.value);
   }
+  function onsubmit(e: React.FormEvent) {
+    e.preventDefault();
+    dispatch(changeSearch(searchValue));
+  }
+  useEffect(() => {
+    if (searchValue === '') {
+      dispatch(changeSearch(''));
+    }
+  }, [
+    searchValue, dispatch
+  ]);
   return (
-    <Form>
+    <Form onSubmit={onsubmit}>
       <input
-        value={search}
+        value={searchValue}
         onChange={onchange}
         type="text"
         className="search"
