@@ -36,6 +36,7 @@
   }
   .ProductLayout__Left {
     height: 40vh;
+    width: 100%;
   }
   .ProductLayout__Rectangle {
     display: none;

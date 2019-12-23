@@ -8,7 +8,8 @@ import { getImageURL } from "../../../lib/api/UploadImage";
 
 const Image = styled.div<{ image?: string }>`
   width: 400px;
-  height: 200px;
+  height: 180px;
+  border-radius:6pt;
   ${props =>
     props.image
       ? css`
@@ -23,15 +24,19 @@ const Image = styled.div<{ image?: string }>`
   background-position: center;
 
   ${mobile(css`
-    width: 250px;
+    width: 100%;
     height: 250px;
   `)}
 `;
 const ImageList = styled.div`
   display: flex;
-  margin-top: 20px;
-  width: 400px;
+  width:400px;
+  margin-top: 16px;
   justify-content: space-between;
+  ${mobile(css`
+    width:100%;
+    margin-top:8px;
+  `)}
 `;
 const ImageBlock = styled.div<{ image?: string }>`
   ${props =>
@@ -50,6 +55,11 @@ const ImageBlock = styled.div<{ image?: string }>`
   width: 120px;
   height: 120px;
   border-radius: 4pt;
+  ${mobile(css`
+    width: 110px;
+    height: 110px;
+  `)}
+
 `;
 function InformationPage({ images }: { images: string[] }) {
   const [open, setOpen] = useState(false);
