@@ -61,7 +61,7 @@ function ChatUserList() {
     onlineData: state.Socket.onlineData
   }));
   return (
-    <div style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "80%", borderBottom: '1px solid gray' }}>
+    <div style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "100%" }}>
       <ChatUser
         online={onlineData[chatData.product.owner._id]}
         nickname={chatData.product.owner.nickname}
@@ -69,6 +69,7 @@ function ChatUserList() {
         isOwner
       />
       {chatData.product.participant.map((data: any) => {
+        console.log(data);
         return (
           <ChatUser
             online={onlineData[data._id]}

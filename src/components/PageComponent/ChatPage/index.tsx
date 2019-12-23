@@ -23,6 +23,9 @@ const Header = styled.header`
   width:80%;
   margin: 0 auto;
   justify-content:space-between;
+  @media(max-width:768px) {
+    width:100%;
+  }
 `;
 const Title = styled.div`
 font-size: 24px;
