@@ -19,7 +19,7 @@ function IndexPage() {
     <LoginedMainPage />
   )
   const props: any = {};
-  if (!user) props.navFixed = true;
+  if (!user) { props.navFixed = true; props.mainPage = true; }
   else {
     props.whiteColor = true;
     props.colorfulLogo = true;

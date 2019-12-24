@@ -61,7 +61,10 @@ p {
   position: fixed;
 }
 .Layout__header.transparent a {
-  color: black !important;
+  color: black;
+}
+.Layout__header.transparent.main_page a {
+  color: white !important;
 }
 .Layout__header.whiteBackground {
   background: white;
