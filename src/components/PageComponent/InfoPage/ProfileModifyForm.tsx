@@ -19,6 +19,9 @@ const Form = styled.form`
       display: flex;
       flex-wrap: wrap;
     }
+    @media(max-width:768px){
+      width:100%;
+    }
   }
   .fields {
     display:flex;
@@ -41,6 +44,9 @@ const Form = styled.form`
           flex: 1.2;
         `)}
       }
+      ${mobile(css`
+      width:100%;
+        `)}
   }
     input {
       flex: 2;

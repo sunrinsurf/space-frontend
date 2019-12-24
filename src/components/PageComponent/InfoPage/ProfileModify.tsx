@@ -5,7 +5,7 @@ import favicon from "../../../assets/favicon.svg";
 import ProfileModifyForm from "./ProfileModifyForm";
 
 const Wrap = styled.div`
-  margin: 1em 2em;
+  margin: 1em 1em;
 `;
 const Favicon = styled.div`
   width: 100px;
