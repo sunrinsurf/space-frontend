@@ -44,7 +44,7 @@ function Step({ start, img, text }: { start?: boolean, img?: any, text: String }
     <div className="MainShareProcedure__Images_Element">
       {!start && <Arrow strokeLen={10} className="MainShareProcedure__arrow" />}
       <div>
-        <Steps src={img}></Steps>
+        <Steps src={img} width="300px" height="550px"></Steps>
         <Text>{text}</Text>
       </div>
     </div>
