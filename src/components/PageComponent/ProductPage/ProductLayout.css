@@ -40,5 +40,6 @@
 @media (max-width: 600px) {
   .ProductLayout__wrap {
     flex-direction: column;
+    margin-top: 40px;
   }
 }
