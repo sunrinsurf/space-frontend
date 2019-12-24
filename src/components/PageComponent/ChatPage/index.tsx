@@ -46,9 +46,10 @@ const Title = styled.div`
   color: #494949;
   text-align: left;
   margin: auto 0;
-  word-break: break-all;
+  word-break: keep-all;
   flex: 1;
   padding: 0 30px;
+  
 `;
 const Toggler = styled.div<{ opened?: boolean }>`
   cursor: pointer;
@@ -68,6 +69,14 @@ const Toggler = styled.div<{ opened?: boolean }>`
     color: gray;
   }
 `;
+const UserButton = styled.div`
+width:80%;
+padding: 1em;
+margin:0 auto;
+@media(max-width:768px) {
+  width:100%;
+}
+`
 interface ChatPageComponentProps {
   id: string;
 }
@@ -134,7 +143,7 @@ function ChatPageComponent({ id }: ChatPageComponentProps) {
           </Toggler>
         </div>
       </Header>
-      <div>{openUser && <div><div style={{ maxWidth: 1080, margin: 'auto', padding: '1em' }}>{setStatusBtn}</div><ChatUserList /></div>}</div>
+      <div>{openUser && <div><UserButton>{setStatusBtn}</UserButton><ChatUserList /></div>}</div>
       <div
         style={{
           height: "65vh",

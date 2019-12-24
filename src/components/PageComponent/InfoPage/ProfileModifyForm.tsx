@@ -46,7 +46,7 @@ const Form = styled.form`
       }
       ${mobile(css`
       width:100%;
-        `)}
+    `)}
   }
     input {
       flex: 2;

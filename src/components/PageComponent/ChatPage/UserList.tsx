@@ -29,6 +29,16 @@ const Profile = styled.div<{ image?: string }>`
     background-position: center;
     
 `;
+const UserListC = styled.div`
+ position:absolute;
+ background-color:white;
+ left:50%;
+ transform : translateX(-50%);
+ width:80%;
+ @media(max-width:768px) {
+   width:100% !important;
+ }
+`
 
 function ChatUser({ nickname, isOwner, online, profileImage }: ChatUserProps) {
   return (
@@ -61,7 +71,7 @@ function ChatUserList() {
     onlineData: state.Socket.onlineData
   }));
   return (
-    <div style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "80%" }}>
+    <UserListC style={{ position: "absolute", backgroundColor: "white", left: "50%", transform: "translateX(-50%)", width: "80%" }} className="UserListChat">
       <ChatUser
         online={onlineData[chatData.product.owner._id]}
         nickname={chatData.product.owner.nickname}
@@ -79,7 +89,7 @@ function ChatUserList() {
           />
         );
       })}
-    </div>
+    </UserListC>
   );
 }
 
