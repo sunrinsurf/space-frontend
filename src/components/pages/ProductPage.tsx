@@ -14,7 +14,7 @@ function ProductPage({
   }
 }: ProductPageType) {
   return (
-    <Page colorfulLogo noFooter bgctransparent >
+    <Page colorfulLogo noFooter navFixed whiteColor >
       <ProductLayout id={id} />
     </Page>
   );

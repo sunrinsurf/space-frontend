@@ -66,7 +66,7 @@ function Layout({
           navFixed && "navFixed",
           transparent && "transparent",
           colorfulLogo && "colorful",
-          whiteColor && "whiteColor",
+          whiteColor && !transparent && "whiteColor",
           bgctransparent && "bgctransparent"
         ]
           .filter(Boolean)

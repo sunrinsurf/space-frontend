@@ -33,7 +33,7 @@ p {
   flex-direction: column;
   min-height: 100vh;
 }
-.Layout__wrapC{
+.Layout__wrapC {
   display: flex;
   flex-direction: column;
 }
@@ -60,6 +60,9 @@ p {
 .Layout__header.navFixed {
   position: fixed;
 }
+.Layout__header.transparent a {
+  color: black !important;
+}
 .Layout__header.whiteBackground {
   background: white;
 }
@@ -82,7 +85,6 @@ p {
   padding: 1em 1.5em;
   color: white;
   z-index: 9000;
-
 }
 a {
   text-decoration: none;
