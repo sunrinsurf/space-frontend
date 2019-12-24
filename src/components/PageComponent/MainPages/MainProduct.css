@@ -1,12 +1,12 @@
 .MainProduct__wrap {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .MainProduct__Info {
-    width: 80vw;
+    width: 75vw;
     font-weight: 900;
 }
 
